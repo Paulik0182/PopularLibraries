@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">PopularLibraries</string>
+    <string name="app_name">Популярные Библиотеки</string>
+
+    <!-- bottom nav menu -->
+    <string name="starting">Стартовый</string>
+    <string name="settings">Настройки</string>
+
+    <!-- О приложении -->
+    <string name="about_app">О приложении</string>
+    <string name="personalization_app">Персонализация</string>
+    <string name="cod_version">Код версии:</string>
+    <string name="version">Версия:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="counter_mvp">Cчетчик на MVP</string>
+    <string name="blanks">Ничего нет</string>
+
 </resources>
