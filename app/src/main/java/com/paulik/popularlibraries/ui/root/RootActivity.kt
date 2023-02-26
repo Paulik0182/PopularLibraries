@@ -18,12 +18,10 @@ class RootActivity : AppCompatActivity(),
     AboutAppFragment.Controller,
     CounterBasedMvpFragment.Controller {
 
-    private var _binding: ActivityRootBinding? = null
-    private val binding get() = _binding!!
-
+    private lateinit var binding: ActivityRootBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityRootBinding.inflate(layoutInflater)
+        binding = ActivityRootBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         onBottomNaviBar()
