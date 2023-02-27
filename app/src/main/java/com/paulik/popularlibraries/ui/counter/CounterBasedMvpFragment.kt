@@ -38,4 +38,9 @@ class CounterBasedMvpFragment : ViewBindingFragment<FragmentCounterBasedMvpBindi
     override fun setThreeButtonText(text: String) {
         binding.threeCounterButton.text = text
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.detach()
+    }
 }
