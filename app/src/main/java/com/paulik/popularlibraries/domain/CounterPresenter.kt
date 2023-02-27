@@ -2,5 +2,9 @@ package com.paulik.popularlibraries.domain
 
 interface CounterPresenter {
 
-    fun setButtonText(index: Int, text: String)
+    fun setOneButtonText(text: String)
+    fun setTwoButtonText(text: String)
+    fun setThreeButtonText(text: String)
+
+
 }

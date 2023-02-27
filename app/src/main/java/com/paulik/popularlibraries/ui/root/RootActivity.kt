@@ -15,11 +15,13 @@ private const val TAG_ROOT_CONTAINER_LAYOUT_KEY = "TAG_ROOT_CONTAINER_LAYOUT_KEY
 class RootActivity : AppCompatActivity(),
     SettingsFragment.Controller,
     StartingFragment.Controller,
-    AboutAppFragment.Controller,
-    CounterBasedMvpFragment.Controller {
+    AboutAppFragment.Controller {
 
     private var _binding: ActivityRootBinding? = null
     private val binding get() = _binding!!
+
+    private val startingFragment: StartingFragment by lazy { StartingFragment() }
+    private val settingsFragment: SettingsFragment by lazy { SettingsFragment() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,10 +41,10 @@ class RootActivity : AppCompatActivity(),
         binding.bottomNavBar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.starting_item -> {
-                    navigateTo(StartingFragment())
+                    navigateTo(startingFragment)
                 }
                 R.id.settings_item -> {
-                    navigateTo(SettingsFragment())
+                    navigateTo(settingsFragment)
                 }
                 else -> throw IllegalStateException("Такого фрагмента нет")
             }

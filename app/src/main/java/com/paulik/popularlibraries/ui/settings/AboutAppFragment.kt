@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import com.paulik.popularlibraries.BuildConfig
 import com.paulik.popularlibraries.databinding.FragmentAboutAppBinding
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
-import com.squareup.picasso.BuildConfig
 
 class AboutAppFragment : ViewBindingFragment<FragmentAboutAppBinding>(
     FragmentAboutAppBinding::inflate
