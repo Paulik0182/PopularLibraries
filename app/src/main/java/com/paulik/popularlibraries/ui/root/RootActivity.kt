@@ -2,17 +2,17 @@ package com.paulik.popularlibraries.ui.root
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.databinding.ActivityRootBinding
 import com.paulik.popularlibraries.ui.counter.CounterBasedMvpFragment
 import com.paulik.popularlibraries.ui.settings.AboutAppFragment
 import com.paulik.popularlibraries.ui.settings.SettingsFragment
+import moxy.MvpAppCompatActivity
 
 private const val TAG_ROOT_CONTAINER_LAYOUT_KEY = "TAG_ROOT_CONTAINER_LAYOUT_KEY"
 
-class RootActivity : AppCompatActivity(),
+class RootActivity : MvpAppCompatActivity(),
     SettingsFragment.Controller,
     StartingFragment.Controller,
     AboutAppFragment.Controller {

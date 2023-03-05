@@ -2,17 +2,31 @@ package com.paulik.popularlibraries.ui.counter
 
 import android.os.Bundle
 import android.view.View
+import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.databinding.FragmentCounterBasedMvpBinding
 import com.paulik.popularlibraries.domain.CounterPresenter
-import com.paulik.popularlibraries.ui.root.ViewBindingFragment
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
-class CounterBasedMvpFragment : ViewBindingFragment<FragmentCounterBasedMvpBinding>(
-    FragmentCounterBasedMvpBinding::inflate
-), CounterPresenter {
+class CounterBasedMvpFragment : MvpAppCompatFragment(R.layout.fragment_counter_based_mvp),
+    CounterPresenter {
 
-    private val presenter = CounterBasedMvpPresenter(this)
+    private var _binding: FragmentCounterBasedMvpBinding? = null
+    private val binding get() = _binding!!
+
+    // @InjectPresenter – аннотация для управления жизненным циклом Presenter
+    @InjectPresenter // в старых версиях. Работает только с дефолтными значениями в конструкторе CounterBasedMvpPresenter
+    lateinit var presenter: CounterBasedMvpPresenter
+
+    @ProvidePresenter
+    fun providePresenter(): CounterBasedMvpPresenter {
+        return CounterBasedMvpPresenter()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentCounterBasedMvpBinding.bind(view)
 
         binding.oneCounterButton.setOnClickListener {
             presenter.onOneCounterClicked()
@@ -41,6 +55,6 @@ class CounterBasedMvpFragment : ViewBindingFragment<FragmentCounterBasedMvpBindi
 
     override fun onDestroyView() {
         super.onDestroyView()
-        presenter.detach()
+        presenter.detachView(this)
     }
 }

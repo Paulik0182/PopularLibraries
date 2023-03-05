@@ -2,29 +2,29 @@ package com.paulik.popularlibraries.ui.counter
 
 import com.paulik.popularlibraries.data.CounterModelRepoImpl
 import com.paulik.popularlibraries.domain.CounterPresenter
+import moxy.MvpPresenter
 
-class CounterBasedMvpPresenter(
-    private var view: CounterPresenter? = null
-) {
+/**
+ * в старой серсии Moxy дополнительно нужно было на класс поставить анатацию @InjectViewState
+ * @InjectViewState – аннотация для привязывания ViewState к Presenter
+ */
+
+class CounterBasedMvpPresenter : MvpPresenter<CounterPresenter>() {
 
     private val model = CounterModelRepoImpl()
 
     fun onOneCounterClicked() {
         val nextValue = model.incrementOne()
-        view?.setOneButtonText(nextValue.toString())
+        viewState?.setOneButtonText(nextValue.toString())
     }
 
     fun onTwoCounterClicked() {
         val nextValue = model.incrementTwo()
-        view?.setTwoButtonText(nextValue.toString())
+        viewState?.setTwoButtonText(nextValue.toString())
     }
 
     fun onThreeCounterClicked() {
         val nextValue = model.incrementThree()
-        view?.setThreeButtonText(nextValue.toString())
-    }
-
-    fun detach() {
-        view = null
+        viewState?.setThreeButtonText(nextValue.toString())
     }
 }
