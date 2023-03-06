@@ -8,6 +8,7 @@ import com.paulik.popularlibraries.databinding.ActivityRootBinding
 import com.paulik.popularlibraries.ui.counter.CounterBasedMvpFragment
 import com.paulik.popularlibraries.ui.settings.AboutAppFragment
 import com.paulik.popularlibraries.ui.settings.SettingsFragment
+import com.paulik.popularlibraries.ui.users.UsersGitHubFragment
 import moxy.MvpAppCompatActivity
 
 private const val TAG_ROOT_CONTAINER_LAYOUT_KEY = "TAG_ROOT_CONTAINER_LAYOUT_KEY"
@@ -15,7 +16,8 @@ private const val TAG_ROOT_CONTAINER_LAYOUT_KEY = "TAG_ROOT_CONTAINER_LAYOUT_KEY
 class RootActivity : MvpAppCompatActivity(),
     SettingsFragment.Controller,
     StartingFragment.Controller,
-    AboutAppFragment.Controller {
+    AboutAppFragment.Controller,
+    UsersGitHubFragment.Controller {
 
     private var _binding: ActivityRootBinding? = null
     private val binding get() = _binding!!
@@ -90,12 +92,21 @@ class RootActivity : MvpAppCompatActivity(),
         binding.bottomNavBar.visibility = View.GONE
     }
 
+    private fun onUsersGitHub() {
+        navigateWithBackStack(UsersGitHubFragment())
+        binding.bottomNavBar.visibility = View.GONE
+    }
+
     override fun openAboutApp() {
         onAboutApp()
     }
 
     override fun openCounterBasedMvp() {
         onCounterBasedMvp()
+    }
+
+    override fun openUsersGitHub() {
+        onUsersGitHub()
     }
 
     @Deprecated("Deprecated in Java")
