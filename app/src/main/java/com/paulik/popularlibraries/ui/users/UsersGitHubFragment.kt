@@ -9,11 +9,11 @@ import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
+import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import moxy.ktx.moxyPresenter
-
 
 class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     FragmentUsersGitHubBinding::inflate
@@ -27,7 +27,11 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     private val adapter by lazy {
-        UsersAdapter(presenter.usersListPresenter)
+        UsersAdapter {
+            presenter.onUserClicked(requireContext(), it)
+        }
+
+//        UsersAdapter(presenter::onUserClicked)// вариант записи
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,8 +47,9 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun updateList() {
-        adapter.notifyDataSetChanged()
+    override fun updateList(users: List<UsersGitHubEntity>) {
+        // submitList - отправляет список элементов
+        adapter.submitList(users)
     }
 
     interface Controller {

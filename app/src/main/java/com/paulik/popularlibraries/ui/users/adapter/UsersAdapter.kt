@@ -2,36 +2,51 @@ package com.paulik.popularlibraries.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.paulik.popularlibraries.databinding.ItemUsersBinding
-import com.paulik.popularlibraries.ui.users.UsersGitHubPresenter
+import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 
 
 class UsersAdapter(
-    private val presenter: UsersGitHubPresenter.UsersListPresenter
-) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+    private val itemClickListener: (UsersGitHubEntity) -> Unit
+) : ListAdapter<UsersGitHubEntity, UsersAdapter.UserViewHolder>(GitHibUserCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
             ItemUsersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        ).apply {
-            itemView.setOnClickListener { presenter.itemClickListener() }
-        }
+        )
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        presenter.bindView(holder.apply { pos = position })
+        holder.showUser(currentList[position])
     }
-
-    override fun getItemCount() = presenter.getCount()
 
     inner class UserViewHolder(private val binding: ItemUsersBinding) :
-        RecyclerView.ViewHolder(binding.root), UserItemView {
+        RecyclerView.ViewHolder(binding.root) {
 
-        override var pos: Int = -1
+        fun showUser(user: UsersGitHubEntity) {
+            itemView.setOnClickListener { itemClickListener(user) }
+//            binding.root.setOnClickListener { itemClickListener(user) } // выриант записи
 
-        override fun setLogin(login: String) {
-            binding.loginTextView.text = login
+            binding.loginTextView.text = user.login
         }
     }
+}
+
+object GitHibUserCallback : DiffUtil.ItemCallback<UsersGitHubEntity>() {
+    // совпадают ли элементы
+    override fun areItemsTheSame(oldItem: UsersGitHubEntity, newItem: UsersGitHubEntity): Boolean {
+        return oldItem == newItem
+    }
+
+    // На сколько элементы совпадают
+    override fun areContentsTheSame(
+        oldItem: UsersGitHubEntity,
+        newItem: UsersGitHubEntity
+    ): Boolean {
+        return oldItem == newItem
+    }
+
 }
