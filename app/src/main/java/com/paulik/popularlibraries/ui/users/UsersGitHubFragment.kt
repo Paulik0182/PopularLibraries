@@ -5,19 +5,26 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
+import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import moxy.ktx.moxyPresenter
 
 
 class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     FragmentUsersGitHubBinding::inflate
-), UsersGitHubViewPresenter {
+), UsersGitHubViewPresenter, BackButtonListener {
 
-    private val presenter by moxyPresenter { UsersGitHubPresenter(UsersGitHubRepoImpl()) }
+    private val presenter by moxyPresenter {
+        UsersGitHubPresenter(
+            App.instance.router,
+            UsersGitHubRepoImpl()
+        )
+    }
 
     private val adapter by lazy {
         UsersAdapter(presenter.usersListPresenter)
@@ -27,6 +34,7 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+
     }
 
     private fun initView() {
@@ -57,5 +65,10 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
                 arguments = Bundle().apply {
                 }
             }
+    }
+
+    override fun backPressed(): Boolean {
+        presenter.backPressed()
+        return true
     }
 }

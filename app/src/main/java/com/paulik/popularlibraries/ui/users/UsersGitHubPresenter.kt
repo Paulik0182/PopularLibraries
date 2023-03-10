@@ -1,5 +1,7 @@
 package com.paulik.popularlibraries.ui.users
 
+import com.github.terrakok.cicerone.Router
+import com.paulik.popularlibraries.AppScreens
 import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
@@ -8,6 +10,7 @@ import com.paulik.popularlibraries.ui.users.base.IListPresenter
 import moxy.MvpPresenter
 
 class UsersGitHubPresenter(
+    private val router: Router,
     private val usersGitHubRepoImpl: UsersGitHubRepoImpl
 ) : MvpPresenter<UsersGitHubViewPresenter>() {
 
@@ -18,7 +21,9 @@ class UsersGitHubPresenter(
 
         loadData()
 
-        usersListPresenter.itemClickListener = {}
+        usersListPresenter.itemClickListener = {
+            router.replaceScreen(AppScreens.DetailsUerGitHubScreen())
+        }
     }
 
     private fun loadData() {
@@ -28,6 +33,10 @@ class UsersGitHubPresenter(
         viewState.updateList()
     }
 
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
+    }
 
     class UsersListPresenter : IListPresenter<UserItemView> {
 
