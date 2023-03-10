@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.paulik.popularlibraries.databinding.FragmentStartingBinding
-import com.paulik.popularlibraries.utils.snack
 
 class StartingFragment : ViewBindingFragment<FragmentStartingBinding>(
     FragmentStartingBinding::inflate
@@ -17,12 +16,14 @@ class StartingFragment : ViewBindingFragment<FragmentStartingBinding>(
             getController().openCounterBasedMvp()
         }
         binding.blanksButton.setOnClickListener {
-            view.snack("Пока никак")
+            getController().openUsersGitHub()
+//            view.snack("Пока никак")
         }
     }
 
     interface Controller {
         fun openCounterBasedMvp()
+        fun openUsersGitHub()
     }
 
     private fun getController(): Controller = activity as Controller

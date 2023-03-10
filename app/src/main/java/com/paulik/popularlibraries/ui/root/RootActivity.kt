@@ -1,18 +1,21 @@
 package com.paulik.popularlibraries.ui.root
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.databinding.ActivityRootBinding
 import com.paulik.popularlibraries.ui.counter.CounterBasedMvpFragment
 import com.paulik.popularlibraries.ui.settings.AboutAppFragment
 import com.paulik.popularlibraries.ui.settings.SettingsFragment
+import com.paulik.popularlibraries.ui.users.UserGitHubActivity
+import moxy.MvpAppCompatActivity
 
 private const val TAG_ROOT_CONTAINER_LAYOUT_KEY = "TAG_ROOT_CONTAINER_LAYOUT_KEY"
+private const val USERS_GIT_HUB_REQUEST_KOD = 100
 
-class RootActivity : AppCompatActivity(),
+class RootActivity : MvpAppCompatActivity(),
     SettingsFragment.Controller,
     StartingFragment.Controller,
     AboutAppFragment.Controller {
@@ -90,12 +93,26 @@ class RootActivity : AppCompatActivity(),
         binding.bottomNavBar.visibility = View.GONE
     }
 
+    private fun onUsersGitHub() {
+
+        val intent = Intent(this, UserGitHubActivity::class.java)
+        startActivityForResult(intent, USERS_GIT_HUB_REQUEST_KOD)
+//        startActivity( intent)
+
+//        navigateWithBackStack(UsersGitHubFragment())
+        binding.bottomNavBar.visibility = View.GONE
+    }
+
     override fun openAboutApp() {
         onAboutApp()
     }
 
     override fun openCounterBasedMvp() {
         onCounterBasedMvp()
+    }
+
+    override fun openUsersGitHub() {
+        onUsersGitHub()
     }
 
     @Deprecated("Deprecated in Java")

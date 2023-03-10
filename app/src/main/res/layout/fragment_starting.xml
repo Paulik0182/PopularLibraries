@@ -13,7 +13,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/counter_mvp_button"
-            style="@style/Widget.Material3.Button"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/counter_mvp"
@@ -21,11 +21,11 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/blanks_button"
-            style="@style/Widget.Material3.Button.OutlinedButton"
+            style="@style/Widget.Material3.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="@string/blanks"
+            android:text="@string/users_git_hub"
             android:textSize="@dimen/default_text" />
     </LinearLayout>
 
