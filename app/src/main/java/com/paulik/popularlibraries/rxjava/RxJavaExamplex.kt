@@ -23,6 +23,18 @@ class Producer {
         return Observable.fromIterable(listOf("1", "2", "3", "4"))
     }
 
+    fun fromIterableLong(): Observable<Long> {
+        return Observable.fromIterable((1L..100L).toList())
+    }
+
+    fun fromIterableLongTwo(): Observable<Long> {
+        return Observable.fromIterable((101L..200L).toList())
+    }
+
+    fun fromIterableRange(to: Int): @NonNull Observable<Int> {
+        return Observable.fromIterable((1..to).toList())
+    }
+
     fun interval(): @NonNull Observable<Long> {
         return Observable.interval(1, TimeUnit.SECONDS)
     }
@@ -161,6 +173,161 @@ class Consumer {
                 },
                 {
                     Log.d("RxJava", "(create) Поток завершён")
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    fun subscribeIntervalTake() {
+        disposable = producer.interval()
+            .take(2) // Отдает первые два элемента
+//            .takeLast(2) // Отдает последнии два элемента (бесконечность, потому что
+            // источник постоянно отдает элементы. Если ограничить количество элементов, то
+            // бесконечности не будет)
+//            .skip(1) // сколькото элементов пропусти (в данном случае будет пропущен первый элемент)
+            .subscribe(
+                {
+                    Log.d("RxJava", "(intervalTake) Получен элемент $it")
+                },
+                {
+                    Log.e("RxJava", "(intervalTake) Получена ошибка $it", it)
+                },
+                {
+                    Log.d("RxJava", "(intervalTake) Поток завершён")
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    fun subscribeMap() {
+        disposable = producer.fromIterable()
+            .map { it.toInt() * 10 }
+            .map { it * 10 }
+            .skip(1)
+            .subscribe(
+                {
+                    Log.d("RxJava", "(map) Получен элемент $it")
+                },
+                {
+                    Log.e("RxJava", "(map) Получена ошибка $it", it)
+                },
+                {
+                    Log.d("RxJava", "(map) Поток завершён")
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    fun subscribeDistinct() {
+        disposable = producer.interval()
+            .map { it.mod(5) }// оператор деления с остатком
+            .distinct()// Возвращает только те элементы которых еще небыло
+            .subscribe(
+                {
+                    Log.d("RxJava", "(distinct) Получен элемент $it")
+                },
+                {
+                    Log.e("RxJava", "(distinct) Получена ошибка $it", it)
+                },
+                {
+                    Log.d("RxJava", "(distinct) Поток завершён")
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    fun subscribeFilter() {
+        disposable = producer.interval()
+            .filter {
+                it.mod(3) == 0 // Отображаем все числа кратные 3
+            }
+            .subscribe(
+                {
+                    Log.d("RxJava", "(filter) Получен элемент $it")
+                    if (it >= 12L) {
+                        disposable.dispose()
+                    }
+                },
+                {
+                    Log.e("RxJava", "(filter) Получена ошибка $it", it)
+                },
+                {
+                    Log.d("RxJava", "(filter) Поток завершён")
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    fun subscribeMarge() {
+
+        // Еще пример!!
+//        val observable1 = producer.interval()
+//            .filter{ it.mod(3) == 0}
+//        val observable2 = producer.interval() // другой источник лучше
+//            .filter{ it.mod(5) == 0}
+//        Observable.merge(observable1, observable2)
+
+
+        disposable = Observable.merge(producer.fromIterableLong(), producer.fromIterableLongTwo())
+            .subscribe(
+                {
+                    Log.d("RxJava", "(merge) Получен элемент $it")
+                },
+                {
+                    Log.e("RxJava", "(merge) Получена ошибка $it", it)
+                },
+                {
+                    Log.d("RxJava", "(merge) Поток завершён")
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    fun subscribeFlatMap() {
+        val observable1 = producer.interval()
+            .filter { it.mod(3) == 0 }
+
+        // Отображаем источник в другом виде (в том в котором задаем)
+        observable1.flatMap {
+//            Observable.just(it * 2)
+            producer.fromIterableRange(it.toInt())
+        }
+            .subscribe(
+                {
+                    Log.d("RxJava", "(FlatMap) Получен элемент $it")
+                },
+                {
+                    Log.e("RxJava", "(FlatMap) Получена ошибка $it", it)
+                },
+                {
+                    Log.d("RxJava", "(FlatMap) Поток завершён")
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+    fun subscribeZip() {
+        val observable1 = producer.interval()
+            .filter { it.mod(3) == 0 }
+//            .take(2) // взяли только первые два элемента и закончили поток
+        val observable2 = producer.interval() // другой источник лучше
+            .filter { it.mod(5) == 0 }
+//            .filter { it < 20 } // искуственно создали условие нехватки элементов (зависаем)
+
+        // возвращаем сумму двух (если с одного источника не хватит значений то мы зависним)
+        Observable.zip(observable1, observable2, { o1, o2 ->
+            "$o1 + $o2 = ${o1 + o2}"
+        })
+            .take(3)
+            .subscribe(
+                {
+                    Log.d("RxJava", "(Zip) Получен элемент $it")
+                },
+                {
+                    Log.e("RxJava", "(Zip) Получена ошибка $it", it)
+                },
+                {
+                    Log.d("RxJava", "(Zip) Поток завершён")
                 }
             )
     }

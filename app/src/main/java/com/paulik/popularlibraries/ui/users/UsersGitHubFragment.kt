@@ -42,12 +42,19 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 
         initView()
 
-        Consumer().subscribe()
-        Consumer().subscribeFromIterable()
-//        Consumer().subscribeTimer()
-        Consumer().subscribeRange()
-        Consumer().subscribeFromCallable()
-        Consumer().subscribeCreate()
+//        Consumer().subscribe()
+//        Consumer().subscribeFromIterable()
+////        Consumer().subscribeTimer()
+//        Consumer().subscribeRange()
+//        Consumer().subscribeFromCallable()
+//        Consumer().subscribeCreate()
+//        Consumer().subscribeIntervalTake()
+//        Consumer().subscribeMap()
+//        Consumer().subscribeDistinct()
+//        Consumer().subscribeFilter()
+//        Consumer().subscribeMarge()
+//        Consumer().subscribeFlatMap()
+        Consumer().subscribeZip()
 //        Consumer().subscribeInterval()
     }
 
