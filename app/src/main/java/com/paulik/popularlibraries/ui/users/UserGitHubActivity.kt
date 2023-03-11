@@ -4,6 +4,7 @@ import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
+import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -38,7 +39,7 @@ class UserGitHubActivity : MvpAppCompatActivity(R.layout.activity_users), UsersG
         presenter.backPressed()
     }
 
-    override fun updateList() {
+    override fun updateList(users: List<UsersGitHubEntity>) {
         // TODO("Not yet implemented")
     }
 }
