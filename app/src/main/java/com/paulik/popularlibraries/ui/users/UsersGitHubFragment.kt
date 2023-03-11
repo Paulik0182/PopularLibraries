@@ -10,6 +10,7 @@ import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
+import com.paulik.popularlibraries.rxjava.Consumer
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
@@ -26,6 +27,8 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
         )
     }
 
+    private var flagVisibilityFragment = 0L
+
     private val adapter by lazy {
         UsersAdapter {
             presenter.onUserClicked(requireContext(), it)
@@ -39,6 +42,13 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 
         initView()
 
+        Consumer().subscribe()
+        Consumer().subscribeFromIterable()
+//        Consumer().subscribeTimer()
+        Consumer().subscribeRange()
+        Consumer().subscribeFromCallable()
+        Consumer().subscribeCreate()
+//        Consumer().subscribeInterval()
     }
 
     private fun initView() {
