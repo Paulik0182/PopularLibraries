@@ -67,6 +67,8 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     override fun updateList(users: List<UsersGitHubEntity>) {
         // submitList - отправляет список элементов
         adapter.submitList(users)
+//        adapter.submitList(adapter.currentList + users) // вариант
+
     }
 
     interface Controller {

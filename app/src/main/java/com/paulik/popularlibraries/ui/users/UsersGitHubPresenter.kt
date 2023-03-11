@@ -1,5 +1,6 @@
 package com.paulik.popularlibraries.ui.users
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
 import com.github.terrakok.cicerone.Router
@@ -20,10 +21,14 @@ class UsersGitHubPresenter(
         loadData()
     }
 
+    @SuppressLint("CheckResult")
     private fun loadData() {
-        val users = usersGitHubRepoImpl.getUsers()
+        usersGitHubRepoImpl.getUsers()
+            .subscribe {
+                viewState.updateList(it)
+            }
 
-        viewState.updateList(users)
+//        viewState.updateList(users)
     }
 
     fun onUserClicked(context: Context, usersGitHubEntity: UsersGitHubEntity) {
