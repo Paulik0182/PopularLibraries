@@ -3,6 +3,8 @@ package com.paulik.popularlibraries
 import android.app.Application
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
+import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
+import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 
 class App : Application() {
 
@@ -24,5 +26,9 @@ class App : Application() {
         private var _instance: App? = null
         val instance
             get() = _instance!!
+    }
+
+    val networkStatusInteractor: NetworkStatusInteractor by lazy {
+        NetworkStatusInteractorImpl(this)
     }
 }

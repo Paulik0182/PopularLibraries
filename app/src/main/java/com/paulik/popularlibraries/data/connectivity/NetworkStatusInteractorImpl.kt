@@ -8,20 +8,18 @@ import androidx.core.content.getSystemService
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
-import java.lang.ref.WeakReference
 
 /**
  * Context - следует обращатся к context как приведено ниже. В случае если фрагмент умрет и
  * Garbage Collector вызовится еще раз то все ссылки удалятся и не случится утечки памяти.
  */
 class NetworkStatusInteractorImpl(
-    _context: Context
+    private val context: Context
 ) : NetworkStatusInteractor {
 
-    private val context = WeakReference(_context)
 
     // Служба через которую получаем статус сети
-    val connectivityManager = context.get()?.getSystemService<ConnectivityManager>()
+    private val connectivityManager = context.getSystemService<ConnectivityManager>()
 
     private val networkSubject = PublishSubject.create<Boolean>()
 

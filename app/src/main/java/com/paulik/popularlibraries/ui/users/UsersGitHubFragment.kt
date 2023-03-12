@@ -3,6 +3,7 @@ package com.paulik.popularlibraries.ui.users
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
@@ -10,7 +11,7 @@ import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
-import com.paulik.popularlibraries.rxjava.OtherConsumerSubjects
+import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
@@ -20,6 +21,8 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     FragmentUsersGitHubBinding::inflate
 ), UsersGitHubViewPresenter, BackButtonListener {
 
+    private val app: App get() = requireActivity().applicationContext as App
+
     private val presenter by moxyPresenter {
         UsersGitHubPresenter(
             App.instance.router,
@@ -27,7 +30,9 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
         )
     }
 
-    private var flagVisibilityFragment = 0L
+    private val networkStatusInteractor: NetworkStatusInteractor by lazy {
+        app.networkStatusInteractor
+    }
 
     private val adapter by lazy {
         UsersAdapter {
@@ -41,6 +46,8 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
         super.onViewCreated(view, savedInstanceState)
 
         initView()
+
+        networkStatus()
 
 //        Consumer().subscribe()
 //        Consumer().subscribeFromIterable()
@@ -66,7 +73,14 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 //        OtherConsumer().subscribeRefCount() // -/- Получение вторым подписчиком данных с того момента с которого он подписался.
 //        OtherConsumer().subscribeCache() // -/- Работает при 1 подписке, хранит элем. и отдает все элем. каждому новому подписчику.
 
-        OtherConsumerSubjects().subscribe() // Subject
+//        OtherConsumerSubjects().subscribe() // Subject
+    }
+
+    @SuppressLint("CheckResult")
+    private fun networkStatus() {
+        networkStatusInteractor.getNetworkStatusSubject().subscribe {
+            Log.d("Rxjava", "Состояние сети: $it")
+        }
     }
 
     private fun initView() {
