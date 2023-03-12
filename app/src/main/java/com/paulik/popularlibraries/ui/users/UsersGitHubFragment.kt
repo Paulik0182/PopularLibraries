@@ -10,7 +10,7 @@ import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
-import com.paulik.popularlibraries.rxjava.OtherConsumer
+import com.paulik.popularlibraries.rxjava.OtherConsumerSubjects
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
@@ -59,11 +59,14 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 //        OtherConsumer().subscribeCompletable()
 //        OtherConsumer().subscribeSingle()
 //        OtherConsumer().subscribeMaybe()
+
 //        OtherConsumer().subscribeTime1() // пример с двумя подписчиками. получение подписчиками данных с нуля
 //        OtherConsumer().subscribeTime2() // пример с двумя подписчиками. Данные не с нуля. Горячая подписка.
 //        OtherConsumer().subscribeReplay() // -/- подгрузка пропущенных данных
 //        OtherConsumer().subscribeRefCount() // -/- Получение вторым подписчиком данных с того момента с которого он подписался.
-        OtherConsumer().subscribeCache() // -/- Работает при 1 подписке, хранит элем. и отдает все элем. каждому новому подписчику.
+//        OtherConsumer().subscribeCache() // -/- Работает при 1 подписке, хранит элем. и отдает все элем. каждому новому подписчику.
+
+        OtherConsumerSubjects().subscribe() // Subject
     }
 
     private fun initView() {
