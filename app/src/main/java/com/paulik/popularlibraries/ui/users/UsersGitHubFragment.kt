@@ -15,6 +15,7 @@ import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
+import com.paulik.popularlibraries.utils.snack
 import moxy.ktx.moxyPresenter
 
 class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
@@ -80,6 +81,11 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     private fun networkStatus() {
         networkStatusInteractor.getNetworkStatusSubject().subscribe {
             Log.d("Rxjava", "Состояние сети: $it")
+            if (!it) {
+                view?.snack("Интернета  Нет!!")
+            } else {
+                view?.snack("Интернет подключен")
+            }
         }
     }
 

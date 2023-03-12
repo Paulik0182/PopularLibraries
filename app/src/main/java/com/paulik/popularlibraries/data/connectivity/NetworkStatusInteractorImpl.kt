@@ -1,10 +1,11 @@
 package com.paulik.popularlibraries.data.connectivity
 
-import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import androidx.core.content.getSystemService
+import com.paulik.popularlibraries.ContextProvider
+import com.paulik.popularlibraries.IContextProvider
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.PublishSubject
@@ -14,12 +15,14 @@ import io.reactivex.rxjava3.subjects.PublishSubject
  * Garbage Collector вызовится еще раз то все ссылки удалятся и не случится утечки памяти.
  */
 class NetworkStatusInteractorImpl(
-    private val context: Context
+    contextProvider: IContextProvider = ContextProvider
+//    private val context: Context
 ) : NetworkStatusInteractor {
 
 
     // Служба через которую получаем статус сети
-    private val connectivityManager = context.getSystemService<ConnectivityManager>()
+    private val connectivityManager =
+        contextProvider.context.getSystemService<ConnectivityManager>()
 
     private val networkSubject = PublishSubject.create<Boolean>()
 
