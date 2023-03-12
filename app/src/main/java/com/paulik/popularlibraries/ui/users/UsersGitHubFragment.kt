@@ -12,6 +12,7 @@ import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
+import com.paulik.popularlibraries.rxjava.OtherConsumerThreads
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
@@ -75,6 +76,13 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 //        OtherConsumer().subscribeCache() // -/- Работает при 1 подписке, хранит элем. и отдает все элем. каждому новому подписчику.
 
 //        OtherConsumerSubjects().subscribe() // Subject
+
+        // Многопоточность
+//        OtherConsumerThreads().subscribe() // Interval
+//        OtherConsumerThreads().subscribeJust() // Just. Для хождения в сеть, скачивания файлов и т.д.
+//        OtherConsumerThreads().subscribeJustComputation() // Just. Создает солько Thread сколько есть ядер у процессора
+//        OtherConsumerThreads().subscribeCreateMainThread() // Create. Разные потоки
+        OtherConsumerThreads().subscribeCreateNewThread() // Create. Свой Thread
     }
 
     @SuppressLint("CheckResult")
