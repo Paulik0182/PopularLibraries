@@ -58,7 +58,12 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 //        Consumer().subscribeInterval()
 //        OtherConsumer().subscribeCompletable()
 //        OtherConsumer().subscribeSingle()
-        OtherConsumer().subscribeMaybe()
+//        OtherConsumer().subscribeMaybe()
+//        OtherConsumer().subscribeTime1() // пример с двумя подписчиками. получение подписчиками данных с нуля
+//        OtherConsumer().subscribeTime2() // пример с двумя подписчиками. Данные не с нуля. Горячая подписка.
+//        OtherConsumer().subscribeReplay() // -/- подгрузка пропущенных данных
+//        OtherConsumer().subscribeRefCount() // -/- Получение вторым подписчиком данных с того момента с которого он подписался.
+        OtherConsumer().subscribeCache() // -/- Работает при 1 подписке, хранит элем. и отдает все элем. каждому новому подписчику.
     }
 
     private fun initView() {
