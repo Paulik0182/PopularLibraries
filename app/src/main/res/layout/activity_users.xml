@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.users.UserGitHubActivity">
+    tools:context=".ui.users.UserGitHubMvpActivity">
 
 </FrameLayout>

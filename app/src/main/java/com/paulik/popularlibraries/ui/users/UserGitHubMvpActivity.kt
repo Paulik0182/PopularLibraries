@@ -3,14 +3,13 @@ package com.paulik.popularlibraries.ui.users
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.R
-import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
-import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
+import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
-class UserGitHubActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubViewPresenter,
-    UsersGitHubFragment.Controller {
+class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users),
+    UsersGitHubMvpFragment.Controller {
 
     private val navigator = AppNavigator(this, R.id.container)
 
@@ -39,7 +38,11 @@ class UserGitHubActivity : MvpAppCompatActivity(R.layout.activity_users), UsersG
         presenter.backPressed()
     }
 
-    override fun updateList(users: List<UsersGitHubEntity>) {
-        // TODO("Not yet implemented")
+    fun showUser(user: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.container, DetailsUserGitHubFragment.newInstance(user)
+            ).commit()
     }
 }

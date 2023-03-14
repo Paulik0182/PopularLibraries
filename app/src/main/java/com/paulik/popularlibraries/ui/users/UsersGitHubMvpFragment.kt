@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
-import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
+import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
@@ -18,9 +18,9 @@ import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import com.paulik.popularlibraries.utils.snack
 import moxy.ktx.moxyPresenter
 
-class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
+class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     FragmentUsersGitHubBinding::inflate
-), UsersGitHubViewPresenter, BackButtonListener {
+), UsersGitHubMvpView, BackButtonListener {
 
     private val app: App get() = requireActivity().applicationContext as App
 
@@ -131,10 +131,14 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     companion object {
         @JvmStatic
         fun newInstance() =
-            UsersGitHubFragment().apply {
+            UsersGitHubMvpFragment().apply {
                 arguments = Bundle().apply {
                 }
             }
+    }
+
+    override fun showUser(user: String) {
+        (requireActivity() as UserGitHubMvpActivity).showUser(user)
     }
 
     override fun backPressed(): Boolean {

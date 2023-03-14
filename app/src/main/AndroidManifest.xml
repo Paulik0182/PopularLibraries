@@ -20,7 +20,7 @@
         android:theme="@style/Theme.PopularLibraries"
         tools:targetApi="31">
         <activity
-            android:name=".ui.users.UserGitHubActivity"
+            android:name=".ui.users.UserGitHubMvpActivity"
             android:exported="false" />
         <activity
             android:name=".ui.root.RootActivity"

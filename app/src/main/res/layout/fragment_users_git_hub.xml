@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.users.UsersGitHubFragment">
+    tools:context=".ui.users.UsersGitHubMvpFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/users_recycler"
