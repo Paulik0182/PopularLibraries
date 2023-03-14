@@ -12,7 +12,7 @@ import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
-import com.paulik.popularlibraries.rxjava.OtherConsumerError
+import com.paulik.popularlibraries.rxjava.OtherConsumerFlowable
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
@@ -53,7 +53,7 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 
 //        Consumer().subscribe()
 //        Consumer().subscribeFromIterable()
-////        Consumer().subscribeTimer()
+//        Consumer().subscribeTimer()
 //        Consumer().subscribeRange()
 //        Consumer().subscribeFromCallable()
 //        Consumer().subscribeCreate()
@@ -86,7 +86,11 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 //        OtherConsumerError().subscribeCreateErrorReturn() // Create. Обработка ошибки onErrorReturn
 //        OtherConsumerError().subscribeCreateErrorResumeNext() // Create. Обработка ошибки onErrorResumeNext
 //        OtherConsumerError().subscribeCreateErrorResumeNextRetry() // Create. Обработка ошибки Retry
-        OtherConsumerError().subscribeCreateDoOnErrorRetry() // Create. Обработка ошибки doOnError
+//        OtherConsumerError().subscribeCreateDoOnErrorRetry() // Create. Обработка ошибки doOnError
+
+        // еще один тип источника - Flowable()
+//        OtherConsumerFlowable().subscribe() //
+        OtherConsumerFlowable().subscribeBackPressure() //
     }
 
     @SuppressLint("CheckResult")
