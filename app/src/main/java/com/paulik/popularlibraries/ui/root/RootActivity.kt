@@ -6,6 +6,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.databinding.ActivityRootBinding
+import com.paulik.popularlibraries.ui.convertor.ConvertorImageFragment
 import com.paulik.popularlibraries.ui.counter.CounterBasedMvpFragment
 import com.paulik.popularlibraries.ui.settings.AboutAppFragment
 import com.paulik.popularlibraries.ui.settings.SettingsFragment
@@ -94,12 +95,13 @@ class RootActivity : MvpAppCompatActivity(),
     }
 
     private fun onUsersGitHub() {
-
         val intent = Intent(this, UserGitHubActivity::class.java)
         startActivityForResult(intent, USERS_GIT_HUB_REQUEST_KOD)
-//        startActivity( intent)
+        binding.bottomNavBar.visibility = View.GONE
+    }
 
-//        navigateWithBackStack(UsersGitHubFragment())
+    private fun onConverterImage() {
+        navigateWithBackStack(ConvertorImageFragment())
         binding.bottomNavBar.visibility = View.GONE
     }
 
@@ -113,6 +115,10 @@ class RootActivity : MvpAppCompatActivity(),
 
     override fun openUsersGitHub() {
         onUsersGitHub()
+    }
+
+    override fun openConverterImage() {
+        onConverterImage()
     }
 
     @Deprecated("Deprecated in Java")

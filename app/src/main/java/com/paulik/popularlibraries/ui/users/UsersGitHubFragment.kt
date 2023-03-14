@@ -12,7 +12,6 @@ import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
-import com.paulik.popularlibraries.rxjava.OtherConsumerFlowable
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
@@ -90,7 +89,7 @@ class UsersGitHubFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 
         // еще один тип источника - Flowable()
 //        OtherConsumerFlowable().subscribe() //
-        OtherConsumerFlowable().subscribeBackPressure() //
+//        OtherConsumerFlowable().subscribeBackPressure() // остановить подписку
     }
 
     @SuppressLint("CheckResult")

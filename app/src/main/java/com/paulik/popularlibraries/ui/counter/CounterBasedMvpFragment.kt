@@ -26,6 +26,10 @@ class CounterBasedMvpFragment : ViewBindingFragment<FragmentCounterBasedMvpBindi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initButton()
+    }
+
+    private fun initButton() {
         binding.oneCounterButton.setOnClickListener {
             presenter.onOneCounterClicked()
         }
