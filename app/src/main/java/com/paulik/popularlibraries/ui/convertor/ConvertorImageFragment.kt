@@ -5,13 +5,10 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -20,13 +17,9 @@ import com.paulik.popularlibraries.databinding.FragmentConvertorImageBinding
 import com.paulik.popularlibraries.domain.ConverterPresenter
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.squareup.picasso.Picasso
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import java.io.File
-import java.io.FileOutputStream
 
 
 const val JPG_CHOOSER_CODE = 0
@@ -35,6 +28,7 @@ class ConvertorImageFragment : ViewBindingFragment<FragmentConvertorImageBinding
     FragmentConvertorImageBinding::inflate
 ), ConverterPresenter {
 
+    private lateinit var file: File
     private var jpgPath: String? = null
 
     @InjectPresenter
@@ -67,7 +61,7 @@ class ConvertorImageFragment : ViewBindingFragment<FragmentConvertorImageBinding
             while (cursor.moveToNext()) {
                 val absolutePathOfImage =
                     cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA));
-                val file = File(absolutePathOfImage)
+                file = File(absolutePathOfImage)
 
                 jpgPath = absolutePathOfImage
 
@@ -80,23 +74,11 @@ class ConvertorImageFragment : ViewBindingFragment<FragmentConvertorImageBinding
             }
         }
 
+        binding.nameImageTextView.text = file.name
+
         binding.converterSaveImageButton.setOnClickListener {
-            Observable.fromCallable {
-                try {
-                    val bitmap: Bitmap = BitmapFactory.decodeFile(jpgPath)
-                    val out = FileOutputStream(jpgPath + ".png")
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, out) //100-best quality
-                    out.close()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    Toast.makeText(requireContext(), "Файл конвертирован в png", Toast.LENGTH_SHORT)
-                        .show()
-                }
+            presenter.onConvertSaveClicked(requireActivity(), jpgPath)
+            binding.nameImageTextView.text = jpgPath
         }
     }
 
@@ -112,14 +94,14 @@ class ConvertorImageFragment : ViewBindingFragment<FragmentConvertorImageBinding
                 // Внимательно импортировать Manifest (в библиотеках android)
                 ContextCompat.checkSelfPermission(it, Manifest.permission.READ_EXTERNAL_STORAGE) ==
                         PackageManager.PERMISSION_GRANTED -> {
-                    // Доступ к контактам
+                    // Доступ к файлам
                     showFileChooser()
                 }
                 // пояснение перед запросом разрешения (не обязательно. показывается в окне запроса)
                 shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE) -> {
                     AlertDialog.Builder(it)
                         .setTitle("Доступ к файлам")
-                        .setMessage("Для чтения контактов и демонстрации")
+                        .setMessage("Для работы с файлами")
                         .setPositiveButton("Предоставить доступ") { _, _ ->
                             // Запрашиваем разрешение
                             requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
