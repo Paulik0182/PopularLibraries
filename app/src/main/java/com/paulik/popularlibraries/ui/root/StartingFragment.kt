@@ -12,18 +12,25 @@ class StartingFragment : ViewBindingFragment<FragmentStartingBinding>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initButton()
+    }
+
+    private fun initButton() {
         binding.counterMvpButton.setOnClickListener {
             getController().openCounterBasedMvp()
         }
-        binding.blanksButton.setOnClickListener {
+        binding.usersGitHubButton.setOnClickListener {
             getController().openUsersGitHub()
-//            view.snack("Пока никак")
+        }
+        binding.convertorImageButton.setOnClickListener {
+            getController().openConverterImage()
         }
     }
 
     interface Controller {
         fun openCounterBasedMvp()
         fun openUsersGitHub()
+        fun openConverterImage()
     }
 
     private fun getController(): Controller = activity as Controller

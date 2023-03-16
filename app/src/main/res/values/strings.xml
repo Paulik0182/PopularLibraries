@@ -18,6 +18,9 @@
     <string name="counter_mvp">Cчетчик на MVP</string>
     <string name="blanks">Ничего нет</string>
     <string name="users_git_hub">Users GitHub</string>
+    <string name="convertor_image">Конвертация картинок</string>
+    <string name="open_image">Открыть</string>
+    <string name="convertor_save_image">Конвертировать</string>
 
     <!-- name text view -->
     <string name="counter_one">Счетчик 1</string>

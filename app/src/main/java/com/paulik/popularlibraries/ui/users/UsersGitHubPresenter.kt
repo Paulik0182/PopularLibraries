@@ -5,15 +5,14 @@ import android.content.Context
 import android.widget.Toast
 import com.github.terrakok.cicerone.Router
 import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
-import com.paulik.popularlibraries.domain.UsersGitHubViewPresenter
+import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
-import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
 import moxy.MvpPresenter
 
 class UsersGitHubPresenter(
     private val router: Router,
     private val usersGitHubRepoImpl: UsersGitHubRepoImpl
-) : MvpPresenter<UsersGitHubViewPresenter>() {
+) : MvpPresenter<UsersGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -32,7 +31,7 @@ class UsersGitHubPresenter(
     }
 
     fun onUserClicked(context: Context, usersGitHubEntity: UsersGitHubEntity) {
-        DetailsUserGitHubFragment.newInstance()
+        viewState.showUser(usersGitHubEntity.login)
 
         Toast.makeText(context, usersGitHubEntity.login, Toast.LENGTH_SHORT).show()
     }
