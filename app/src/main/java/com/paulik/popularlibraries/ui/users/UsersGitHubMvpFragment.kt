@@ -27,7 +27,8 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     private val presenter by moxyPresenter {
         UsersGitHubPresenter(
             App.instance.router,
-            UsersGitHubRepoImpl()
+            UsersGitHubRepoImpl(),
+            app.gitHubApi
         )
     }
 
