@@ -5,6 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.paulik.popularlibraries.UsedConst
 import com.paulik.popularlibraries.databinding.ItemUsersBinding
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 
@@ -31,6 +33,12 @@ class UsersAdapter(
 //            binding.root.setOnClickListener { itemClickListener(user) } // выриант записи
 
             binding.loginTextView.text = user.login
+            binding.subtitleTextView.text = user.nodeId
+
+            Glide.with(itemView.context)
+                .load(user.avatarUrl)
+                .placeholder(UsedConst.imageConst.DEFAULT_IMAGE_CONST)
+                .into(binding.avatarImageView)
         }
     }
 }
