@@ -13,10 +13,10 @@ interface GitHubApi {
     fun getUsers(): Single<List<UsersGitHubEntity>>
 
     @GET("users/{user}/repos")
-    fun getProject(@Path("user") user: String?): Single<List<ProjectGitHubEntity>>
+    fun getProject2(@Path("user") user: String?): Single<List<ProjectGitHubEntity>>
 
     @GET("users/{user}/repos")
-    fun getProject2(@Url reposUrl: String?): Single<List<ProjectGitHubEntity>>
+    fun getProject(@Url reposUrl: String?): Single<List<ProjectGitHubEntity>>
 
     @GET("users/{user}")
     fun getUser(@Path("user") user: String?): Single<UsersGitHubEntity>

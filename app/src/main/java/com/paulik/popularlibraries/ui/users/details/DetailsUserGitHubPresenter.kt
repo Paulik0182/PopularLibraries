@@ -13,18 +13,18 @@ import moxy.MvpPresenter
 class DetailsUserGitHubPresenter(
     private val router: Router,
     private val gitHubRepoImpl: GitHubRepoImpl,
-    private val user: String
+    private val reposUrl: String
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        loadData(user)
+        loadData(reposUrl)
     }
 
     @SuppressLint("CheckResult")
-    private fun loadData(user: String) {
-        gitHubRepoImpl.getProject(user)
+    private fun loadData(reposUrl: String) {
+        gitHubRepoImpl.getProject(reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }

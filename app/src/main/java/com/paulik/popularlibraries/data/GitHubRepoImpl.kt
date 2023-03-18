@@ -16,8 +16,8 @@ class GitHubRepoImpl(
         return gitHubApi.getUsers()
     }
 
-    override fun getProject(user: String): Single<List<ProjectGitHubEntity>> {
-        return gitHubApi.getProject(user)
+    override fun getProject(reposUrl: String): Single<List<ProjectGitHubEntity>> {
+        return gitHubApi.getProject(reposUrl)
     }
 
     fun interval(): @NonNull Observable<Long> {

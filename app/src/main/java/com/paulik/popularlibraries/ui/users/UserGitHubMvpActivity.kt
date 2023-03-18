@@ -43,11 +43,11 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
         presenterDetails.backPressed()
     }
 
-    override fun showUser(user: String) {
+    override fun showReposUrl(reposUrl: String) {
         supportFragmentManager
             .beginTransaction()
             .replace(
-                R.id.container, DetailsUserGitHubFragment.newInstance(user)
+                R.id.container, DetailsUserGitHubFragment.newInstance(reposUrl)
             )
 //            .addToBackStack(null)
             .commit()

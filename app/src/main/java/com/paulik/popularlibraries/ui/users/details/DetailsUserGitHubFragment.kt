@@ -54,9 +54,9 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
     companion object {
 
         @JvmStatic
-        fun newInstance(user: String) =
+        fun newInstance(reposUrl: String) =
             DetailsUserGitHubFragment().apply {
-                arguments = bundleOf(KEY_USER to user)
+                arguments = bundleOf(KEY_USER to reposUrl)
             }
     }
 

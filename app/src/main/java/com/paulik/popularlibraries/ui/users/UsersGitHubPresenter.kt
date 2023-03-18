@@ -41,7 +41,7 @@ class UsersGitHubPresenter(
     }
 
     fun onUserClicked(usersGitHubEntity: UsersGitHubEntity) {
-        viewState.showUser(usersGitHubEntity.login)
+        viewState.showReposUrl(usersGitHubEntity.reposUrl)
     }
 
     fun backPressed(): Boolean {

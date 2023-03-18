@@ -7,5 +7,5 @@ import io.reactivex.rxjava3.core.Single
 interface GitHubRepo {
 
     fun getUsers(): Single<List<UsersGitHubEntity>>
-    fun getProject(user: String): Single<List<ProjectGitHubEntity>>
+    fun getProject(reposUrl: String): Single<List<ProjectGitHubEntity>>
 }

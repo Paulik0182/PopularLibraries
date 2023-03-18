@@ -10,7 +10,7 @@ interface UsersGitHubMvpView : MvpView {
     fun updateList(users: List<UsersGitHubEntity>)
 
     @AddToEndSingle
-    fun showUser(user: String)
+    fun showReposUrl(reposUrl: String)
 
     @AddToEndSingle
     fun showProgressBar()
