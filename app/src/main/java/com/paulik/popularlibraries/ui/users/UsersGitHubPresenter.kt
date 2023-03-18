@@ -28,15 +28,17 @@ class UsersGitHubPresenter(
         usersGitHubRepoImpl.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { viewState.showProgressBar() }
             .subscribe({ users: List<UsersGitHubEntity> ->
                 viewState.updateList(users)
+                viewState.hideProgressBar()
             }, {
                 Log.e(
                     "Retrofit. UsersGitHubPresenter",
                     "Ошибка при получении списка пользователей",
                     it
                 )
-
+                viewState.showProgressBar()
             })
     }
 

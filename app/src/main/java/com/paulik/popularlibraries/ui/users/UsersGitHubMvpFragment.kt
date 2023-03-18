@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
@@ -139,6 +140,16 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 
     override fun showUser(user: String) {
         (requireActivity() as UserGitHubMvpActivity).showUser(user)
+    }
+
+    override fun showProgressBar() {
+        binding.progressBar.isVisible = true
+        binding.usersRecycler.isVisible = false
+    }
+
+    override fun hideProgressBar() {
+        binding.progressBar.isVisible = false
+        binding.usersRecycler.isVisible = true
     }
 
     override fun backPressed(): Boolean {

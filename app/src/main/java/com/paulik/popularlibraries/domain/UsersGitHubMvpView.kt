@@ -11,4 +11,10 @@ interface UsersGitHubMvpView : MvpView {
 
     @AddToEndSingle
     fun showUser(user: String)
+
+    @AddToEndSingle
+    fun showProgressBar()
+
+    @AddToEndSingle
+    fun hideProgressBar()
 }

@@ -40,10 +40,6 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
         presenter.backPressed()
     }
 
-    override fun updateList(users: List<UsersGitHubEntity>) {
-        // TODO("Not yet implemented")
-    }
-
     override fun showUser(user: String) {
         supportFragmentManager
             .beginTransaction()
@@ -52,5 +48,17 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
             )
 //            .addToBackStack(null)
             .commit()
+    }
+
+    override fun updateList(users: List<UsersGitHubEntity>) {
+        // TODO("Not yet implemented")
+    }
+
+    override fun showProgressBar() {
+        // TODO("Not yet implemented")
+    }
+
+    override fun hideProgressBar() {
+        // TODO("Not yet implemented")
     }
 }
