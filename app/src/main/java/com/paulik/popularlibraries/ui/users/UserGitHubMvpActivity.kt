@@ -30,7 +30,7 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
     override fun onBackPressed() {
         super.onBackPressed()
 
-        // если наш фрагмент евляется наследником BackButtonListener и backPressed возвращает true
+        // если наш фрагмент является наследником BackButtonListener и backPressed возвращает true
         // то наше активити не нуждается в закрытии
         supportFragmentManager.fragments.forEach {
             if (it is BackButtonListener && it.backPressed()) {
@@ -49,6 +49,8 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
             .beginTransaction()
             .replace(
                 R.id.container, DetailsUserGitHubFragment.newInstance(user)
-            ).commit()
+            )
+//            .addToBackStack(null)
+            .commit()
     }
 }
