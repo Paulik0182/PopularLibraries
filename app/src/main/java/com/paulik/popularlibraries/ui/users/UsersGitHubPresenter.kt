@@ -1,9 +1,7 @@
 package com.paulik.popularlibraries.ui.users
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import com.github.terrakok.cicerone.Router
 import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
@@ -42,10 +40,8 @@ class UsersGitHubPresenter(
             })
     }
 
-    fun onUserClicked(context: Context, usersGitHubEntity: UsersGitHubEntity) {
+    fun onUserClicked(usersGitHubEntity: UsersGitHubEntity) {
         viewState.showUser(usersGitHubEntity.login)
-
-        Toast.makeText(context, usersGitHubEntity.login, Toast.LENGTH_SHORT).show()
     }
 
     fun backPressed(): Boolean {

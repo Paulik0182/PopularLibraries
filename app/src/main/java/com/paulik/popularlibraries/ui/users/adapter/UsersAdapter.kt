@@ -2,17 +2,18 @@ package com.paulik.popularlibraries.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.paulik.popularlibraries.UsedConst
 import com.paulik.popularlibraries.databinding.ItemUsersBinding
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
+import com.paulik.popularlibraries.ui.root.image.ImageLoader
 
 
 class UsersAdapter(
-    private val itemClickListener: (UsersGitHubEntity) -> Unit
+    private val itemClickListener: (UsersGitHubEntity) -> Unit,
+    private val imageLoader: ImageLoader<ImageView>
 ) : ListAdapter<UsersGitHubEntity, UsersAdapter.UserViewHolder>(GitHibUserCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -34,11 +35,7 @@ class UsersAdapter(
 
             binding.loginTextView.text = user.login
             binding.subtitleTextView.text = user.nodeId
-
-            Glide.with(itemView.context)
-                .load(user.avatarUrl)
-                .placeholder(UsedConst.imageConst.DEFAULT_IMAGE_CONST)
-                .into(binding.avatarImageView)
+            imageLoader.loadInto(user.avatarUrl, binding.avatarImageView)
         }
     }
 }

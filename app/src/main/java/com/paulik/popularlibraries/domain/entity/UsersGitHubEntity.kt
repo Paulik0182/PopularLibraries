@@ -14,7 +14,7 @@ data class UsersGitHubEntity(
 
     @Expose
     @SerializedName("avatar_url")
-    val avatarUrl: String? = null,
+    val avatarUrl: String,
 
     @Expose
     @SerializedName("node_id")

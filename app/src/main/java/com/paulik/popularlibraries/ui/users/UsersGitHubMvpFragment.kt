@@ -14,6 +14,7 @@ import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
+import com.paulik.popularlibraries.ui.root.image.GlideImageLoader
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import com.paulik.popularlibraries.utils.snack
@@ -37,11 +38,10 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     private val adapter by lazy {
-        UsersAdapter {
-            presenter.onUserClicked(requireContext(), it)
-        }
-
-//        UsersAdapter(presenter::onUserClicked)// вариант записи
+        UsersAdapter(
+            presenter::onUserClicked,
+            GlideImageLoader()
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
