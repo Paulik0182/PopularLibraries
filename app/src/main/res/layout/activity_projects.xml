@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    tools:context=".ui.users.UsersGitHubMvpFragment">
+    tools:context=".ui.projects.ProjectsActivity">
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -18,11 +17,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/users_recycler"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/avatar_image_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:listitem="@layout/item_users" />
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </FrameLayout>
