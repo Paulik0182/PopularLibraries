@@ -8,8 +8,8 @@ import com.github.terrakok.cicerone.Router
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.paulik.popularlibraries.data.GitHubApi
 import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
-import com.paulik.popularlibraries.data.users.GitHubApi
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

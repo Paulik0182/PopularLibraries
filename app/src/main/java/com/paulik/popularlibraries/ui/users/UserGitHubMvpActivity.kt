@@ -7,6 +7,7 @@ import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
+import com.paulik.popularlibraries.ui.users.details.DetailsUserRootPresenter
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
@@ -16,6 +17,7 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
     private val navigator = AppNavigator(this, R.id.container)
 
     private val presenter by moxyPresenter { UsersRootPresenter(App.instance.router) }
+    private val presenterDetails by moxyPresenter { DetailsUserRootPresenter(App.instance.router) }
 
     override fun onResumeFragments() {
         super.onResumeFragments()
@@ -38,6 +40,7 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
             }
         }
         presenter.backPressed()
+        presenterDetails.backPressed()
     }
 
     override fun showUser(user: String) {

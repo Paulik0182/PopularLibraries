@@ -3,14 +3,14 @@ package com.paulik.popularlibraries.ui.counter
 import android.os.Bundle
 import android.view.View
 import com.paulik.popularlibraries.databinding.FragmentCounterBasedMvpBinding
-import com.paulik.popularlibraries.domain.CounterPresenter
+import com.paulik.popularlibraries.domain.CounterMvpView
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 
 class CounterBasedMvpFragment : ViewBindingFragment<FragmentCounterBasedMvpBinding>(
     FragmentCounterBasedMvpBinding::inflate
-), CounterPresenter {
+), CounterMvpView {
 
     // @InjectPresenter – аннотация для управления жизненным циклом Presenter
     @InjectPresenter // в старых версиях. Работает только с дефолтными значениями в конструкторе CounterBasedMvpPresenter

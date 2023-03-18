@@ -8,7 +8,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
-import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
+import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
@@ -29,7 +29,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     private val presenter by moxyPresenter {
         UsersGitHubPresenter(
             App.instance.router,
-            UsersGitHubRepoImpl(app.gitHubApi),
+            GitHubRepoImpl(app.gitHubApi),
         )
     }
 
@@ -106,8 +106,8 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     private fun initView() {
-        binding.usersRecycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.usersRecycler.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -144,12 +144,12 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 
     override fun showProgressBar() {
         binding.progressBar.isVisible = true
-        binding.usersRecycler.isVisible = false
+        binding.recyclerView.isVisible = false
     }
 
     override fun hideProgressBar() {
         binding.progressBar.isVisible = false
-        binding.usersRecycler.isVisible = true
+        binding.recyclerView.isVisible = true
     }
 
     override fun backPressed(): Boolean {

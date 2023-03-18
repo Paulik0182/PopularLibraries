@@ -1,7 +1,7 @@
 package com.paulik.popularlibraries.ui.counter
 
-import com.paulik.popularlibraries.data.CounterModelRepoImpl
-import com.paulik.popularlibraries.domain.CounterPresenter
+import com.paulik.popularlibraries.data.counter.CounterModelRepoImpl
+import com.paulik.popularlibraries.domain.CounterMvpView
 import moxy.MvpPresenter
 
 /**
@@ -9,7 +9,7 @@ import moxy.MvpPresenter
  * @InjectViewState – аннотация для привязывания ViewState к Presenter
  */
 
-class CounterBasedMvpPresenter : MvpPresenter<CounterPresenter>() {
+class CounterBasedMvpPresenter : MvpPresenter<CounterMvpView>() {
 
     private val model = CounterModelRepoImpl()
 

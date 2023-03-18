@@ -6,7 +6,9 @@ import java.util.*
 
 data class UsersGitHubEntity(
 
-    val id: Int = UUID.randomUUID().variant(),
+    @Expose
+    @SerializedName("id")
+    val id: Int,
 
     @Expose
     @SerializedName("login")
@@ -19,4 +21,8 @@ data class UsersGitHubEntity(
     @Expose
     @SerializedName("node_id")
     val nodeId: String,
+
+    @Expose
+    @SerializedName("repos_url")
+    val reposUrl: String,
 )

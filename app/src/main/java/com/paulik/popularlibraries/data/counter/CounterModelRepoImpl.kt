@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.data
+package com.paulik.popularlibraries.data.counter
 
 import com.paulik.popularlibraries.domain.entity.CounterEntity
 import com.paulik.popularlibraries.domain.repo.CounterModelRepo
