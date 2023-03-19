@@ -28,7 +28,7 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
         DetailsUserGitHubPresenter(
             App.instance.router,
             GitHubRepoImpl(app.gitHubApi),
-            requireActivity().getString(KEY_USER)!!
+//            requireActivity().getString(KEY_USER)!! // todo чтото не так
         )
     }
 

@@ -13,13 +13,13 @@ import moxy.MvpPresenter
 class DetailsUserGitHubPresenter(
     private val router: Router,
     private val gitHubRepoImpl: GitHubRepoImpl,
-    private val reposUrl: String
+//    private val reposUrl: String // todo чтото не так
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        loadData(reposUrl)
+//        loadData(reposUrl) // todo чтото не так
     }
 
     @SuppressLint("CheckResult")
