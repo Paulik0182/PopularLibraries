@@ -29,8 +29,8 @@ class ProjectAdapter(
         fun showProject(project: ProjectGitHubEntity) {
             binding.root.setOnClickListener { itemClickListener(project) }
 
-//            binding.titleTextView.text = project
-//            binding.subtitleTextView.text = project.
+            binding.titleTextView.text = project.name
+            binding.subtitleTextView.text = project.description
         }
     }
 }

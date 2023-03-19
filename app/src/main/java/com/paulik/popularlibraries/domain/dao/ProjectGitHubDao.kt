@@ -12,6 +12,9 @@ interface ProjectGitHubDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE) // в скобках сказано,что если есть такой проект-Id то перезаписываем данные. Есть варианты)
     fun saveProject(project: ProjectGitHubEntity)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE) // в скобках сказано,что если есть такой проект-Id то перезаписываем данные. Есть варианты)
+    fun saveProject(projects: List<ProjectGitHubEntity>)
+
     @Query("SELECT * FROM projects") // запрос всех проектов. projects - это название таблицы
     fun getAllProject(): List<ProjectGitHubEntity>
 

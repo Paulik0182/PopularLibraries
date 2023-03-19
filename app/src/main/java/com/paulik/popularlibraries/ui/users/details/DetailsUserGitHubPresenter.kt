@@ -42,7 +42,7 @@ class DetailsUserGitHubPresenter(
     }
 
     fun onProjectClicked(projectGitHubEntity: ProjectGitHubEntity) {
-//        viewState.showProject(projectGitHubEntity)
+//        viewState.showProject(projectGitHubEntity.userId)
     }
 
     fun backPressed(): Boolean {

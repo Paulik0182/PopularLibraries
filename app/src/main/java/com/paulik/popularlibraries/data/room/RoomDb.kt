@@ -15,18 +15,17 @@ import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
     ],
     version = 1
 )
-abstract class RoomDb : RoomDatabase() {
+abstract class RoomDb() : RoomDatabase() {
 
     abstract val usersGitHubDao: UsersGitHubDao
     abstract val projectGitHubDao: ProjectGitHubDao
 
     companion object {
         private const val DB_NAME = "datebase.db"
-        private var db: RoomDb? = null
-        val instance by lazy {
+        val instanceRoom by lazy {
             Room.databaseBuilder(App.instance, RoomDb::class.java, DB_NAME)
+                .allowMainThreadQueries()
                 .build()
         }
     }
-
 }

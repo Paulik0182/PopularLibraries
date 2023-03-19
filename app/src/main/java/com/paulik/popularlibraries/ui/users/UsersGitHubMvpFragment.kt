@@ -9,6 +9,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.GitHubRepoImpl
+import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
+import com.paulik.popularlibraries.data.room.RoomDb
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
@@ -25,16 +27,21 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 ), UsersGitHubMvpView, BackButtonListener {
 
     private val app: App get() = requireActivity().applicationContext as App
+    private val status by lazy { NetworkStatusInteractorImpl() }
+    private val networkStatusInteractor: NetworkStatusInteractor by lazy {
+        app.networkStatusInteractor
+    }
 
     private val presenter by moxyPresenter {
         UsersGitHubPresenter(
             App.instance.router,
-            GitHubRepoImpl(app.gitHubApi),
+            GitHubRepoImpl(
+//                networkStatusInteractorImpl = NetworkStatusInteractorImpl(),
+//                networkStatusInteractorImpl = status,
+                gitHubApi = app.gitHubApi,
+                db = RoomDb.instanceRoom
+            ),
         )
-    }
-
-    private val networkStatusInteractor: NetworkStatusInteractor by lazy {
-        app.networkStatusInteractor
     }
 
     private val adapter by lazy {

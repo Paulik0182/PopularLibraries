@@ -22,25 +22,25 @@ data class ProjectGitHubEntity(
     @Expose
     @SerializedName("id")
     @PrimaryKey
-    private var id: Int,
+    var id: Int,
 
     @Expose
     @SerializedName("name")
     @ColumnInfo(name = "name")
-    private val name: String,
+    val name: String,
 
     @Expose
     @SerializedName("description")
     @ColumnInfo(name = "description")
-    private val description: String,
+    val description: String,
 
     @Expose
     @SerializedName("user_id")
     @ColumnInfo(name = "user_id")
-    private val userId: String,
+    val userId: String,
 
     @Expose
     @SerializedName("forks_count")
     @ColumnInfo(name = "forks_count")
-    private val forksCount: Int,
+    val forksCount: Int,
 )
