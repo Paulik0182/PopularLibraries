@@ -22,13 +22,11 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 
     private val app: App get() = requireActivity().applicationContext as App
 
-    private lateinit var projectGitHubEntity: ProjectGitHubEntity
-
     private val presenter by moxyPresenter {
         DetailsUserGitHubPresenter(
             App.instance.router,
             GitHubRepoImpl(app.gitHubApi),
-            requireActivity().getString(KEY_USER)!!
+            requireArguments().getString(KEY_USER)!!
         )
     }
 
@@ -42,8 +40,6 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
         super.onViewCreated(view, savedInstanceState)
 
         initView()
-
-//        projectGitHubEntity = requireActivity().getString(KEY_USER)!!// todo чтото не так
     }
 
     private fun initView() {
@@ -56,7 +52,10 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
         @JvmStatic
         fun newInstance(reposUrl: String) =
             DetailsUserGitHubFragment().apply {
-                arguments = bundleOf(KEY_USER to reposUrl)
+//                arguments = bundleOf(KEY_USER to reposUrl)
+                arguments = bundleOf().apply {
+                    putString(KEY_USER, reposUrl)
+                }
             }
     }
 

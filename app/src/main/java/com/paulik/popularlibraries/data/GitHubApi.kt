@@ -15,7 +15,7 @@ interface GitHubApi {
     @GET("users/{user}/repos")
     fun getProject2(@Path("user") user: String?): Single<List<ProjectGitHubEntity>>
 
-    @GET("users/{user}/repos")
+    @GET()
     fun getProject(@Url reposUrl: String?): Single<List<ProjectGitHubEntity>>
 
     @GET("users/{user}")

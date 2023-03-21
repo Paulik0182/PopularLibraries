@@ -7,13 +7,21 @@ data class ProjectGitHubEntity(
 
     @Expose
     @SerializedName("id")
-    private var id: Int,
+    var id: Int,
 
     @Expose
     @SerializedName("name")
-    private val name: String,
+    val name: String,
 
     @Expose
     @SerializedName("description")
-    private val description: String
+    val description: String,
+
+    @Expose
+    @SerializedName("user_id")
+    val userId: String,
+
+    @Expose
+    @SerializedName("forks_count")
+    val forksCount: Int,
 )
