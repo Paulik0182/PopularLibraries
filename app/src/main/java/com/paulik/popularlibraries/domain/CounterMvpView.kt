@@ -13,7 +13,7 @@ import moxy.viewstate.strategy.alias.AddToEndSingle
  * @SkipStrategy – команда не будет добавлена в очередь, и никак не изменит очередь
  */
 
-interface CounterPresenter : MvpView {
+interface CounterMvpView : MvpView {
     @AddToEndSingle
     fun setOneButtonText(text: String)
 

@@ -1,16 +1,16 @@
 package com.paulik.popularlibraries.domain
 
-import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
+import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
-interface UsersGitHubMvpView : MvpView {
+interface ProjectGitHubMvpView : MvpView {
 
     @AddToEndSingle
-    fun updateUsersList(users: List<UsersGitHubEntity>)
+    fun updateProjectList(project: List<ProjectGitHubEntity>)
 
     @AddToEndSingle
-    fun showReposUrl(reposUrl: String)
+    fun showForksRepo(forksUrl: String)
 
     @AddToEndSingle
     fun showProgressBar()

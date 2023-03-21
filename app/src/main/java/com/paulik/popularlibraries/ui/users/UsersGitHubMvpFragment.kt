@@ -5,14 +5,16 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
-import com.paulik.popularlibraries.data.UsersGitHubRepoImpl
+import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
+import com.paulik.popularlibraries.ui.root.image.GlideImageLoader
 import com.paulik.popularlibraries.ui.users.adapter.UsersAdapter
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import com.paulik.popularlibraries.utils.snack
@@ -27,7 +29,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     private val presenter by moxyPresenter {
         UsersGitHubPresenter(
             App.instance.router,
-            UsersGitHubRepoImpl()
+            GitHubRepoImpl(app.gitHubApi),
         )
     }
 
@@ -36,11 +38,10 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     private val adapter by lazy {
-        UsersAdapter {
-            presenter.onUserClicked(requireContext(), it)
-        }
-
-//        UsersAdapter(presenter::onUserClicked)// вариант записи
+        UsersAdapter(
+            presenter::onUserClicked,
+            GlideImageLoader()
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -105,12 +106,12 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     private fun initView() {
-        binding.usersRecycler.layoutManager = LinearLayoutManager(requireContext())
-        binding.usersRecycler.adapter = adapter
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun updateList(users: List<UsersGitHubEntity>) {
+    override fun updateUsersList(users: List<UsersGitHubEntity>) {
         // submitList - отправляет список элементов
         adapter.submitList(users)
 //        adapter.submitList(adapter.currentList + users) // вариант
@@ -137,8 +138,18 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
             }
     }
 
-    override fun showUser(user: String) {
-        (requireActivity() as UserGitHubMvpActivity).showUser(user)
+    override fun showReposUrl(reposUrl: String) {
+        (requireActivity() as UserRootActivity).showReposUrl(reposUrl)
+    }
+
+    override fun showProgressBar() {
+        binding.progressBar.isVisible = true
+        binding.recyclerView.isVisible = false
+    }
+
+    override fun hideProgressBar() {
+        binding.progressBar.isVisible = false
+        binding.recyclerView.isVisible = true
     }
 
     override fun backPressed(): Boolean {

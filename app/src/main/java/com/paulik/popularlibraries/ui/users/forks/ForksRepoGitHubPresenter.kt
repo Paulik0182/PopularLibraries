@@ -1,47 +1,44 @@
-package com.paulik.popularlibraries.ui.users
+package com.paulik.popularlibraries.ui.users.forks
 
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
 import com.paulik.popularlibraries.data.GitHubRepoImpl
-import com.paulik.popularlibraries.domain.UsersGitHubMvpView
-import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
+import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
+import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class UsersGitHubPresenter(
+class ForksRepoGitHubPresenter(
     private val router: Router,
-    private val usersGitHubRepoImpl: GitHubRepoImpl
-) : MvpPresenter<UsersGitHubMvpView>() {
+    private val gitHubRepoImpl: GitHubRepoImpl,
+    private val forksUrl: String
+) : MvpPresenter<ForksRepoGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        loadData()
+        loadData(forksUrl)
     }
 
     @SuppressLint("CheckResult")
-    private fun loadData() {
-        usersGitHubRepoImpl.getUsers()
+    private fun loadData(forksUrl: String) {
+        gitHubRepoImpl.getForks(forksUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }
-            .subscribe({ users: List<UsersGitHubEntity> ->
-                viewState.updateUsersList(users)
+            .subscribe({ fork: List<ForksRepoGitHubEntity> ->
+                viewState.updateForksList(fork)
                 viewState.hideProgressBar()
             }, {
                 Log.e(
-                    "Retrofit. UsersGitHubPresenter",
-                    "Ошибка при получении списка пользователей",
+                    "Retrofit. ForksRepoGitHubPresenter",
+                    "Ошибка при получении списка форков",
                     it
                 )
                 viewState.showProgressBar()
             })
-    }
-
-    fun onUserClicked(usersGitHubEntity: UsersGitHubEntity) {
-        viewState.showReposUrl(usersGitHubEntity.reposUrl)
     }
 
     fun backPressed(): Boolean {

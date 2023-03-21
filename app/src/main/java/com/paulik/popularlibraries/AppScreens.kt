@@ -10,7 +10,7 @@ object AppScreens {
         UsersGitHubMvpFragment()
     }
 
-    fun DetailsUerGitHubScreen() = FragmentScreen {
+    fun detailsUerGitHubScreen() = FragmentScreen {
         DetailsUserGitHubFragment()
     }
 }
