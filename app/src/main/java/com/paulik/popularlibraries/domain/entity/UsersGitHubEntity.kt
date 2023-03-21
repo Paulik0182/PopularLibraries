@@ -24,5 +24,5 @@ data class UsersGitHubEntity(
 
     @Expose
     @SerializedName("repos_url")
-    val reposUrl: String,
+    val reposUrl: String
 )

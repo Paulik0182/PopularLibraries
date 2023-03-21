@@ -1,5 +1,6 @@
 package com.paulik.popularlibraries.data
 
+import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.repo.GitHubRepo
@@ -18,6 +19,10 @@ class GitHubRepoImpl(
 
     override fun getProject(reposUrl: String): Single<List<ProjectGitHubEntity>> {
         return gitHubApi.getProject(reposUrl)
+    }
+
+    override fun getForks(forksUrl: String): Single<List<ForksRepoGitHubEntity>> {
+        return gitHubApi.getForks(forksUrl)
     }
 
     fun interval(): @NonNull Observable<Long> {

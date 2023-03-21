@@ -30,7 +30,12 @@ class ProjectAdapter(
             binding.root.setOnClickListener { itemClickListener(project) }
 
             binding.titleTextView.text = project.name
-//            binding.subtitleTextView.text = project.userId
+
+            if (project.private) {
+                binding.privateRepoTextView.text = "Private"
+            } else {
+                binding.privateRepoTextView.text = "public"
+            }
         }
     }
 }

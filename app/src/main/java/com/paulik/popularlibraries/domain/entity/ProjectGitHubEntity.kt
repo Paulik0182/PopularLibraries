@@ -24,4 +24,12 @@ data class ProjectGitHubEntity(
     @Expose
     @SerializedName("forks_count")
     val forksCount: Int,
+
+    @Expose
+    @SerializedName("forks_url")
+    val forksUrl: String,
+
+    @Expose
+    @SerializedName("private")
+    val private: Boolean
 )

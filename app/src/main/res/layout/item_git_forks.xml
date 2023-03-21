@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:backgroundTint="#DACF6B"
+    android:layout_margin="4dp"
+    android:backgroundTint="#6BC9DA"
     android:clickable="true"
     android:focusable="true">
 
@@ -12,24 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="14dp">
 
         <TextView
-            android:id="@+id/title_text_view"
+            android:id="@+id/name_forks_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginTop="3dp"
-            android:gravity="center"
-            tools:text="Name repo" />
-
-        <TextView
-            android:id="@+id/private_repo_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textStyle="italic"
-            tools:text="private" />
+            tools:text="Name forks" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

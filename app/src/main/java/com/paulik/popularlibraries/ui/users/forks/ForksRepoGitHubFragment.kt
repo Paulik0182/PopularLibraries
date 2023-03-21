@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.ui.users.details
+package com.paulik.popularlibraries.ui.users.forks
 
 import android.os.Bundle
 import android.view.View
@@ -7,40 +7,37 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.GitHubRepoImpl
-import com.paulik.popularlibraries.databinding.FragmentDetailsUserGitHubBinding
-import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
-import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
+import com.paulik.popularlibraries.databinding.FragmentForksRepoGitHubBinding
+import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
+import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
-import com.paulik.popularlibraries.ui.users.UserGitHubMvpActivity
-import com.paulik.popularlibraries.ui.users.adapter.ProjectAdapter
+import com.paulik.popularlibraries.ui.users.adapter.ForksRepoAdapter
 import moxy.ktx.moxyPresenter
 
-private const val KEY_USER = "KEY_USER"
+private const val KEY_FORKS_REPO = "KEY_FORKS_REPO"
 
-class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubBinding>(
-    FragmentDetailsUserGitHubBinding::inflate
-), ProjectGitHubMvpView {
+class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBinding>(
+    FragmentForksRepoGitHubBinding::inflate
+), ForksRepoGitHubMvpView {
 
     private val app: App get() = requireActivity().applicationContext as App
 
     private val presenter by moxyPresenter {
-        DetailsUserGitHubPresenter(
+        ForksRepoGitHubPresenter(
             App.instance.router,
             GitHubRepoImpl(app.gitHubApi),
-            requireArguments().getString(KEY_USER)!!
+            requireArguments().getString(KEY_FORKS_REPO)!!
         )
     }
 
     private val adapter by lazy {
-        ProjectAdapter(
-            presenter::onProjectClicked,
-        )
+        ForksRepoAdapter()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initView()
+        presenter
     }
 
     private fun initView() {
@@ -51,22 +48,21 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
     companion object {
 
         @JvmStatic
-        fun newInstance(reposUrl: String) =
-            DetailsUserGitHubFragment().apply {
-//                arguments = bundleOf(KEY_USER to reposUrl)
+        fun newInstance(forksUrl: String) =
+            ForksRepoGitHubFragment().apply {
                 arguments = bundleOf().apply {
-                    putString(KEY_USER, reposUrl)
+                    putString(KEY_FORKS_REPO, forksUrl)
                 }
             }
     }
 
-    override fun updateProjectList(project: List<ProjectGitHubEntity>) {
+    override fun updateForksList(forks: List<ForksRepoGitHubEntity>) {
         // submitList - отправляет список элементов
-        adapter.submitList(project)
+        adapter.submitList(forks)
     }
 
-    override fun showForksRepo(forksUrl: String) {
-        (requireActivity() as UserGitHubMvpActivity).showForksRepo(forksUrl)
+    override fun showFork(fork: String) {
+        // TODO("Not yet implemented")
     }
 
     override fun showProgressBar() {

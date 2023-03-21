@@ -111,7 +111,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun updateList(users: List<UsersGitHubEntity>) {
+    override fun updateUsersList(users: List<UsersGitHubEntity>) {
         // submitList - отправляет список элементов
         adapter.submitList(users)
 //        adapter.submitList(adapter.currentList + users) // вариант

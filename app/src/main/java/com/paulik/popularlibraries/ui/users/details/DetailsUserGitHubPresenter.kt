@@ -29,7 +29,7 @@ class DetailsUserGitHubPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }
             .subscribe({ project: List<ProjectGitHubEntity> ->
-                viewState.updateList(project)
+                viewState.updateProjectList(project)
                 viewState.hideProgressBar()
             }, {
                 Log.e(
@@ -42,7 +42,7 @@ class DetailsUserGitHubPresenter(
     }
 
     fun onProjectClicked(projectGitHubEntity: ProjectGitHubEntity) {
-//        viewState.showProject(projectGitHubEntity)
+        viewState.showForksRepo(projectGitHubEntity.forksUrl)
     }
 
     fun backPressed(): Boolean {
