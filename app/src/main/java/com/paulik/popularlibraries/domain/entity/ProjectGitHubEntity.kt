@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName
     ]
 )
 data class ProjectGitHubEntity(
+
     @Expose
     @SerializedName("id")
     @PrimaryKey
@@ -43,4 +44,14 @@ data class ProjectGitHubEntity(
     @SerializedName("forks_count")
     @ColumnInfo(name = "forks_count")
     val forksCount: Int,
+
+    @Expose
+    @SerializedName("forks_url")
+    @ColumnInfo(name = "forks_url")
+    val forksUrl: String,
+
+    @Expose
+    @SerializedName("private")
+    @ColumnInfo(name = "private")
+    val private: Boolean
 )

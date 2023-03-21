@@ -33,5 +33,5 @@ data class UsersGitHubEntity(
     @Expose
     @SerializedName("repos_url")
     @ColumnInfo(name = "repos_url")
-    val reposUrl: String,
+    val reposUrl: String
 )

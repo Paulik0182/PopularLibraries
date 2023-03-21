@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.GitHubRepoImpl
-import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
 import com.paulik.popularlibraries.data.room.RoomDb
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
@@ -27,7 +26,6 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 ), UsersGitHubMvpView, BackButtonListener {
 
     private val app: App get() = requireActivity().applicationContext as App
-    private val status by lazy { NetworkStatusInteractorImpl() }
     private val networkStatusInteractor: NetworkStatusInteractor by lazy {
         app.networkStatusInteractor
     }
@@ -37,7 +35,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
             App.instance.router,
             GitHubRepoImpl(
 //                networkStatusInteractorImpl = NetworkStatusInteractorImpl(),
-//                networkStatusInteractorImpl = status,
+                networkStatusInteractor = networkStatusInteractor,
                 gitHubApi = app.gitHubApi,
                 db = RoomDb.instanceRoom
             ),
@@ -118,7 +116,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    override fun updateList(users: List<UsersGitHubEntity>) {
+    override fun updateUsersList(users: List<UsersGitHubEntity>) {
         // submitList - отправляет список элементов
         adapter.submitList(users)
 //        adapter.submitList(adapter.currentList + users) // вариант
@@ -146,7 +144,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     override fun showReposUrl(reposUrl: String) {
-        (requireActivity() as UserGitHubMvpActivity).showReposUrl(reposUrl)
+        (requireActivity() as UserRootActivity).showReposUrl(reposUrl)
     }
 
     override fun showProgressBar() {

@@ -3,21 +3,25 @@ package com.paulik.popularlibraries.ui.users
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.R
+import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
+import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
-import com.paulik.popularlibraries.ui.users.details.DetailsUserRootPresenter
+import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
+//import com.paulik.popularlibraries.ui.users.details.DetailsUserRootPresenter
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
-class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubMvpView,
+class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubMvpView,
+    ProjectGitHubMvpView,
     UsersGitHubMvpFragment.Controller {
 
     private val navigator = AppNavigator(this, R.id.container)
 
     private val presenter by moxyPresenter { UsersRootPresenter(App.instance.router) }
-    private val presenterDetails by moxyPresenter { DetailsUserRootPresenter(App.instance.router) }
+//    private val presenterDetails by moxyPresenter { DetailsUserRootPresenter(App.instance.router) }
 
     override fun onResumeFragments() {
         super.onResumeFragments()
@@ -40,7 +44,7 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
             }
         }
         presenter.backPressed()
-        presenterDetails.backPressed()
+//        presenterDetails.backPressed()
     }
 
     override fun showReposUrl(reposUrl: String) {
@@ -53,7 +57,21 @@ class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), Use
             .commit()
     }
 
-    override fun updateList(users: List<UsersGitHubEntity>) {
+    override fun showForksRepo(forksUrl: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(
+                R.id.container, ForksRepoGitHubFragment.newInstance(forksUrl)
+            )
+//            .addToBackStack(null)
+            .commit()
+    }
+
+    override fun updateUsersList(users: List<UsersGitHubEntity>) {
+        // TODO("Not yet implemented")
+    }
+
+    override fun updateProjectList(project: List<ProjectGitHubEntity>) {
         // TODO("Not yet implemented")
     }
 

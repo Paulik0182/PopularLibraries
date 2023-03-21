@@ -13,13 +13,13 @@ import moxy.MvpPresenter
 class DetailsUserGitHubPresenter(
     private val router: Router,
     private val gitHubRepoImpl: GitHubRepoImpl,
-//    private val reposUrl: String // todo чтото не так
+    private val reposUrl: String
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-//        loadData(reposUrl) // todo чтото не так
+        loadData(reposUrl)
     }
 
     @SuppressLint("CheckResult")
@@ -29,7 +29,7 @@ class DetailsUserGitHubPresenter(
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }
             .subscribe({ project: List<ProjectGitHubEntity> ->
-                viewState.updateList(project)
+                viewState.updateProjectList(project)
                 viewState.hideProgressBar()
             }, {
                 Log.e(
@@ -42,7 +42,7 @@ class DetailsUserGitHubPresenter(
     }
 
     fun onProjectClicked(projectGitHubEntity: ProjectGitHubEntity) {
-//        viewState.showProject(projectGitHubEntity.userId)
+        viewState.showForksRepo(projectGitHubEntity.forksUrl)
     }
 
     fun backPressed(): Boolean {

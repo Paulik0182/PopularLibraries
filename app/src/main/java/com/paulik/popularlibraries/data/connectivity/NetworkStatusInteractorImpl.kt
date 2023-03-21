@@ -16,13 +16,10 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
  */
 class NetworkStatusInteractorImpl(
     contextProvider: IContextProvider = ContextProvider
-//    private val context: Context
 ) : NetworkStatusInteractor {
-
 
     // Служба через которую получаем статус сети
     private val connectivityManager =
-//        context.getSystemService<ConnectivityManager>()
         contextProvider.context.getSystemService<ConnectivityManager>()
 
     private val networkSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
@@ -31,7 +28,7 @@ class NetworkStatusInteractorImpl(
         return networkSubject
     }
 
-    fun isOnLine() = networkSubject.value ?: false
+   override fun isOnLine() = networkSubject.value ?: false
 
     init {
         val request = NetworkRequest.Builder().build()

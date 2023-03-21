@@ -1,23 +1,23 @@
 package com.paulik.popularlibraries.data
 
+import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
-import retrofit2.http.Path
 import retrofit2.http.Url
 
 interface GitHubApi {
 
+    // https://api.github.com/users
     @GET("users")
     fun getUsers(): Single<List<UsersGitHubEntity>>
 
-    @GET("users/{user}/repos")
-    fun getProject2(@Path("user") user: String?): Single<List<ProjectGitHubEntity>>
-
-    @GET("users/{user}/repos")
+    // https://api.github.com/users/mojombo/repos
+    @GET()
     fun getProject(@Url reposUrl: String?): Single<List<ProjectGitHubEntity>>
 
-    @GET("users/{user}")
-    fun getUser(@Path("user") user: String?): Single<UsersGitHubEntity>
+    // https://api.github.com/repos/mojombo/30daysoflaptops.github.io/forks
+    @GET()
+    fun getForks(@Url forksUrl: String?): Single<List<ForksRepoGitHubEntity>>
 }

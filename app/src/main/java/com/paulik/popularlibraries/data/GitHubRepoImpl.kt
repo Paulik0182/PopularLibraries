@@ -1,8 +1,10 @@
 package com.paulik.popularlibraries.data
 
 import com.paulik.popularlibraries.data.room.RoomDb
+import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
+import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.domain.repo.GitHubRepo
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Observable
@@ -10,85 +12,93 @@ import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
 
 class GitHubRepoImpl(
-//    private val networkStatusInteractorImpl: NetworkStatusInteractorImpl,
     private val gitHubApi: GitHubApi,
-    private val db: RoomDb
+    private val db: RoomDb,
+    private val networkStatusInteractor: NetworkStatusInteractor
 ) : GitHubRepo {
 
     override fun getUsers(): Single<List<UsersGitHubEntity>> {
-//        return if (networkStatusInteractorImpl.isOnLine()) {
-        /** если есть интернет */
-        return gitHubApi.getUsers()
-            // переключаемся на другой Observable
-            .flatMap { users ->
-                Single.fromCallable {
-                    // необходимо поработать на другом Thread. трансформируем каждого из пользователя
-                    val roomUsers = users.map { user ->
-                        UsersGitHubEntity(
-                            user.id,
-                            user.login,
-                            user.reposUrl,
-                            user.avatarUrl,
-                            user.nodeId
-                        )
+        return if (networkStatusInteractor.isOnLine()) {
+            /** если есть интернет */
+            gitHubApi.getUsers()
+                // переключаемся на другой Observable
+                .flatMap { users ->
+                    Single.fromCallable {
+                        // необходимо поработать на другом Thread. трансформируем каждого из пользователя
+                        val roomUsers = users.map { user ->
+                            UsersGitHubEntity(
+                                id = user.id,
+                                login = user.login,
+                                reposUrl = user.reposUrl,
+                                avatarUrl = user.avatarUrl,
+                                nodeId = user.nodeId
+                            )
+                        }
+                        db.usersGitHubDao().saveUser(roomUsers)
+                        users
                     }
-                    db.usersGitHubDao.saveUser(roomUsers)
-                    users
+                }
+        } else {
+            /** если нет интернета */
+            Single.fromCallable {
+                db.usersGitHubDao().getAllUsers().map { user ->
+                    UsersGitHubEntity(
+                        id = user.id,
+                        login = user.login,
+                        reposUrl = user.reposUrl,
+                        avatarUrl = user.avatarUrl,
+                        nodeId = user.nodeId
+                    )
                 }
             }
-//        } else {
-//            /** если нет интернета */
-//            Single.fromCallable {
-//                db.usersGitHubDao.getAllUsers().map { user ->
-//                    UsersGitHubEntity(
-//                        user.id,
-//                        user.login,
-//                        user.reposUrl,
-//                        user.avatarUrl,
-//                        user.nodeId
-//                    )
-//                }
-//            }
-//        }
+        }
 //        return gitHubApi.getUsers()
     }
 
     override fun getProject(reposUrl: String): Single<List<ProjectGitHubEntity>> {
-//        return if (networkStatusInteractorImpl.isOnLine()) {
+//        return if (networkStatusInteractor.isOnLine()) {
 //            /** если есть интернет */
-//            return gitHubApi.getProject(reposUrl)
+//            gitHubApi.getProject(reposUrl)
 //                // переключаемся на другой Observable
 //                .flatMap { projects ->
 //                    Single.fromCallable {
 //                        // необходимо поработать на другом Thread. трансформируем каждого из пользователя
 //                        val roomProject = projects.map { project ->
 //                            ProjectGitHubEntity(
-//                                project.id,
-//                                project.name,
-//                                project.description,
-//                                project.userId,
-//                                project.forksCount
+//                                id = project.id,
+//                                name = project.name,
+//                                description = project.description,
+//                                userId = project.userId,
+//                                forksCount = project.forksCount,
+//                                forksUrl = project.forksUrl,
+//                                private = project.private
 //                            )
 //                        }
-//                        db.projectGitHubDao.saveProject(roomProject)
+//                        db.projectGitHubDao().saveProject(roomProject)
 //                        projects
 //                    }
 //                }
 //        } else {
 //            /** если нет интернета */
 //            Single.fromCallable {
-//                db.projectGitHubDao.getAllProject().map { project ->
+//                db.projectGitHubDao().getAllProject().map { project ->
 //                    ProjectGitHubEntity(
-//                        project.id,
-//                        project.name,
-//                        project.description,
-//                        project.userId,
-//                        project.forksCount
+//                        id = project.id,
+//                        name = project.name,
+//                        description = project.description,
+//                        userId = project.userId,
+//                        forksCount = project.forksCount,
+//                        forksUrl = project.forksUrl,
+//                        private = project.private
 //                    )
 //                }
 //            }
 //        }
         return gitHubApi.getProject(reposUrl)
+    }
+
+    override fun getForks(forksUrl: String): Single<List<ForksRepoGitHubEntity>> {
+        return gitHubApi.getForks(forksUrl)
     }
 
     fun interval(): @NonNull Observable<Long> {

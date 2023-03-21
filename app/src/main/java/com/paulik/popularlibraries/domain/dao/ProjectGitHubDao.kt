@@ -18,6 +18,6 @@ interface ProjectGitHubDao {
     @Query("SELECT * FROM projects") // запрос всех проектов. projects - это название таблицы
     fun getAllProject(): List<ProjectGitHubEntity>
 
-    @Query("SELECT * FROM projects WHERE userId = :userId LIMIT 1") // запрос всех проектов где проект совпадает с переданным проекта и ограничить возвращаемых запросов до 1
-    fun getByUserId(userId: String): ProjectGitHubEntity?
+//    @Query("SELECT * FROM projects WHERE userId = :userId LIMIT 1") // запрос всех проектов где проект совпадает с переданным проекта и ограничить возвращаемых запросов до 1
+//    fun getByUserId(userId: String): ProjectGitHubEntity?
 }

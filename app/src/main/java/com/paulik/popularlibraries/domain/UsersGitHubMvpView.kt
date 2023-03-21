@@ -7,7 +7,7 @@ import moxy.viewstate.strategy.alias.AddToEndSingle
 interface UsersGitHubMvpView : MvpView {
 
     @AddToEndSingle
-    fun updateList(users: List<UsersGitHubEntity>)
+    fun updateUsersList(users: List<UsersGitHubEntity>)
 
     @AddToEndSingle
     fun showReposUrl(reposUrl: String)
