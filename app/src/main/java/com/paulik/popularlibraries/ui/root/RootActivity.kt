@@ -10,7 +10,7 @@ import com.paulik.popularlibraries.ui.convertor.ConvertorImageFragment
 import com.paulik.popularlibraries.ui.counter.CounterBasedMvpFragment
 import com.paulik.popularlibraries.ui.settings.AboutAppFragment
 import com.paulik.popularlibraries.ui.settings.SettingsFragment
-import com.paulik.popularlibraries.ui.users.UserGitHubMvpActivity
+import com.paulik.popularlibraries.ui.users.UserRootActivity
 import moxy.MvpAppCompatActivity
 
 private const val TAG_ROOT_CONTAINER_LAYOUT_KEY = "TAG_ROOT_CONTAINER_LAYOUT_KEY"
@@ -95,7 +95,7 @@ class RootActivity : MvpAppCompatActivity(),
     }
 
     private fun onUsersGitHub() {
-        val intent = Intent(this, UserGitHubMvpActivity::class.java)
+        val intent = Intent(this, UserRootActivity::class.java)
         startActivityForResult(intent, USERS_GIT_HUB_REQUEST_KOD)
         binding.bottomNavBar.visibility = View.GONE
     }

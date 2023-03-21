@@ -14,7 +14,7 @@ import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
-class UserGitHubMvpActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubMvpView,
+class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubMvpView,
     ProjectGitHubMvpView,
     UsersGitHubMvpFragment.Controller {
 

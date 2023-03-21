@@ -139,7 +139,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     override fun showReposUrl(reposUrl: String) {
-        (requireActivity() as UserGitHubMvpActivity).showReposUrl(reposUrl)
+        (requireActivity() as UserRootActivity).showReposUrl(reposUrl)
     }
 
     override fun showProgressBar() {

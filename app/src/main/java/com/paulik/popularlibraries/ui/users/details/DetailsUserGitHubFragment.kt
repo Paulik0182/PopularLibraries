@@ -11,7 +11,7 @@ import com.paulik.popularlibraries.databinding.FragmentDetailsUserGitHubBinding
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
-import com.paulik.popularlibraries.ui.users.UserGitHubMvpActivity
+import com.paulik.popularlibraries.ui.users.UserRootActivity
 import com.paulik.popularlibraries.ui.users.adapter.ProjectAdapter
 import moxy.ktx.moxyPresenter
 
@@ -53,10 +53,7 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
         @JvmStatic
         fun newInstance(reposUrl: String) =
             DetailsUserGitHubFragment().apply {
-//                arguments = bundleOf(KEY_USER to reposUrl)
-                arguments = bundleOf().apply {
-                    putString(KEY_USER, reposUrl)
-                }
+                arguments = bundleOf(KEY_USER to reposUrl)
             }
     }
 
@@ -66,7 +63,7 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
     }
 
     override fun showForksRepo(forksUrl: String) {
-        (requireActivity() as UserGitHubMvpActivity).showForksRepo(forksUrl)
+        (requireActivity() as UserRootActivity).showForksRepo(forksUrl)
     }
 
     override fun showProgressBar() {
