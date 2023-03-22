@@ -7,6 +7,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.GitHubRepoImpl
+import com.paulik.popularlibraries.data.room.RoomDb
 import com.paulik.popularlibraries.databinding.FragmentForksRepoGitHubBinding
 import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
@@ -25,7 +26,7 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
     private val presenter by moxyPresenter {
         ForksRepoGitHubPresenter(
             App.instance.router,
-            GitHubRepoImpl(app.gitHubApi),
+            GitHubRepoImpl(app.gitHubApi, RoomDb.instanceRoom, app.networkStatusInteractor),
             requireArguments().getString(KEY_FORKS_REPO)!!
         )
     }

@@ -6,4 +6,6 @@ import io.reactivex.rxjava3.core.Observable
 interface NetworkStatusInteractor {
 
     fun getNetworkStatusSubject(): Observable<Boolean>
+
+    fun isOnLine(): Boolean
 }

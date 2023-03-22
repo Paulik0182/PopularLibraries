@@ -8,7 +8,7 @@ import com.paulik.popularlibraries.ContextProvider
 import com.paulik.popularlibraries.IContextProvider
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.subjects.PublishSubject
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 /**
  * Context - следует обращатся к context как приведено ниже. В случае если фрагмент умрет и
@@ -16,19 +16,19 @@ import io.reactivex.rxjava3.subjects.PublishSubject
  */
 class NetworkStatusInteractorImpl(
     contextProvider: IContextProvider = ContextProvider
-//    private val context: Context
 ) : NetworkStatusInteractor {
-
 
     // Служба через которую получаем статус сети
     private val connectivityManager =
         contextProvider.context.getSystemService<ConnectivityManager>()
 
-    private val networkSubject = PublishSubject.create<Boolean>()
+    private val networkSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     override fun getNetworkStatusSubject(): Observable<Boolean> {
         return networkSubject
     }
+
+   override fun isOnLine() = networkSubject.value ?: false
 
     init {
         val request = NetworkRequest.Builder().build()
