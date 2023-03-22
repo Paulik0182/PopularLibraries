@@ -10,7 +10,6 @@ import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
-//import com.paulik.popularlibraries.ui.users.details.DetailsUserRootPresenter
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
@@ -44,7 +43,6 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
             }
         }
         presenter.backPressed()
-//        presenterDetails.backPressed()
     }
 
     override fun showReposUrl(reposUrl: String) {

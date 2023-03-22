@@ -34,7 +34,6 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
         UsersGitHubPresenter(
             App.instance.router,
             GitHubRepoImpl(
-//                networkStatusInteractorImpl = NetworkStatusInteractorImpl(),
                 networkStatusInteractor = networkStatusInteractor,
                 gitHubApi = app.gitHubApi,
                 db = RoomDb.instanceRoom
