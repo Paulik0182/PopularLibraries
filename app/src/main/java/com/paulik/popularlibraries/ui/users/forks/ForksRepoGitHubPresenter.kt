@@ -3,17 +3,20 @@ package com.paulik.popularlibraries.ui.users.forks
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
-import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
+import com.paulik.popularlibraries.domain.repo.GitHubRepo
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class ForksRepoGitHubPresenter(
+class ForksRepoGitHubPresenter @AssistedInject constructor(
     private val router: Router,
-    private val gitHubRepoImpl: GitHubRepoImpl,
-    private val forksUrl: String
+    private val gitHubRepoImpl: GitHubRepo,
+    @Assisted private val forksUrl: String
 ) : MvpPresenter<ForksRepoGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
@@ -45,4 +48,9 @@ class ForksRepoGitHubPresenter(
         router.exit()
         return true
     }
+}
+
+@AssistedFactory
+interface ForksRepoGitHubPresenterFactory {
+    fun forksRepoPresenter(forksUrl: String): ForksRepoGitHubPresenter
 }

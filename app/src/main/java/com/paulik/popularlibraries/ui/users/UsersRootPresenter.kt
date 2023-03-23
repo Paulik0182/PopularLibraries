@@ -4,15 +4,18 @@ import com.github.terrakok.cicerone.Router
 import com.paulik.popularlibraries.AppScreens
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import moxy.MvpPresenter
+import javax.inject.Inject
 
-class UsersRootPresenter(
-    private val router: Router
+class UsersRootPresenter @Inject constructor(
+    private val router: Router,
+    private val appScreens: AppScreens
 ) : MvpPresenter<UsersGitHubMvpView>() {
+
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
-        router.replaceScreen(AppScreens.usersGitHubScreen())
+        router.replaceScreen(appScreens.usersGitHubScreen())
     }
 
     fun backPressed() {

@@ -1,5 +1,7 @@
 package com.paulik.popularlibraries.ui.users
 
+import android.os.Bundle
+import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.R
@@ -10,27 +12,37 @@ import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
-//import com.paulik.popularlibraries.ui.users.details.DetailsUserRootPresenter
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubMvpView,
     ProjectGitHubMvpView,
     UsersGitHubMvpFragment.Controller {
 
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
+
     private val navigator = AppNavigator(this, R.id.container)
 
-    private val presenter by moxyPresenter { UsersRootPresenter(App.instance.router) }
-//    private val presenterDetails by moxyPresenter { DetailsUserRootPresenter(App.instance.router) }
+    private val presenter by moxyPresenter {
+        App.instance.appComponent.usersRootPresenter()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        App.instance.appComponent.inject(this)
+    }
 
     override fun onResumeFragments() {
         super.onResumeFragments()
-        App.instance.navigationHolder.setNavigator(navigator)
+        navigatorHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        App.instance.navigationHolder.removeNavigator()
+        navigatorHolder.removeNavigator()
     }
 
     override fun onBackPressed() {
@@ -44,7 +56,6 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
             }
         }
         presenter.backPressed()
-//        presenterDetails.backPressed()
     }
 
     override fun showReposUrl(reposUrl: String) {

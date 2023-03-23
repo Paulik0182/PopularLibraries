@@ -109,4 +109,8 @@ dependencies {
     // snappyDB
     implementation 'com.snappydb:snappydb-lib:0.5.2'
     implementation 'com.esotericsoftware.kryo:kryo:2.24.0'
+
+    // Dagger 2
+    implementation 'com.google.dagger:dagger:2.45'
+    kapt 'com.google.dagger:dagger-compiler:2.45'
 }

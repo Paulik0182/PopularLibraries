@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.paulik.popularlibraries.databinding.ItemGitForksBinding
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 
-
 class ForksRepoAdapter :
     ListAdapter<ForksRepoGitHubEntity, ForksRepoAdapter.ForksRepoViewHolder>(ForksRepoGitHibCallback) {
 
