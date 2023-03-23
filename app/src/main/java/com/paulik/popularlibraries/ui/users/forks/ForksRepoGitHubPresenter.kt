@@ -9,12 +9,19 @@ import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 class ForksRepoGitHubPresenter(
-    private val router: Router,
     private val gitHubRepoImpl: GitHubRepoImpl,
     private val forksUrl: String
 ) : MvpPresenter<ForksRepoGitHubMvpView>() {
+
+    @Inject
+    lateinit var router: Router
+//    @Inject
+//    lateinit var gitHubRepoImpl: GitHubRepoImpl
+//    @Inject
+//    lateinit var forksUrl: String
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

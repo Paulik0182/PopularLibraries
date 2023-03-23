@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.GitHubRepoImpl
-import com.paulik.popularlibraries.data.room.RoomDb
 import com.paulik.popularlibraries.databinding.FragmentDetailsUserGitHubBinding
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
@@ -26,15 +25,22 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 
     private val presenter by moxyPresenter {
         DetailsUserGitHubPresenter(
-            App.instance.router,
-            GitHubRepoImpl(
-                gitHubApi = app.gitHubApi,
-                db = RoomDb.instanceRoom,
-                app.networkStatusInteractor
-            ),
+            GitHubRepoImpl().apply {
+                App.instance.appComponent.inject(this)
+            },
             requireArguments().getString(KEY_USER)!! // todo чтото не так
-        )
+        ).apply {
+            App.instance.appComponent.inject(this)
+        }
     }
+
+//    App.instance.router,
+//    GitHubRepoImpl(
+//    gitHubApi = app.gitHubApi,
+//    db = RoomDb.instanceRoom,
+//    app.networkStatusInteractor
+//    ),
+//    requireArguments().getString(KEY_USER)!! // todo чтото не так
 
     private val adapter by lazy {
         ProjectAdapter(

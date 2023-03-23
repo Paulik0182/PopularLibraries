@@ -1,9 +1,7 @@
 package com.paulik.popularlibraries.data.room
 
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.domain.dao.UsersGitHubDao
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 
@@ -19,12 +17,12 @@ abstract class RoomDb : RoomDatabase() {
     abstract fun usersGitHubDao(): UsersGitHubDao
 //    abstract fun projectGitHubDao(): ProjectGitHubDao
 
-    companion object {
-        private const val DB_NAME = "database.db"
-        val instanceRoom by lazy {
-            Room.databaseBuilder(App.instance, RoomDb::class.java, DB_NAME)
-                .allowMainThreadQueries()
-                .build()
-        }
-    }
+//    companion object {
+//        private const val DB_NAME = "database.db"
+//        val instanceRoom by lazy {
+//            Room.databaseBuilder(App.instance, RoomDb::class.java, DB_NAME)
+//                .allowMainThreadQueries()
+//                .build()
+//        }
+//    }
 }

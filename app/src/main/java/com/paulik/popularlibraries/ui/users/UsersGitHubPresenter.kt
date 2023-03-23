@@ -9,11 +9,16 @@ import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 class UsersGitHubPresenter(
-    private val router: Router,
     private val usersGitHubRepoImpl: GitHubRepoImpl
 ) : MvpPresenter<UsersGitHubMvpView>() {
+
+    @Inject
+    lateinit var router: Router
+//    @Inject
+//    lateinit var usersGitHubRepoImpl: GitHubRepoImpl
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
