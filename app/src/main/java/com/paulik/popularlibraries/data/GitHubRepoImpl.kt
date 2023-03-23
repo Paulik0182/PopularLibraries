@@ -10,20 +10,12 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 class GitHubRepoImpl(
-
+    private val gitHubApi: GitHubApi,
+    private val db: RoomDb,
+    private val networkStatusInteractor: NetworkStatusInteractor
 ) : GitHubRepo {
-
-    @Inject
-    lateinit var gitHubApi: GitHubApi
-
-    @Inject
-    lateinit var db: RoomDb
-
-    @Inject
-    lateinit var networkStatusInteractor: NetworkStatusInteractor
 
     override fun getUsers(): Single<List<UsersGitHubEntity>> {
         return if (networkStatusInteractor.isOnLine()) {

@@ -1,13 +1,6 @@
 package com.paulik.popularlibraries
 
-import android.annotation.SuppressLint
-
 class UsedConst {
-
-    @SuppressLint("NotConstructor")
-    private fun UsedConst() {
-        //конструктор, это для того чтобы нельзя было сделать с этим классом
-    }
 
     interface httpsConst {
         companion object {

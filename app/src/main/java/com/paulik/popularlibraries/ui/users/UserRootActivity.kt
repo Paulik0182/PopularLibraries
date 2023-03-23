@@ -32,7 +32,6 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
     }
 //    private val presenterDetails by moxyPresenter { DetailsUserRootPresenter(App.instance.router) }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

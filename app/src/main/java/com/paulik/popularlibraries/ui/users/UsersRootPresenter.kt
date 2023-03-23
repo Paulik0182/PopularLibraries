@@ -6,10 +6,7 @@ import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class UsersRootPresenter(
-
-) : MvpPresenter<UsersGitHubMvpView>() {
-
+class UsersRootPresenter : MvpPresenter<UsersGitHubMvpView>() {
 
     @Inject
     lateinit var router: Router

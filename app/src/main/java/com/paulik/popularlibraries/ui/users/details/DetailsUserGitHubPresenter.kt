@@ -3,25 +3,23 @@ package com.paulik.popularlibraries.ui.users.details
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
-import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
+import com.paulik.popularlibraries.domain.repo.GitHubRepo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import javax.inject.Inject
 
 class DetailsUserGitHubPresenter(
-    private val gitHubRepoImpl: GitHubRepoImpl,
     private val reposUrl: String
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
     @Inject
     lateinit var router: Router
-//    @Inject
-//    lateinit var gitHubRepoImpl: GitHubRepoImpl
-//    @Inject
-//    lateinit var reposUrl: String
+
+    @Inject
+    lateinit var gitHubRepoImpl: GitHubRepo
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

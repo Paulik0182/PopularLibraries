@@ -1,5 +1,6 @@
 package com.paulik.popularlibraries.di.components
 
+import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
 import com.paulik.popularlibraries.di.modules.*
 import com.paulik.popularlibraries.domain.repo.GitHubRepo
 import com.paulik.popularlibraries.ui.users.UserRootActivity
@@ -11,7 +12,9 @@ import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubPresenter
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubPresenter
 import dagger.Component
+import javax.inject.Singleton
 
+@Singleton
 @Component(
     modules = [
         CacheModule::class,
@@ -36,4 +39,7 @@ interface AppComponent {
     fun inject(forksRepoGitHubPresenter: ForksRepoGitHubPresenter)
 
     fun inject(gitHubRepo: GitHubRepo)
+    fun inject(networkStatusInteractorImpl: NetworkStatusInteractorImpl)
+
+
 }
