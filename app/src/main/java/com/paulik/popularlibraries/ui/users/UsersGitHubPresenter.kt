@@ -11,13 +11,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class UsersGitHubPresenter : MvpPresenter<UsersGitHubMvpView>() {
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var usersGitHubRepoImpl: GitHubRepo
+class UsersGitHubPresenter @Inject constructor(
+    private val router: Router,
+    private val usersGitHubRepoImpl: GitHubRepo
+) : MvpPresenter<UsersGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

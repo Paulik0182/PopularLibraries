@@ -19,14 +19,10 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
     FragmentForksRepoGitHubBinding::inflate
 ), ForksRepoGitHubMvpView {
 
-    private val app: App get() = requireActivity().applicationContext as App
-
     private val presenter by moxyPresenter {
-        ForksRepoGitHubPresenter(
+        App.instance.appComponent.forksRepoGitHubPresenterFactory().forksRepoPresenter(
             requireArguments().getString(KEY_FORKS_REPO)!!
-        ).apply {
-            App.instance.appComponent.inject(this)
-        }
+        )
     }
 
     private val adapter by lazy {

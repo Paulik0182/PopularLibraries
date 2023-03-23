@@ -26,11 +26,8 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
     private val navigator = AppNavigator(this, R.id.container)
 
     private val presenter by moxyPresenter {
-        UsersRootPresenter().apply {
-            App.instance.appComponent.inject(this)
-        }
+        App.instance.appComponent.usersRootPresenter()
     }
-//    private val presenterDetails by moxyPresenter { DetailsUserRootPresenter(App.instance.router) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -29,10 +29,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     private val presenter by moxyPresenter {
-        UsersGitHubPresenter(
-        ).apply {
-            App.instance.appComponent.inject(this)
-        }
+        App.instance.appComponent.usersGitHubPresenter()
     }
 
     private val adapter by lazy {

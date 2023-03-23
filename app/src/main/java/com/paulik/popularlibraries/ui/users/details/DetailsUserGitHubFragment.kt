@@ -20,14 +20,11 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
     FragmentDetailsUserGitHubBinding::inflate
 ), ProjectGitHubMvpView {
 
-    private val app: App get() = requireActivity().applicationContext as App
-
     private val presenter by moxyPresenter {
-        DetailsUserGitHubPresenter(
-            requireArguments().getString(KEY_USER)!! // todo чтото не так
-        ).apply {
-            App.instance.appComponent.inject(this)
-        }
+        App.instance.appComponent.detailsUserGitHubPresenterFactory()
+            .detailsUserGitHubPresenterFactory(
+                requireArguments().getString(KEY_USER)!!
+            )
     }
 
     private val adapter by lazy {

@@ -6,20 +6,18 @@ import com.github.terrakok.cicerone.Router
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.repo.GitHubRepo
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
-import javax.inject.Inject
 
-class DetailsUserGitHubPresenter(
-    private val reposUrl: String
+class DetailsUserGitHubPresenter @AssistedInject constructor(
+    private val router: Router,
+    private val gitHubRepoImpl: GitHubRepo,
+    @Assisted private val reposUrl: String
 ) : MvpPresenter<ProjectGitHubMvpView>() {
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var gitHubRepoImpl: GitHubRepo
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -54,4 +52,9 @@ class DetailsUserGitHubPresenter(
         router.exit()
         return true
     }
+}
+
+@AssistedFactory
+interface DetailsUserGitHubPresenterFactory {
+    fun detailsUserGitHubPresenterFactory(reposUrl: String): DetailsUserGitHubPresenter
 }

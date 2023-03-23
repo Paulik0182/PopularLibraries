@@ -1,16 +1,11 @@
 package com.paulik.popularlibraries.di.components
 
-import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
 import com.paulik.popularlibraries.di.modules.*
-import com.paulik.popularlibraries.domain.repo.GitHubRepo
 import com.paulik.popularlibraries.ui.users.UserRootActivity
-import com.paulik.popularlibraries.ui.users.UsersGitHubMvpFragment
 import com.paulik.popularlibraries.ui.users.UsersGitHubPresenter
 import com.paulik.popularlibraries.ui.users.UsersRootPresenter
-import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
-import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubPresenter
-import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
-import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubPresenter
+import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubPresenterFactory
+import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubPresenterFactory
 import dagger.Component
 import javax.inject.Singleton
 
@@ -26,20 +21,11 @@ import javax.inject.Singleton
 )
 interface AppComponent {
 
+    fun usersGitHubPresenter(): UsersGitHubPresenter
+    fun forksRepoGitHubPresenterFactory(): ForksRepoGitHubPresenterFactory
+    fun usersRootPresenter(): UsersRootPresenter
+
+    fun detailsUserGitHubPresenterFactory(): DetailsUserGitHubPresenterFactory
+
     fun inject(userRootActivity: UserRootActivity)
-
-    fun inject(usersGitHubMvpFragment: UsersGitHubMvpFragment)
-    fun inject(usersRootPresenter: UsersRootPresenter)
-    fun inject(usersGitHubPresenter: UsersGitHubPresenter)
-
-    fun inject(detailsUserGitHubFragment: DetailsUserGitHubFragment)
-    fun inject(detailsUserGitHubPresenter: DetailsUserGitHubPresenter)
-
-    fun inject(forksRepoGitHubFragment: ForksRepoGitHubFragment)
-    fun inject(forksRepoGitHubPresenter: ForksRepoGitHubPresenter)
-
-    fun inject(gitHubRepo: GitHubRepo)
-    fun inject(networkStatusInteractorImpl: NetworkStatusInteractorImpl)
-
-
 }

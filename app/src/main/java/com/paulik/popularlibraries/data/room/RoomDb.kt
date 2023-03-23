@@ -16,13 +16,4 @@ abstract class RoomDb : RoomDatabase() {
 
     abstract fun usersGitHubDao(): UsersGitHubDao
 //    abstract fun projectGitHubDao(): ProjectGitHubDao
-
-//    companion object {
-//        private const val DB_NAME = "database.db"
-//        val instanceRoom by lazy {
-//            Room.databaseBuilder(App.instance, RoomDb::class.java, DB_NAME)
-//                .allowMainThreadQueries()
-//                .build()
-//        }
-//    }
 }
