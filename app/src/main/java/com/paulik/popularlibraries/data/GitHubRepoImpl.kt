@@ -1,6 +1,7 @@
 package com.paulik.popularlibraries.data
 
-import com.paulik.popularlibraries.data.room.RoomDb
+import com.paulik.popularlibraries.data.cache.ProjectGitHubCache
+import com.paulik.popularlibraries.data.cache.UsersGitHubCache
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
@@ -13,7 +14,8 @@ import java.util.concurrent.TimeUnit
 
 class GitHubRepoImpl(
     private val gitHubApi: GitHubApi,
-    private val db: RoomDb,
+    private val projectGitHubCache: ProjectGitHubCache,
+    private val usersGitHubCache: UsersGitHubCache,
     private val networkStatusInteractor: NetworkStatusInteractor
 ) : GitHubRepo {
 
@@ -21,32 +23,10 @@ class GitHubRepoImpl(
         return if (networkStatusInteractor.isOnLine()) {
             /** если есть интернет */
             gitHubApi.getUsers()
-                .flatMap { users ->
-                    val roomUsers = users.map { user ->
-                        UsersGitHubEntity(
-                            id = user.id,
-                            login = user.login,
-                            reposUrl = user.reposUrl,
-                            avatarUrl = user.avatarUrl,
-                            nodeId = user.nodeId
-                        )
-                    }
-                    db.usersGitHubDao().saveUser(roomUsers)
-                        .toSingle { users }
-                }
+                .flatMap(usersGitHubCache::insertUsers)
         } else {
             /** если нет интернета */
-            db.usersGitHubDao().getAllUsers().map {
-                it.map { user ->
-                    UsersGitHubEntity(
-                        id = user.id,
-                        login = user.login,
-                        reposUrl = user.reposUrl,
-                        avatarUrl = user.avatarUrl,
-                        nodeId = user.nodeId
-                    )
-                }
-            }
+            usersGitHubCache.getUser()
         }
 //        return gitHubApi.getUsers()
     }
@@ -55,39 +35,12 @@ class GitHubRepoImpl(
 //        return if (networkStatusInteractor.isOnLine()) {
 //            /** если есть интернет */
 //            gitHubApi.getProject(reposUrl)
-//                // переключаемся на другой Observable
 //                .flatMap { projects ->
-//                    // необходимо поработать на другом Thread. трансформируем каждого из пользователя
-//                    val roomProject = projects.map { project ->
-//                        ProjectGitHubEntity(
-//                            id = project.id,
-//                            name = project.name,
-//                            description = project.description,
-//                            userId = project.userId,
-//                            forksCount = project.forksCount,
-//                            forksUrl = project.forksUrl,
-//                            private = project.private
-//                        )
-//                    }
-//                    db.projectGitHubDao().saveProject(roomProject)
-//                        .toSingle { projects }
-//
+//                    projectGitHubCache.insertProject(projects)
 //                }
 //        } else {
 //            /** если нет интернета */
-//            db.projectGitHubDao().getAllProject().map {
-//                it.map { project ->
-//                    ProjectGitHubEntity(
-//                        id = project.id,
-//                        name = project.name,
-//                        description = project.description,
-//                        userId = project.userId,
-//                        forksCount = project.forksCount,
-//                        forksUrl = project.forksUrl,
-//                        private = project.private
-//                    )
-//                }
-//            }
+//            projectGitHubCache.getProject(reposUrl)
 //        }
         return gitHubApi.getProject(reposUrl)
     }

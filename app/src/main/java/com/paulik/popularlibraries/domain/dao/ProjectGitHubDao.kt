@@ -18,8 +18,8 @@ interface ProjectGitHubDao {
     fun saveProject(projects: List<ProjectGitHubEntity>): Completable
 
     @Query("SELECT * FROM projects") // запрос всех проектов. projects - это название таблицы
-    fun getAllProject(): Single<List<ProjectGitHubEntity>>
+    fun getAllProject(reposUrl: String): Single<List<ProjectGitHubEntity>>
 
 //    @Query("SELECT * FROM projects WHERE userId = :userId LIMIT 1") // запрос всех проектов где проект совпадает с переданным проекта и ограничить возвращаемых запросов до 1
-//    fun getByUserId(userId: String): Single<ProjectGitHubEntity>
+//    fun getByUserId(userId: String): Maybe<ProjectGitHubEntity>
 }

@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 
 @Dao
@@ -23,5 +24,5 @@ interface UsersGitHubDao {
     fun getAllUsers(): Single<List<UsersGitHubEntity>>
 
     @Query("SELECT * FROM users WHERE login = :login LIMIT 1") // запрос всех пользователей где пользователь совпадает с переданным пользователем и ограничить возвращаемых запросов до 1
-    fun getByLogin(login: String): Single<UsersGitHubEntity>
+    fun getByLogin(login: String): Maybe<UsersGitHubEntity>
 }
