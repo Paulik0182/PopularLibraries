@@ -21,6 +21,8 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 ), ProjectGitHubMvpView {
 
     private val presenter by moxyPresenter {
+//        App.instance.initProjectSubcomponent()
+//        App.instance.projectSubcomponent?.detailsUserGitHubPresenterFactory()!!
         App.instance.appComponent.detailsUserGitHubPresenterFactory()
             .detailsUserGitHubPresenterFactory(
                 requireArguments().getString(KEY_USER)!!

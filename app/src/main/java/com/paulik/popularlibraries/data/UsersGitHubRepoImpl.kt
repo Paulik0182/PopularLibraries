@@ -5,19 +5,19 @@ import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
-import com.paulik.popularlibraries.domain.repo.GitHubRepo
+import com.paulik.popularlibraries.domain.repo.UsersGitHubRepo
 import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class GitHubRepoImpl @Inject constructor(
+class UsersGitHubRepoImpl @Inject constructor(
     private val gitHubApi: GitHubApi,
 //    private val projectGitHubCache: ProjectGitHubCache,
     private val usersGitHubCache: UsersGitHubCache,
     private val networkStatusInteractor: NetworkStatusInteractor
-) : GitHubRepo {
+) : UsersGitHubRepo {
 
     override fun getUsers(): Single<List<UsersGitHubEntity>> {
         return if (networkStatusInteractor.isOnLine()) {

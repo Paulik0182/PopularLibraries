@@ -2,7 +2,6 @@ package com.paulik.popularlibraries.di.components
 
 import com.paulik.popularlibraries.di.modules.*
 import com.paulik.popularlibraries.ui.users.UserRootActivity
-import com.paulik.popularlibraries.ui.users.UsersGitHubPresenter
 import com.paulik.popularlibraries.ui.users.UsersRootPresenter
 import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubPresenterFactory
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubPresenterFactory
@@ -12,16 +11,18 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules = [
-        CacheModule::class,
+        DbModule::class,
         CiceroneModule::class,
-        ContextModule::class,
+        AppModule::class,
         NetworkModule::class,
-        RepositoryModule::class
+        GitHubRepoModule::class
     ]
 )
 interface AppComponent {
 
-    fun usersGitHubPresenter(): UsersGitHubPresenter
+    fun usersSubComponent(): GitHubUsersSubcomponent
+
+    //    fun usersGitHubPresenter(): UsersGitHubPresenter
     fun forksRepoGitHubPresenterFactory(): ForksRepoGitHubPresenterFactory
     fun usersRootPresenter(): UsersRootPresenter
 

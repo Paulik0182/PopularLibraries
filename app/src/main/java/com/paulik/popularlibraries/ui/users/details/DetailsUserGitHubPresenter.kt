@@ -5,7 +5,7 @@ import android.util.Log
 import com.github.terrakok.cicerone.Router
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
-import com.paulik.popularlibraries.domain.repo.GitHubRepo
+import com.paulik.popularlibraries.domain.repo.UsersGitHubRepo
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -15,8 +15,9 @@ import moxy.MvpPresenter
 
 class DetailsUserGitHubPresenter @AssistedInject constructor(
     private val router: Router,
-    private val gitHubRepoImpl: GitHubRepo,
-    @Assisted private val reposUrl: String
+    private val usersGitHubRepoImpl: UsersGitHubRepo,
+    @Assisted private val reposUrl: String,
+//    private val githubProjectScopeContainer: GithubProjectScopeContainer
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
@@ -27,7 +28,7 @@ class DetailsUserGitHubPresenter @AssistedInject constructor(
 
     @SuppressLint("CheckResult")
     private fun loadData(reposUrl: String) {
-        gitHubRepoImpl.getProject(reposUrl)
+        usersGitHubRepoImpl.getProject(reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }
@@ -51,6 +52,11 @@ class DetailsUserGitHubPresenter @AssistedInject constructor(
     fun backPressed(): Boolean {
         router.exit()
         return true
+    }
+
+    override fun onDestroy() {
+//        githubProjectScopeContainer.destroyProjectSubcomponent()
+        super.onDestroy()
     }
 }
 
