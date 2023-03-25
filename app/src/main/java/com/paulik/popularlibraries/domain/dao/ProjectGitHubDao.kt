@@ -11,15 +11,15 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface ProjectGitHubDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE) // в скобках сказано,что если есть такой проект-Id то перезаписываем данные. Есть варианты)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveProject(project: ProjectGitHubEntity): Completable
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE) // в скобках сказано,что если есть такой проект-Id то перезаписываем данные. Есть варианты)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveProject(projects: List<ProjectGitHubEntity>): Completable
 
-    @Query("SELECT * FROM projects") // запрос всех проектов. projects - это название таблицы
+    @Query("SELECT * FROM projects")
     fun getAllProject(reposUrl: String): Single<List<ProjectGitHubEntity>>
 
-//    @Query("SELECT * FROM projects WHERE userId = :userId LIMIT 1") // запрос всех проектов где проект совпадает с переданным проекта и ограничить возвращаемых запросов до 1
+//    @Query("SELECT * FROM projects WHERE userId = :userId LIMIT 1")
 //    fun getByUserId(userId: String): Maybe<ProjectGitHubEntity>
 }

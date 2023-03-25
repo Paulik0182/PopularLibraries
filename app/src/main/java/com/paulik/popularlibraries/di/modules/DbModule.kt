@@ -2,6 +2,7 @@ package com.paulik.popularlibraries.di.modules
 
 import android.content.Context
 import androidx.room.Room
+import com.paulik.popularlibraries.data.cache.ForksGitHubCache
 import com.paulik.popularlibraries.data.cache.ProjectGitHubCache
 import com.paulik.popularlibraries.data.room.RoomDb
 import dagger.Module
@@ -25,6 +26,14 @@ class DbModule {
         db: RoomDb
     ): ProjectGitHubCache {
         return ProjectGitHubCache(db)
+    }
+
+    @Singleton
+    @Provides
+    fun forksGitHubCache(
+        db: RoomDb
+    ): ForksGitHubCache {
+        return ForksGitHubCache(db)
     }
 
 //    @Singleton

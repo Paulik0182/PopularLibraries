@@ -1,8 +1,6 @@
 package com.paulik.popularlibraries.data
 
 import com.paulik.popularlibraries.data.cache.UsersGitHubCache
-import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
-import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.domain.repo.UsersGitHubRepo
@@ -14,7 +12,6 @@ import javax.inject.Inject
 
 class UsersGitHubRepoImpl @Inject constructor(
     private val gitHubApi: GitHubApi,
-//    private val projectGitHubCache: ProjectGitHubCache,
     private val usersGitHubCache: UsersGitHubCache,
     private val networkStatusInteractor: NetworkStatusInteractor
 ) : UsersGitHubRepo {
@@ -29,24 +26,6 @@ class UsersGitHubRepoImpl @Inject constructor(
             usersGitHubCache.getUser()
         }
 //        return gitHubApi.getUsers()
-    }
-
-    override fun getProject(reposUrl: String): Single<List<ProjectGitHubEntity>> {
-//        return if (networkStatusInteractor.isOnLine()) {
-//            /** если есть интернет */
-//            gitHubApi.getProject(reposUrl)
-//                .flatMap { projects ->
-//                    projectGitHubCache.insertProject(projects)
-//                }
-//        } else {
-//            /** если нет интернета */
-//            projectGitHubCache.getProject(reposUrl)
-//        }
-        return gitHubApi.getProject(reposUrl)
-    }
-
-    override fun getForks(forksUrl: String): Single<List<ForksRepoGitHubEntity>> {
-        return gitHubApi.getForks(forksUrl)
     }
 
     fun interval(): @NonNull Observable<Long> {

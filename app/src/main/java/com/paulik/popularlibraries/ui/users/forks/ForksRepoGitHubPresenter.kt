@@ -5,7 +5,7 @@ import android.util.Log
 import com.github.terrakok.cicerone.Router
 import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
-import com.paulik.popularlibraries.domain.repo.UsersGitHubRepo
+import com.paulik.popularlibraries.domain.repo.ForksGitHubRepo
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -15,8 +15,9 @@ import moxy.MvpPresenter
 
 class ForksRepoGitHubPresenter @AssistedInject constructor(
     private val router: Router,
-    private val usersGitHubRepoImpl: UsersGitHubRepo,
-    @Assisted private val forksUrl: String
+    private val forksGitHubRepo: ForksGitHubRepo,
+    @Assisted private val forksUrl: String,
+    //    private val githubForksScopeContainer: GithubForksScopeContainer
 ) : MvpPresenter<ForksRepoGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
@@ -27,7 +28,7 @@ class ForksRepoGitHubPresenter @AssistedInject constructor(
 
     @SuppressLint("CheckResult")
     private fun loadData(forksUrl: String) {
-        usersGitHubRepoImpl.getForks(forksUrl)
+        forksGitHubRepo.getForks(forksUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }

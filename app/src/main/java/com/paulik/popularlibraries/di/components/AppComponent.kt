@@ -15,7 +15,7 @@ import javax.inject.Singleton
         CiceroneModule::class,
         AppModule::class,
         NetworkModule::class,
-        GitHubRepoModule::class
+        UsersGitHubModule::class
     ]
 )
 interface AppComponent {

@@ -1,14 +1,14 @@
 package com.paulik.popularlibraries.di.components
 
-import com.paulik.popularlibraries.di.modules.GitHubRepoModule
-import com.paulik.popularlibraries.di.scope.GitHubScope
+import com.paulik.popularlibraries.di.modules.UsersGitHubModule
+import com.paulik.popularlibraries.di.scope.UsersGitHubScope
 import com.paulik.popularlibraries.ui.users.UsersGitHubPresenter
 import dagger.Subcomponent
 
-@GitHubScope
+@UsersGitHubScope
 @Subcomponent(
     modules = [
-        GitHubRepoModule::class
+        UsersGitHubModule::class
     ]
 )
 interface GitHubUsersSubcomponent {
