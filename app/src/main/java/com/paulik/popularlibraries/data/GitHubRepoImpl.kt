@@ -1,6 +1,5 @@
 package com.paulik.popularlibraries.data
 
-import com.paulik.popularlibraries.data.cache.ProjectGitHubCache
 import com.paulik.popularlibraries.data.cache.UsersGitHubCache
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
@@ -11,10 +10,11 @@ import io.reactivex.rxjava3.annotations.NonNull
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
-class GitHubRepoImpl(
+class GitHubRepoImpl @Inject constructor(
     private val gitHubApi: GitHubApi,
-    private val projectGitHubCache: ProjectGitHubCache,
+//    private val projectGitHubCache: ProjectGitHubCache,
     private val usersGitHubCache: UsersGitHubCache,
     private val networkStatusInteractor: NetworkStatusInteractor
 ) : GitHubRepo {
