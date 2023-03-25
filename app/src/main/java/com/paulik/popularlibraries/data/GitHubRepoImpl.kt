@@ -21,27 +21,23 @@ class GitHubRepoImpl(
         return if (networkStatusInteractor.isOnLine()) {
             /** если есть интернет */
             gitHubApi.getUsers()
-                // переключаемся на другой Observable
                 .flatMap { users ->
-                    Single.fromCallable {
-                        // необходимо поработать на другом Thread. трансформируем каждого из пользователя
-                        val roomUsers = users.map { user ->
-                            UsersGitHubEntity(
-                                id = user.id,
-                                login = user.login,
-                                reposUrl = user.reposUrl,
-                                avatarUrl = user.avatarUrl,
-                                nodeId = user.nodeId
-                            )
-                        }
-                        db.usersGitHubDao().saveUser(roomUsers)
-                        users
+                    val roomUsers = users.map { user ->
+                        UsersGitHubEntity(
+                            id = user.id,
+                            login = user.login,
+                            reposUrl = user.reposUrl,
+                            avatarUrl = user.avatarUrl,
+                            nodeId = user.nodeId
+                        )
                     }
+                    db.usersGitHubDao().saveUser(roomUsers)
+                        .toSingle { users }
                 }
         } else {
             /** если нет интернета */
-            Single.fromCallable {
-                db.usersGitHubDao().getAllUsers().map { user ->
+            db.usersGitHubDao().getAllUsers().map {
+                it.map { user ->
                     UsersGitHubEntity(
                         id = user.id,
                         login = user.login,
@@ -61,27 +57,26 @@ class GitHubRepoImpl(
 //            gitHubApi.getProject(reposUrl)
 //                // переключаемся на другой Observable
 //                .flatMap { projects ->
-//                    Single.fromCallable {
-//                        // необходимо поработать на другом Thread. трансформируем каждого из пользователя
-//                        val roomProject = projects.map { project ->
-//                            ProjectGitHubEntity(
-//                                id = project.id,
-//                                name = project.name,
-//                                description = project.description,
-//                                userId = project.userId,
-//                                forksCount = project.forksCount,
-//                                forksUrl = project.forksUrl,
-//                                private = project.private
-//                            )
-//                        }
-//                        db.projectGitHubDao().saveProject(roomProject)
-//                        projects
+//                    // необходимо поработать на другом Thread. трансформируем каждого из пользователя
+//                    val roomProject = projects.map { project ->
+//                        ProjectGitHubEntity(
+//                            id = project.id,
+//                            name = project.name,
+//                            description = project.description,
+//                            userId = project.userId,
+//                            forksCount = project.forksCount,
+//                            forksUrl = project.forksUrl,
+//                            private = project.private
+//                        )
 //                    }
+//                    db.projectGitHubDao().saveProject(roomProject)
+//                        .toSingle { projects }
+//
 //                }
 //        } else {
 //            /** если нет интернета */
-//            Single.fromCallable {
-//                db.projectGitHubDao().getAllProject().map { project ->
+//            db.projectGitHubDao().getAllProject().map {
+//                it.map { project ->
 //                    ProjectGitHubEntity(
 //                        id = project.id,
 //                        name = project.name,
