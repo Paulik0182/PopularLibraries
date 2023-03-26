@@ -15,6 +15,8 @@ import javax.inject.Singleton
         CiceroneModule::class,
         AppModule::class,
         NetworkModule::class,
+        ProjectGitHubModule::class,
+        ForksGitHubModule::class,
         UsersGitHubModule::class
     ]
 )
