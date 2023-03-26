@@ -6,6 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.paulik.popularlibraries.ui.users.base.InitParams
 
 @Entity(
     tableName = "projects",
@@ -54,4 +55,4 @@ data class ProjectGitHubEntity(
     @SerializedName("private")
     @ColumnInfo(name = "private")
     val private: Boolean
-)
+) : InitParams

@@ -10,6 +10,7 @@ import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
+import com.paulik.popularlibraries.ui.users.base.InitParams
 import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
 import moxy.MvpAppCompatActivity
@@ -58,7 +59,7 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
         presenter.backPressed()
     }
 
-    override fun showReposUrl(reposUrl: String) {
+    override fun showReposUrl(reposUrl: InitParams) {
         supportFragmentManager
             .beginTransaction()
             .replace(
