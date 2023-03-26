@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentFactory
 /**
  * Используем при открытии фрагмента и передачи в него параметров
  */
-abstract class FragmentInitializer<T> {
+abstract class FragmentInitializer<T : String> {
 
     fun newInstance(initParams: T): Fragment {
         val declaredClassName = this::class.java.declaringClass?.name.orEmpty()
@@ -24,6 +24,7 @@ abstract class FragmentInitializer<T> {
 }
 
 // Обработка полученных данных (то что раньше было константой)
-fun <T> Fragment.initParams(): Lazy<T> = lazy {
+@Suppress("UNCHECKED_CAST")
+fun <T : String> Fragment.initParams(): Lazy<T> = lazy {
     requireArguments().getString(this::class.java.name) as T
 }
