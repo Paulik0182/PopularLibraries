@@ -28,23 +28,22 @@ class UsersGitHubPresenter @Inject constructor(
 
     @SuppressLint("CheckResult")
     private fun loadData() {
-        compositeDisposable.add(
-            usersUsersGitHubRepoImpl.getUsers()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { viewState.showProgressBar() }
-                .subscribe({ users: List<UsersGitHubEntity> ->
-                    viewState.updateUsersList(users)
-                    viewState.hideProgressBar()
-                }, {
-                    Log.e(
-                        "Retrofit. UsersGitHubPresenter",
-                        "Ошибка при получении списка пользователей",
+          val disposable = usersUsersGitHubRepoImpl.getUsers()
+              .subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread())
+              .doOnSubscribe { viewState.showProgressBar() }
+              .subscribe({ users: List<UsersGitHubEntity> ->
+                  viewState.updateUsersList(users)
+                  viewState.hideProgressBar()
+              }, {
+                  Log.e(
+                      "Retrofit. UsersGitHubPresenter",
+                      "Ошибка при получении списка пользователей",
                         it
                     )
                     viewState.showProgressBar()
                 })
-        )
+        compositeDisposable.add(disposable)
     }
 
     fun onUserClicked(usersGitHubEntity: UsersGitHubEntity) {
