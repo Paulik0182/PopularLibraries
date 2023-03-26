@@ -29,7 +29,8 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.usersGitHubPresenter()
+        App.instance.initUsersSubcomponent()
+        App.instance.usersSubcomponent?.usersGitHubPresenter()!!
     }
 
     private val adapter by lazy {
