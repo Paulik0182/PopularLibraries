@@ -3,11 +3,14 @@ package com.paulik.popularlibraries.ui.users.base
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
+import java.io.Serializable
 
 /**
  * Используем при открытии фрагмента и передачи в него параметров
  */
-abstract class FragmentInitializer<T : String> {
+
+interface InitParams : Serializable
+abstract class FragmentInitializer<T : InitParams> {
 
     fun newInstance(initParams: T): Fragment {
         val declaredClassName = this::class.java.declaringClass?.name.orEmpty()
@@ -25,6 +28,6 @@ abstract class FragmentInitializer<T : String> {
 
 // Обработка полученных данных (то что раньше было константой)
 @Suppress("UNCHECKED_CAST")
-fun <T : String> Fragment.initParams(): Lazy<T> = lazy {
+fun <T : InitParams> Fragment.initParams(): Lazy<T> = lazy {
     requireArguments().getString(this::class.java.name) as T
 }

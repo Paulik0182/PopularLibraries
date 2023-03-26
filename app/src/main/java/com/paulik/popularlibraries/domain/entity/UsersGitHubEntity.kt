@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 import java.util.*
 
 @Entity(tableName = "users") // это название таблицы
@@ -34,4 +35,4 @@ data class UsersGitHubEntity(
     @SerializedName("repos_url")
     @ColumnInfo(name = "repos_url")
     val reposUrl: String
-)
+) : Serializable

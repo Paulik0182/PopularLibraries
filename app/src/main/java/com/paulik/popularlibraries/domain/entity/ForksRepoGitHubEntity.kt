@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Entity(
     tableName = "forks",
@@ -33,4 +34,4 @@ data class ForksRepoGitHubEntity(
     @Expose
     @SerializedName("size")
     val size: Int
-)
+) : Serializable
