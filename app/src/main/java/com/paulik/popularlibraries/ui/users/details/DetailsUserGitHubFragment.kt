@@ -12,10 +12,10 @@ import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.UserRootActivity
 import com.paulik.popularlibraries.ui.users.adapter.ProjectAdapter
 import com.paulik.popularlibraries.ui.users.base.FragmentInitializer
+import com.paulik.popularlibraries.ui.users.base.InitParams
 import com.paulik.popularlibraries.ui.users.base.initParams
 import moxy.ktx.moxyPresenter
-
-private const val KEY_USER = "KEY_USER"
+import java.io.Serializable
 
 class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubBinding>(
     FragmentDetailsUserGitHubBinding::inflate
@@ -26,12 +26,12 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 //        App.instance.projectSubcomponent?.detailsUserGitHubPresenterFactory()!!
         App.instance.appComponent.detailsUserGitHubPresenterFactory()
             .detailsUserGitHubPresenterFactory(
-                userUrl // вариант 2 (наиболее предпочтительный)
+                userUrl as String // вариант 2 (наиболее предпочтительный)
 //                requireArguments().getString(this::class.java.name)!! // вариант 1 (не очень)
             )
     }
 
-    private val userUrl: String by initParams()
+    private val userUrl: Serializable by initParams()
 //    private val userUrl by initParams<String>() // вариант записи
 
     private val adapter by lazy {
@@ -51,7 +51,7 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
         binding.recyclerView.adapter = adapter
     }
 
-    companion object : FragmentInitializer<String>()
+    companion object : FragmentInitializer<InitParams>()
 
 //    companion object {
 //

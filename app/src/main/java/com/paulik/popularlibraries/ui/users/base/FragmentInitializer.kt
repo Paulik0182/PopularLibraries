@@ -29,5 +29,5 @@ abstract class FragmentInitializer<T : InitParams> {
 // Обработка полученных данных (то что раньше было константой)
 @Suppress("UNCHECKED_CAST")
 fun <T : InitParams> Fragment.initParams(): Lazy<T> = lazy {
-    requireArguments().getString(this::class.java.name) as T
+    requireArguments().getSerializable(this::class.java.name) as T
 }
