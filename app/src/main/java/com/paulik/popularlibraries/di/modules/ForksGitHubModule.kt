@@ -1,10 +1,10 @@
 package com.paulik.popularlibraries.di.modules
 
 import com.paulik.popularlibraries.data.ForksGitHubRepoImpl
-import com.paulik.popularlibraries.di.scope.ForksGitHubScope
 import com.paulik.popularlibraries.domain.repo.ForksGitHubRepo
 import dagger.Binds
 import dagger.Module
+import javax.inject.Singleton
 
 @Module
 abstract class ForksGitHubModule {
@@ -12,7 +12,8 @@ abstract class ForksGitHubModule {
     /**
      * Унифицирование код с помощью аннотации @Binds
      */
-    @ForksGitHubScope
+//    @ForksGitHubScope
+    @Singleton
     @Binds
     abstract fun bindForks(impl: ForksGitHubRepoImpl): ForksGitHubRepo
 

@@ -17,7 +17,7 @@ import javax.inject.Singleton
         NetworkModule::class,
         ProjectGitHubModule::class,
         ForksGitHubModule::class,
-        UsersGitHubModule::class
+//        UsersGitHubModule::class
     ]
 )
 interface AppComponent {
