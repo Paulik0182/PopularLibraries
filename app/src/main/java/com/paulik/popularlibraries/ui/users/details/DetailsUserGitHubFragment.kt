@@ -29,7 +29,7 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
             App.instance.router,
             GitHubRepoImpl(
                 gitHubApi = app.gitHubApi,
-                db = RoomDb.instanceRoom,
+                db = RoomDb.getDatabase(requireContext()), //instanceRoom,
                 app.networkStatusInteractor
             ),
             requireArguments().getString(KEY_USER)!! // todo чтото не так

@@ -37,7 +37,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 //                networkStatusInteractorImpl = NetworkStatusInteractorImpl(),
                 networkStatusInteractor = networkStatusInteractor,
                 gitHubApi = app.gitHubApi,
-                db = RoomDb.instanceRoom
+                db = RoomDb.getDatabase(requireContext()) //instanceRoom
             ),
         )
     }

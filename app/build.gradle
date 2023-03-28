@@ -101,12 +101,17 @@ dependencies {
 
     // ROOM
     implementation "androidx.room:room-runtime:2.4.3"
+    implementation "androidx.room:room-ktx:2.4.3"
 //    annotationProcessor "androidx.room:room-compiler:2.4.3"
     kapt("androidx.room:room-compiler:2.4.3")
 //    kapt 'androidx.room:room-compiler:2.5.0'
-    kapt("org.xerial:sqlite-jdbc:3.36.0") // для процессоров М1
+//    kapt("org.xerial:sqlite-jdbc:3.36.0") // для процессоров М1
 
     // snappyDB
     implementation 'com.snappydb:snappydb-lib:0.5.2'
     implementation 'com.esotericsoftware.kryo:kryo:2.24.0'
+
+    // Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
 }
