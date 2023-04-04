@@ -1,9 +1,6 @@
 package com.paulik.popularlibraries.domain.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
@@ -23,4 +20,10 @@ interface ProjectGitHubDao {
 
     @Query("SELECT * FROM projects WHERE user_Id = :userId LIMIT 1") // запрос всех проектов где проект совпадает с переданным проекта и ограничить возвращаемых запросов до 1
     fun getByName(userId: String): Maybe<ProjectGitHubEntity>
+
+    @Update
+    fun update(project: ProjectGitHubEntity): Completable
+
+    @Delete
+    fun delete(project: ProjectGitHubEntity): Completable
 }

@@ -1,10 +1,6 @@
 package com.paulik.popularlibraries.domain.dao
 
-import androidx.room.Dao
-
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Maybe
@@ -25,4 +21,10 @@ interface UsersGitHubDao {
 
     @Query("SELECT * FROM users WHERE login = :login LIMIT 1") // запрос всех пользователей где пользователь совпадает с переданным пользователем и ограничить возвращаемых запросов до 1
     fun getByLogin(login: String): Maybe<UsersGitHubEntity>
+
+    @Update
+    fun update(user: UsersGitHubEntity): Completable
+
+    @Delete
+    fun delete(user: UsersGitHubEntity): Completable
 }
