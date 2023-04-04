@@ -43,7 +43,7 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
     companion object {
 
         @JvmStatic
-        fun newInstance(forksUrl: String) =
+        fun newInstance(forksUrl: String?) =
             ForksRepoGitHubFragment().apply {
                 arguments = bundleOf().apply {
                     putString(KEY_FORKS_REPO, forksUrl)

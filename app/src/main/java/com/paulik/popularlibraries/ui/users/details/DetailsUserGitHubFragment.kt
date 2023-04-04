@@ -53,12 +53,12 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
             }
     }
 
-    override fun updateProjectList(project: List<ProjectGitHubEntity>) {
+    override fun updateProjectList(project: List<ProjectGitHubEntity?>) {
         // submitList - отправляет список элементов
         adapter.submitList(project)
     }
 
-    override fun showForksRepo(forksUrl: String) {
+    override fun showForksRepo(forksUrl: String?) {
         (requireActivity() as UserRootActivity).showForksRepo(forksUrl)
     }
 

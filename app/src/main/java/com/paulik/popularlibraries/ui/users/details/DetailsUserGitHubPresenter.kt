@@ -5,7 +5,7 @@ import android.util.Log
 import com.github.terrakok.cicerone.Router
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
-import com.paulik.popularlibraries.domain.repo.GitHubRepo
+import com.paulik.popularlibraries.domain.repo.ProjectGitHubRepo
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -15,7 +15,7 @@ import moxy.MvpPresenter
 
 class DetailsUserGitHubPresenter @AssistedInject constructor(
     private val router: Router,
-    private val gitHubRepoImpl: GitHubRepo,
+    private val projectGitHubRepoImpl: ProjectGitHubRepo,
     @Assisted private val reposUrl: String
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
@@ -27,11 +27,11 @@ class DetailsUserGitHubPresenter @AssistedInject constructor(
 
     @SuppressLint("CheckResult")
     private fun loadData(reposUrl: String) {
-        gitHubRepoImpl.getProject(reposUrl)
+        projectGitHubRepoImpl.getProject(reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }
-            .subscribe({ project: List<ProjectGitHubEntity> ->
+            .subscribe({ project: List<ProjectGitHubEntity?> ->
                 viewState.updateProjectList(project)
                 viewState.hideProgressBar()
             }, {

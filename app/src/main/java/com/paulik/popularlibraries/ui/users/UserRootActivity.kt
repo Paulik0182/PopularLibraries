@@ -68,7 +68,7 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
             .commit()
     }
 
-    override fun showForksRepo(forksUrl: String) {
+    override fun showForksRepo(forksUrl: String?) {
         supportFragmentManager
             .beginTransaction()
             .replace(
@@ -82,7 +82,7 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
         // TODO("Not yet implemented")
     }
 
-    override fun updateProjectList(project: List<ProjectGitHubEntity>) {
+    override fun updateProjectList(project: List<ProjectGitHubEntity?>) {
         // TODO("Not yet implemented")
     }
 

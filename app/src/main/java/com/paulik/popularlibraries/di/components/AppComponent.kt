@@ -16,7 +16,8 @@ import javax.inject.Singleton
         CiceroneModule::class,
         ContextModule::class,
         NetworkModule::class,
-        RepositoryModule::class
+        UsersRepositoryModule::class,
+        ProjectRepositoryModule::class
     ]
 )
 interface AppComponent {

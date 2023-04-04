@@ -31,7 +31,7 @@ class ProjectAdapter(
 
             binding.titleTextView.text = project.name
 
-            if (project.private) {
+            if (project.private!!) {
                 binding.privateRepoTextView.text = "Private"
             } else {
                 binding.privateRepoTextView.text = "public"

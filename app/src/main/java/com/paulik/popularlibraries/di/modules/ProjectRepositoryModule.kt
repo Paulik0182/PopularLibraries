@@ -1,20 +1,20 @@
 package com.paulik.popularlibraries.di.modules
 
-import com.paulik.popularlibraries.data.GitHubRepoImpl
-import com.paulik.popularlibraries.domain.repo.GitHubRepo
+import com.paulik.popularlibraries.data.ProjectGitHubRepoImpl
+import com.paulik.popularlibraries.domain.repo.ProjectGitHubRepo
 import dagger.Binds
 import dagger.Module
 import javax.inject.Singleton
 
 @Module
-abstract class RepositoryModule {
+abstract class ProjectRepositoryModule {
 
     /**
      * Унифицирование fun gitHubRepo с помощью аннотации @Binds
      */
     @Singleton
     @Binds
-    abstract fun bindHubRepo(impl: GitHubRepoImpl): GitHubRepo
+    abstract fun bindHubRepo(impl: ProjectGitHubRepoImpl): ProjectGitHubRepo
 
 //    @Singleton
 //    @Provides
