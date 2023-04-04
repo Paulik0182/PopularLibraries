@@ -101,8 +101,7 @@ dependencies {
 
     // ROOM
     implementation "androidx.room:room-runtime:2.4.3"
-    implementation "androidx.room:room-rxjava3:2.4.3"
-//    annotationProcessor "androidx.room:room-compiler:2.4.3"
+    annotationProcessor "androidx.room:room-compiler:2.4.3"
     kapt("androidx.room:room-compiler:2.4.3")
 //    kapt 'androidx.room:room-compiler:2.5.0'
     kapt("org.xerial:sqlite-jdbc:3.36.0") // для процессоров М1
