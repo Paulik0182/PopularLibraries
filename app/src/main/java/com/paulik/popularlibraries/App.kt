@@ -39,14 +39,3 @@ class App : Application() {
         NetworkStatusInteractorImpl(this)
     }
 }
-
-interface IContextProvider {
-    val context: Context
-}
-
-object ContextProvider : IContextProvider {
-
-    override val context: Context
-        get() = App.context
-
-}

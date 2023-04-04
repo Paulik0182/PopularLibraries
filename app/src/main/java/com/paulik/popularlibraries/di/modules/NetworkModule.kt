@@ -69,7 +69,6 @@ class NetworkModule {
     @Provides
     fun networkStatus(
         context: Context
-//        contextProvider: IContextProvider = ContextProvider
     ): NetworkStatusInteractor {
         return NetworkStatusInteractorImpl(context)
     }
