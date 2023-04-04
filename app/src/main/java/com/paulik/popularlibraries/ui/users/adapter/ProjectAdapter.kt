@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.paulik.popularlibraries.databinding.ItemGitProjectBinding
-import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
-
+import com.paulik.popularlibraries.domain.entity.project.ProjectGitHubEntity
 
 class ProjectAdapter(
     private val itemClickListener: (ProjectGitHubEntity) -> Unit

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.paulik.popularlibraries.databinding.ItemGitForksBinding
-import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
+import com.paulik.popularlibraries.domain.entity.forks.ForksRepoGitHubEntity
 
 class ForksRepoAdapter :
     ListAdapter<ForksRepoGitHubEntity, ForksRepoAdapter.ForksRepoViewHolder>(ForksRepoGitHibCallback) {

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.databinding.FragmentDetailsUserGitHubBinding
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
-import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
+import com.paulik.popularlibraries.domain.entity.project.ProjectGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.UserRootActivity
 import com.paulik.popularlibraries.ui.users.adapter.ProjectAdapter
@@ -21,12 +21,19 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 ), ProjectGitHubMvpView {
 
     private val presenter by moxyPresenter {
+        App.instance.initProjectSubcomponent()
+        App.instance.projectSubcomponent?.detailsUserGitHubPresenter(
+            requireArguments().getString(
+                KEY_USER
+            )!!
+        )!!
+
 //        App.instance.initProjectSubcomponent()
 //        App.instance.projectSubcomponent?.detailsUserGitHubPresenterFactory()!!
-        App.instance.appComponent.detailsUserGitHubPresenterFactory()
-            .detailsUserGitHubPresenterFactory(
-                requireArguments().getString(KEY_USER)!!
-            )
+//        App.instance.appComponent.detailsUserGitHubPresenterFactory()
+//            .detailsUserGitHubPresenterFactory(
+//                requireArguments().getString(KEY_USER)!!
+//            )
     }
 
     private val adapter by lazy {

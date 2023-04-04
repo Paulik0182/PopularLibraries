@@ -4,14 +4,15 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
-import com.paulik.popularlibraries.di.components.AppComponent
-import com.paulik.popularlibraries.di.components.DaggerAppComponent
-import com.paulik.popularlibraries.di.components.GitHubUsersSubcomponent
+import com.paulik.popularlibraries.di.components.*
 import com.paulik.popularlibraries.di.modules.AppModule
+import com.paulik.popularlibraries.di.scope.containers.GithubForksScopeContainer
+import com.paulik.popularlibraries.di.scope.containers.GithubProjectScopeContainer
 import com.paulik.popularlibraries.di.scope.containers.GithubUsersScopeContainer
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 
-class App : Application(), GithubUsersScopeContainer {
+class App : Application(), GithubUsersScopeContainer, GithubProjectScopeContainer,
+    GithubForksScopeContainer {
 
     val appComponent: AppComponent by lazy {
         DaggerAppComponent
@@ -22,7 +23,9 @@ class App : Application(), GithubUsersScopeContainer {
 
     var usersSubcomponent: GitHubUsersSubcomponent? = null
 
-    //    var projectSubcomponent: GitHubProjectSubcomponent? = null
+    var projectSubcomponent: GitHubProjectSubcomponent? = null
+
+    var forkSubcomponent: GitHubForksSubcomponent? = null
     override fun onCreate() {
         super.onCreate()
 
@@ -38,13 +41,23 @@ class App : Application(), GithubUsersScopeContainer {
         usersSubcomponent = null
     }
 
-//    override fun initProjectSubcomponent() = appComponent.usersSubComponent().projectSubcomponent().also {
-//        projectSubcomponent = it
-//    }
-//
-//    override fun destroyProjectSubcomponent(){
-//        projectSubcomponent = null
-//    }
+    override fun initProjectSubcomponent() =
+        appComponent.usersSubComponent().projectSubcomponent().also {
+            projectSubcomponent = it
+        }
+
+    override fun destroyProjectSubcomponent() {
+        projectSubcomponent = null
+    }
+
+    override fun initForksSubcomponent() =
+        appComponent.usersSubComponent().projectSubcomponent().forksSubcomponent().also {
+            forkSubcomponent = it
+        }
+
+    override fun destroyForksSubcomponent() {
+        forkSubcomponent = null
+    }
 
     companion object {
         @SuppressLint("StaticFieldLeak")
@@ -59,6 +72,7 @@ class App : Application(), GithubUsersScopeContainer {
     val networkStatusInteractor: NetworkStatusInteractor by lazy {
         NetworkStatusInteractorImpl(this)
     }
+
 }
 
 interface IContextProvider {

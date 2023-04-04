@@ -1,6 +1,6 @@
 package com.paulik.popularlibraries.domain
 
-import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
+import com.paulik.popularlibraries.domain.entity.forks.ForksRepoGitHubEntity
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 

@@ -1,8 +1,8 @@
 package com.paulik.popularlibraries.data
 
-import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
-import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
+import com.paulik.popularlibraries.domain.entity.forks.ForksRepoGitHubEntity
+import com.paulik.popularlibraries.domain.entity.project.ProjectGitHubEntity
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Url

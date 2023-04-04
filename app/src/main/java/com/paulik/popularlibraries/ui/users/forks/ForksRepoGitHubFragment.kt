@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.databinding.FragmentForksRepoGitHubBinding
 import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
-import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
+import com.paulik.popularlibraries.domain.entity.forks.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.ForksRepoAdapter
 import moxy.ktx.moxyPresenter
@@ -20,9 +20,15 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
 ), ForksRepoGitHubMvpView {
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.forksRepoGitHubPresenterFactory().forksRepoPresenter(
-            requireArguments().getString(KEY_FORKS_REPO)!!
-        )
+        App.instance.initForksSubcomponent()
+        App.instance.forkSubcomponent?.forksRepoGitHubPresenter(
+            requireArguments().getString(
+                KEY_FORKS_REPO
+            )!!
+        )!!
+//        App.instance.appComponent.forksRepoGitHubPresenterFactory().forksRepoPresenter(
+//            requireArguments().getString(KEY_FORKS_REPO)!!
+//        )
     }
 
     private val adapter by lazy {

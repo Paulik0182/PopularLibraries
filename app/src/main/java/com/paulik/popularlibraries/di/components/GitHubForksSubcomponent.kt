@@ -13,5 +13,5 @@ import dagger.Subcomponent
 )
 interface GitHubForksSubcomponent {
 
-    fun forksRepoGitHubPresenter(): ForksRepoGitHubPresenter
+    fun forksRepoGitHubPresenter(forksUrl: String): ForksRepoGitHubPresenter
 }

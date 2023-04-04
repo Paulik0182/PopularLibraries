@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.domain.entity
+package com.paulik.popularlibraries.domain.entity.project
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -6,6 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 
 @Entity(
     tableName = "projects",
@@ -13,7 +14,7 @@ import com.google.gson.annotations.SerializedName
         ForeignKey(
             entity = UsersGitHubEntity::class,
             parentColumns = ["id"],
-            childColumns = ["userId"],
+            childColumns = ["id"],
             onDelete = ForeignKey.CASCADE // это каскадное удаление данных, если была удалена сущьность то и все подчиненные связи также удалятся.
         )
     ]
@@ -23,35 +24,49 @@ data class ProjectGitHubEntity(
     @Expose
     @SerializedName("id")
     @PrimaryKey
-    var id: Int,
+    var id: Int? = 0,
 
     @Expose
     @SerializedName("name")
     @ColumnInfo(name = "name")
-    val name: String,
+    var name: String? = null,
 
     @Expose
     @SerializedName("description")
     @ColumnInfo(name = "description")
-    val description: String,
+    var description: String? = null,
 
     @Expose
     @SerializedName("user_id")
     @ColumnInfo(name = "user_id")
-    val userId: String,
+    var userId: String? = null,
 
     @Expose
     @SerializedName("forks_count")
     @ColumnInfo(name = "forks_count")
-    val forksCount: Int,
+    var forksCount: Int = 0,
 
     @Expose
     @SerializedName("forks_url")
     @ColumnInfo(name = "forks_url")
-    val forksUrl: String,
+    var forksUrl: String? = null,
 
     @Expose
     @SerializedName("private")
     @ColumnInfo(name = "private")
-    val private: Boolean
-)
+    var private: Boolean? = null,
+) {
+    constructor() : this(0)
+    constructor(
+        id: Int, name: String?, description: String?,
+        userId: String, forksCount: Int, forksUrl: String?, private: Boolean
+    ) : this() {
+        this.id = id
+        this.name = name
+        this.description = description
+        this.userId = userId
+        this.forksCount = forksCount
+        this.forksUrl = forksUrl
+        this.private = private
+    }
+}

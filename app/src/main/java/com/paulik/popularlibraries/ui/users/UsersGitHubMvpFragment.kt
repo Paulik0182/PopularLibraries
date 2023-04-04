@@ -46,47 +46,6 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
         initView()
 
         networkStatus()
-
-//        Consumer().subscribe()
-//        Consumer().subscribeFromIterable()
-//        Consumer().subscribeTimer()
-//        Consumer().subscribeRange()
-//        Consumer().subscribeFromCallable()
-//        Consumer().subscribeCreate()
-//        Consumer().subscribeIntervalTake()
-//        Consumer().subscribeMap()
-//        Consumer().subscribeDistinct()
-//        Consumer().subscribeFilter()
-//        Consumer().subscribeMarge()
-//        Consumer().subscribeFlatMap()
-//        Consumer().subscribeZip()
-//        Consumer().subscribeInterval()
-//        OtherConsumer().subscribeCompletable()
-//        OtherConsumer().subscribeSingle()
-//        OtherConsumer().subscribeMaybe()
-
-//        OtherConsumer().subscribeTime1() // пример с двумя подписчиками. получение подписчиками данных с нуля
-//        OtherConsumer().subscribeTime2() // пример с двумя подписчиками. Данные не с нуля. Горячая подписка.
-//        OtherConsumer().subscribeReplay() // -/- подгрузка пропущенных данных
-//        OtherConsumer().subscribeRefCount() // -/- Получение вторым подписчиком данных с того момента с которого он подписался.
-//        OtherConsumer().subscribeCache() // -/- Работает при 1 подписке, хранит элем. и отдает все элем. каждому новому подписчику.
-
-//        OtherConsumerSubjects().subscribe() // Subject
-
-        // Многопоточность
-//        OtherConsumerThreads().subscribe() // Interval
-//        OtherConsumerThreads().subscribeJust() // Just. Для хождения в сеть, скачивания файлов и т.д.
-//        OtherConsumerThreads().subscribeJustComputation() // Just. Создает солько Thread сколько есть ядер у процессора
-//        OtherConsumerThreads().subscribeCreateMainThread() // Create. Разные потоки
-//        OtherConsumerThreads().subscribeCreateNewThread() // Create. Свой Thread
-//        OtherConsumerError().subscribeCreateErrorReturn() // Create. Обработка ошибки onErrorReturn
-//        OtherConsumerError().subscribeCreateErrorResumeNext() // Create. Обработка ошибки onErrorResumeNext
-//        OtherConsumerError().subscribeCreateErrorResumeNextRetry() // Create. Обработка ошибки Retry
-//        OtherConsumerError().subscribeCreateDoOnErrorRetry() // Create. Обработка ошибки doOnError
-
-        // еще один тип источника - Flowable()
-//        OtherConsumerFlowable().subscribe() //
-//        OtherConsumerFlowable().subscribeBackPressure() // остановить подписку
     }
 
     @SuppressLint("CheckResult")

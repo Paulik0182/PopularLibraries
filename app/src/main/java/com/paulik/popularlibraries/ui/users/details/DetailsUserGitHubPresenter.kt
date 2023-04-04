@@ -3,8 +3,9 @@ package com.paulik.popularlibraries.ui.users.details
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
+import com.paulik.popularlibraries.di.scope.containers.GithubProjectScopeContainer
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
-import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
+import com.paulik.popularlibraries.domain.entity.project.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.repo.ProjectGitHubRepo
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -17,7 +18,7 @@ class DetailsUserGitHubPresenter @AssistedInject constructor(
     private val router: Router,
     private val projectGitHubRepo: ProjectGitHubRepo,
     @Assisted private val reposUrl: String,
-//    private val githubProjectScopeContainer: GithubProjectScopeContainer
+    private val githubProjectScopeContainer: GithubProjectScopeContainer
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
@@ -55,7 +56,7 @@ class DetailsUserGitHubPresenter @AssistedInject constructor(
     }
 
     override fun onDestroy() {
-//        githubProjectScopeContainer.destroyProjectSubcomponent()
+        githubProjectScopeContainer.destroyProjectSubcomponent()
         super.onDestroy()
     }
 }

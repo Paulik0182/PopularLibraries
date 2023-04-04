@@ -13,7 +13,7 @@ import dagger.Subcomponent
 )
 interface GitHubUsersSubcomponent {
 
-//    fun projectSubcomponent(): GitHubProjectSubcomponent
+    fun projectSubcomponent(): GitHubProjectSubcomponent
 
     fun usersGitHubPresenter(): UsersGitHubPresenter
 }
