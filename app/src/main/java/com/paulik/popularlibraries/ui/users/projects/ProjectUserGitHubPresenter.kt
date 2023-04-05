@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.ui.users.details
+package com.paulik.popularlibraries.ui.users.projects
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -12,9 +12,9 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
-class DetailsUserGitHubPresenter @AssistedInject constructor(
+class ProjectsUserGitHubPresenter @AssistedInject constructor(
     private val router: Router,
-    private val projectGitHubRepoImpl: ProjectGitHubRepo,
+    private val projectGitHubRepo: ProjectGitHubRepo,
     @Assisted private val reposUrl: String
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
@@ -26,7 +26,7 @@ class DetailsUserGitHubPresenter @AssistedInject constructor(
 
     @SuppressLint("CheckResult")
     private fun loadData(reposUrl: String) {
-        projectGitHubRepoImpl.getProject(reposUrl)
+        projectGitHubRepo.getProject(reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }
@@ -54,6 +54,6 @@ class DetailsUserGitHubPresenter @AssistedInject constructor(
 }
 
 @AssistedFactory
-interface DetailsUserGitHubPresenterFactory {
-    fun detailsUserGitHubPresenterFactory(reposUrl: String): DetailsUserGitHubPresenter
+interface ProjectsUserGitHubPresenterFactory {
+    fun projectsUserGitHubPresenterFactory(reposUrl: String): ProjectsUserGitHubPresenter
 }

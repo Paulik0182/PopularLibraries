@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.ui.users.details
+package com.paulik.popularlibraries.ui.users.projects
 
 import android.os.Bundle
 import android.view.View
@@ -20,8 +20,8 @@ class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 ), ProjectGitHubMvpView {
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.detailsUserGitHubPresenterFactory()
-            .detailsUserGitHubPresenterFactory(
+        App.instance.appComponent.projectUserGitHubPresenterFactory()
+            .projectsUserGitHubPresenterFactory(
                 requireArguments().getString(KEY_USER)!!
             )
     }

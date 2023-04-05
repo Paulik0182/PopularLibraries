@@ -8,9 +8,9 @@ import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
-import com.paulik.popularlibraries.ui.users.details.ProjectGitHubMvpView
-import com.paulik.popularlibraries.ui.users.details.ProjectUserGitHubFragment
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
+import com.paulik.popularlibraries.ui.users.projects.ProjectGitHubMvpView
+import com.paulik.popularlibraries.ui.users.projects.ProjectUserGitHubFragment
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject

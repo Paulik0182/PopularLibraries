@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class UsersGitHubPresenter @Inject constructor(
     private val router: Router,
-    private val usersUsersGitHubRepoImpl: UsersGitHubRepo
+    private val usersUsersGitHubRepo: UsersGitHubRepo
 ) : MvpPresenter<UsersGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
@@ -23,7 +23,7 @@ class UsersGitHubPresenter @Inject constructor(
 
     @SuppressLint("CheckResult")
     private fun loadData() {
-        usersUsersGitHubRepoImpl.getUsers()
+        usersUsersGitHubRepo.getUsers()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }

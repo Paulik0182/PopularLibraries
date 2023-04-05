@@ -50,12 +50,12 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
             }
     }
 
-    override fun updateForksList(forks: List<ForksRepoGitHubEntity>) {
+    override fun updateForksList(forks: List<ForksRepoGitHubEntity?>) {
         // submitList - отправляет список элементов
         adapter.submitList(forks)
     }
 
-    override fun showFork(fork: String) {
+    override fun showFork(fork: String?) {
         // TODO("Not yet implemented")
     }
 

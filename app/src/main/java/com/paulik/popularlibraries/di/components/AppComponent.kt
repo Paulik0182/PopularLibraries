@@ -4,8 +4,8 @@ import com.paulik.popularlibraries.di.modules.*
 import com.paulik.popularlibraries.ui.users.UserRootActivity
 import com.paulik.popularlibraries.ui.users.UsersGitHubPresenter
 import com.paulik.popularlibraries.ui.users.UsersRootPresenter
-import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubPresenterFactory
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubPresenterFactory
+import com.paulik.popularlibraries.ui.users.projects.ProjectsUserGitHubPresenterFactory
 import dagger.Component
 import javax.inject.Singleton
 
@@ -17,16 +17,15 @@ import javax.inject.Singleton
         ContextModule::class,
         NetworkModule::class,
         UsersRepositoryModule::class,
-        ProjectRepositoryModule::class
+        ProjectRepositoryModule::class,
+        ForkRepositoryModule::class
     ]
 )
 interface AppComponent {
 
     fun usersGitHubPresenter(): UsersGitHubPresenter
     fun forksRepoGitHubPresenterFactory(): ForksRepoGitHubPresenterFactory
+    fun projectUserGitHubPresenterFactory(): ProjectsUserGitHubPresenterFactory
     fun usersRootPresenter(): UsersRootPresenter
-
-    fun detailsUserGitHubPresenterFactory(): DetailsUserGitHubPresenterFactory
-
     fun inject(userRootActivity: UserRootActivity)
 }

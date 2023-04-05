@@ -7,10 +7,10 @@ import moxy.viewstate.strategy.alias.AddToEndSingle
 interface ForksRepoGitHubMvpView : MvpView {
 
     @AddToEndSingle
-    fun updateForksList(forks: List<ForksRepoGitHubEntity>)
+    fun updateForksList(forks: List<ForksRepoGitHubEntity?>)
 
     @AddToEndSingle
-    fun showFork(fork: String)
+    fun showFork(fork: String?)
 
     @AddToEndSingle
     fun showProgressBar()

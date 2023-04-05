@@ -1,7 +1,6 @@
 package com.paulik.popularlibraries.data
 
 import com.paulik.popularlibraries.data.cache.UsersGitHubCache
-import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.domain.repo.UsersGitHubRepo
@@ -23,9 +22,5 @@ class UsersGitHubRepoImpl @Inject constructor(
             /** если нет интернета */
             usersGitHubCache.getUser()
         }
-    }
-
-    override fun getForks(forksUrl: String): Single<List<ForksRepoGitHubEntity>> {
-        return gitHubApi.getForks(forksUrl)
     }
 }

@@ -10,7 +10,6 @@ class UsersRootPresenter @Inject constructor(
     private val appScreens: AppScreens
 ) : MvpPresenter<UsersGitHubMvpView>() {
 
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
 
