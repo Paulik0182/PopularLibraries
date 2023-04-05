@@ -3,6 +3,7 @@ package com.paulik.popularlibraries.ui.users.forks
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
+import com.paulik.popularlibraries.di.scope.containers.ForkScopeContainer
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.domain.repo.ForksGitHubRepo
 import dagger.assisted.Assisted
@@ -15,6 +16,7 @@ import moxy.MvpPresenter
 class ForksRepoGitHubPresenter @AssistedInject constructor(
     private val router: Router,
     private val forksGitHubRepo: ForksGitHubRepo,
+    private val forkScopeContainer: ForkScopeContainer,
     @Assisted private val forksUrl: String
 ) : MvpPresenter<ForksRepoGitHubMvpView>() {
 
@@ -46,6 +48,11 @@ class ForksRepoGitHubPresenter @AssistedInject constructor(
     fun backPressed(): Boolean {
         router.exit()
         return true
+    }
+
+    override fun onDestroy() {
+        forkScopeContainer.destroyForkRepositorySubcomponent()
+        super.onDestroy()
     }
 }
 

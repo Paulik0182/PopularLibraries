@@ -1,7 +1,7 @@
 package com.paulik.popularlibraries.di.components
 
+import com.paulik.popularlibraries.di.modules.AppModule
 import com.paulik.popularlibraries.di.modules.CiceroneModule
-import com.paulik.popularlibraries.di.modules.ContextModule
 import com.paulik.popularlibraries.di.modules.DbModule
 import com.paulik.popularlibraries.di.modules.NetworkModule
 import com.paulik.popularlibraries.ui.users.UserRootActivity
@@ -14,7 +14,7 @@ import javax.inject.Singleton
     modules = [
         DbModule::class,
         CiceroneModule::class,
-        ContextModule::class,
+        AppModule::class,
         NetworkModule::class,
 //        UsersRepositoryModule::class,
 //        ProjectRepositoryModule::class,

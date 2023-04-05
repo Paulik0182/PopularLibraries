@@ -20,10 +20,13 @@ class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 ), ProjectGitHubMvpView {
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.projectUserGitHubPresenterFactory()
-            .projectsUserGitHubPresenterFactory(
-                requireArguments().getString(KEY_USER)!!
-            )
+        App.instance.initProjectRepositorySubcomponent()
+        App.instance.projectRepositorySubcomponent?.projectUserGitHubPresenterFactory()
+            ?.projectsUserPresenter(requireArguments().getString(KEY_USER)!!)!!
+//        App.instance.appComponent.projectUserGitHubPresenterFactory()
+//            .projectsUserGitHubPresenterFactory(
+//                requireArguments().getString(KEY_USER)!!
+//            )
     }
 
     private val adapter by lazy {

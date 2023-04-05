@@ -1,9 +1,11 @@
 package com.paulik.popularlibraries.di.modules
 
+import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.data.ForkGitHubRepoImpl
 import com.paulik.popularlibraries.data.cache.ForkGitHubCache
 import com.paulik.popularlibraries.data.room.RoomDb
 import com.paulik.popularlibraries.di.scope.ForkScope
+import com.paulik.popularlibraries.di.scope.containers.ForkScopeContainer
 import com.paulik.popularlibraries.domain.repo.ForksGitHubRepo
 import dagger.Binds
 import dagger.Module
@@ -20,5 +22,9 @@ abstract class ForkRepositoryModule {
         @ForkScope
         @Provides
         fun forkGitHubCache(db: RoomDb): ForkGitHubCache = ForkGitHubCache(db)
+
+        @ForkScope
+        @Provides
+        fun scopeContainer(app: App): ForkScopeContainer = app
     }
 }
