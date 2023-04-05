@@ -14,7 +14,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.databinding.FragmentConvertorImageBinding
-import com.paulik.popularlibraries.domain.ConverterPresenter
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.squareup.picasso.Picasso
 import moxy.presenter.InjectPresenter
@@ -26,7 +25,7 @@ const val JPG_CHOOSER_CODE = 0
 
 class ConvertorImageFragment : ViewBindingFragment<FragmentConvertorImageBinding>(
     FragmentConvertorImageBinding::inflate
-), ConverterPresenter {
+), ConverterMvpView {
 
     private lateinit var file: File
     private var jpgPath: String? = null

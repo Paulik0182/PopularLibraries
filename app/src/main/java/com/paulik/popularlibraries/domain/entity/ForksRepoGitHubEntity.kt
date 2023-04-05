@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName
     foreignKeys = [
         ForeignKey(
             entity = ProjectGitHubEntity::class,
-            parentColumns = ["forksUrl"],
+            parentColumns = ["forks_url"],
             childColumns = ["name"],
             onDelete = ForeignKey.CASCADE
         )

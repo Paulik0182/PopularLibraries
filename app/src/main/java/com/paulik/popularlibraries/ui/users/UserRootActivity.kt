@@ -5,12 +5,11 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.R
-import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
-import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
-import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
+import com.paulik.popularlibraries.ui.users.details.ProjectGitHubMvpView
+import com.paulik.popularlibraries.ui.users.details.ProjectUserGitHubFragment
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -62,7 +61,7 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
         supportFragmentManager
             .beginTransaction()
             .replace(
-                R.id.container, DetailsUserGitHubFragment.newInstance(reposUrl)
+                R.id.container, ProjectUserGitHubFragment.newInstance(reposUrl)
             )
 //            .addToBackStack(null)
             .commit()

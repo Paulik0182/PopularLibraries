@@ -2,7 +2,7 @@ package com.paulik.popularlibraries
 
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.paulik.popularlibraries.ui.users.UsersGitHubMvpFragment
-import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
+import com.paulik.popularlibraries.ui.users.details.ProjectUserGitHubFragment
 
 interface AppScreens {
     fun usersGitHubScreen(): FragmentScreen
@@ -16,6 +16,6 @@ class AppScreensImpl : AppScreens {
     }
 
     override fun detailsUerGitHubScreen() = FragmentScreen {
-        DetailsUserGitHubFragment()
+        ProjectUserGitHubFragment()
     }
 }

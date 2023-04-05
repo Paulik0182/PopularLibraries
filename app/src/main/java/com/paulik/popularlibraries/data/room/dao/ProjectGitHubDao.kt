@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.domain.dao
+package com.paulik.popularlibraries.data.room.dao
 
 import androidx.room.*
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity

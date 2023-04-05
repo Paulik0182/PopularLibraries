@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.databinding.FragmentForksRepoGitHubBinding
-import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.ForksRepoAdapter

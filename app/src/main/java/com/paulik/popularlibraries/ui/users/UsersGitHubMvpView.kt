@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.domain
+package com.paulik.popularlibraries.ui.users
 
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import moxy.MvpView

@@ -5,14 +5,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.widget.Toast
-import com.paulik.popularlibraries.domain.ConverterPresenter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 import java.io.FileOutputStream
 
-class ConvertorImagePresenter : MvpPresenter<ConverterPresenter>() {
+class ConvertorImagePresenter : MvpPresenter<ConverterMvpView>() {
 
 
     @SuppressLint("CheckResult")

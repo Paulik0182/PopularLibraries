@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.domain
+package com.paulik.popularlibraries.ui.users.forks
 
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import moxy.MvpView

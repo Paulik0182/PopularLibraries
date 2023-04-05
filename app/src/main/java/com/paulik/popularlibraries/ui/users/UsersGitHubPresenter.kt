@@ -3,7 +3,6 @@ package com.paulik.popularlibraries.ui.users
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
-import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.repo.UsersGitHubRepo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

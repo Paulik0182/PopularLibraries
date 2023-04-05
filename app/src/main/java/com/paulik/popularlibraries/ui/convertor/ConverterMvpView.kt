@@ -1,9 +1,9 @@
-package com.paulik.popularlibraries.domain
+package com.paulik.popularlibraries.ui.convertor
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
-interface ConverterPresenter : MvpView {
+interface ConverterMvpView : MvpView {
     @AddToEndSingle
     fun getImage()
 

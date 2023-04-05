@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.domain
+package com.paulik.popularlibraries.ui.counter
 
 import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle

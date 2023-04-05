@@ -3,7 +3,6 @@ package com.paulik.popularlibraries.ui.users.details
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
-import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.repo.ProjectGitHubRepo
 import dagger.assisted.Assisted

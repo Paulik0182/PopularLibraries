@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.databinding.FragmentDetailsUserGitHubBinding
-import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.UserRootActivity
@@ -16,7 +15,7 @@ import moxy.ktx.moxyPresenter
 
 private const val KEY_USER = "KEY_USER"
 
-class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubBinding>(
+class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubBinding>(
     FragmentDetailsUserGitHubBinding::inflate
 ), ProjectGitHubMvpView {
 
@@ -48,7 +47,7 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 
         @JvmStatic
         fun newInstance(reposUrl: String) =
-            DetailsUserGitHubFragment().apply {
+            ProjectUserGitHubFragment().apply {
                 arguments = bundleOf(KEY_USER to reposUrl)
             }
     }

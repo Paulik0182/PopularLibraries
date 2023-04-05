@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
-import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
@@ -73,7 +72,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     interface Controller {
-        // todo
+        fun showReposUrl(reposUrl: String)
     }
 
     private fun getController(): Controller = activity as Controller
@@ -93,7 +92,8 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     override fun showReposUrl(reposUrl: String) {
-        (requireActivity() as UserRootActivity).showReposUrl(reposUrl)
+        getController().showReposUrl(reposUrl)
+//        (requireActivity() as UserRootActivity).showReposUrl(reposUrl)
     }
 
     override fun showProgressBar() {

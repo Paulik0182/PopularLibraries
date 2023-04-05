@@ -13,7 +13,7 @@ import com.google.gson.annotations.SerializedName
         ForeignKey(
             entity = UsersGitHubEntity::class,
             parentColumns = ["id"],
-            childColumns = ["id"],
+            childColumns = ["user_id"],
             onDelete = ForeignKey.CASCADE // это каскадное удаление данных, если была удалена сущьность то и все подчиненные связи также удалятся.
         )
     ]
@@ -38,7 +38,7 @@ data class ProjectGitHubEntity(
     @Expose
     @SerializedName("user_id")
     @ColumnInfo(name = "user_id")
-    var userId: String? = null,
+    var userId: Int? = null,
 
     @Expose
     @SerializedName("forks_count")
@@ -58,7 +58,7 @@ data class ProjectGitHubEntity(
     constructor() : this(0)
     constructor(
         id: Int, name: String?, description: String?,
-        userId: String, forksCount: Int, forksUrl: String?, private: Boolean
+        userId: Int, forksCount: Int, forksUrl: String?, private: Boolean
     ) : this() {
         this.id = id
         this.name = name
