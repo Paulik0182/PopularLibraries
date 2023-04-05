@@ -15,21 +15,13 @@ import javax.inject.Singleton
         DbModule::class,
         CiceroneModule::class,
         AppModule::class,
-        NetworkModule::class,
-//        UsersRepositoryModule::class,
-//        ProjectRepositoryModule::class,
-//        ForkRepositoryModule::class
+        NetworkModule::class
     ]
 )
 interface AppComponent {
 
     fun usersRepositorySubcomponent(): UsersRepositorySubcomponent
-//    fun projectRepositorySubcomponent(): ProjectRepositorySubcomponent
-//    fun forkRepositorySubcomponent(): ForkRepositorySubcomponent
 
-    //    fun usersGitHubPresenter(): UsersGitHubPresenter
-//    fun forksRepoGitHubPresenterFactory(): ForksRepoGitHubPresenterFactory
-//    fun projectUserGitHubPresenterFactory(): ProjectsUserGitHubPresenterFactory
     fun usersRootPresenter(): UsersRootPresenter
     fun inject(userRootActivity: UserRootActivity)
 }

@@ -12,7 +12,6 @@ import javax.inject.Singleton
 @Module
 class CiceroneModule {
 
-    // Создаем Instance Cicerone
     private val cicerone: Cicerone<Router> by lazy { Cicerone.create() }
 
     @Singleton

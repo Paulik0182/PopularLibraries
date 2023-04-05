@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName
             entity = UsersGitHubEntity::class,
             parentColumns = ["id"],
             childColumns = ["user_id"],
-            onDelete = ForeignKey.CASCADE // это каскадное удаление данных, если была удалена сущьность то и все подчиненные связи также удалятся.
+            onDelete = ForeignKey.CASCADE // каскадное удаление данных, если была удалена сущьность то и все подчиненные связи также удалятся.
         )
     ]
 )

@@ -17,28 +17,4 @@ class DbModule {
         Room.databaseBuilder(context, RoomDb::class.java, DB_NAME)
             .allowMainThreadQueries()
             .build()
-
-//    @Singleton
-//    @Provides
-//    fun projectGitHubCache(
-//        db: RoomDb
-//    ): ProjectGitHubCache {
-//        return ProjectGitHubCache(db)
-//    }
-//
-//    @Singleton
-//    @Provides
-//    fun usersGitHubCache(
-//        db: RoomDb
-//    ): UsersGitHubCache {
-//        return UsersGitHubCache(db)
-//    }
-//
-//    @Singleton
-//    @Provides
-//    fun forkGitHubCache(
-//        db: RoomDb
-//    ): ForkGitHubCache {
-//        return ForkGitHubCache(db)
-//    }
 }

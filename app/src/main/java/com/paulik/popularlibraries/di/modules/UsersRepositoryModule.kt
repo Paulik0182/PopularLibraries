@@ -15,7 +15,7 @@ import dagger.Provides
 abstract class UsersRepositoryModule {
 
     /**
-     * Унифицирование fun gitHubRepo с помощью аннотации @Binds
+     * Унифицирование fun bindHubRepo с помощью аннотации @Binds
      */
     @UsersScope
     @Binds

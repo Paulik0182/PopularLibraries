@@ -22,10 +22,6 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
         App.instance.initForkRepositorySubcomponent()
         App.instance.forkRepositorySubcomponent?.forksRepoGitHubPresenterFactory()
             ?.forksRepoPresenter(requireArguments().getString(KEY_FORKS_REPO)!!)!!
-
-//        App.instance.appComponent.forksRepoGitHubPresenterFactory().forksRepoPresenter(
-//            requireArguments().getString(KEY_FORKS_REPO)!!
-//        )
     }
 
     private val adapter by lazy {
