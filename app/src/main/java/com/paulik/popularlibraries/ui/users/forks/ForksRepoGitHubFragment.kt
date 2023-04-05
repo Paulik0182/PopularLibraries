@@ -19,9 +19,9 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
 ), ForksRepoGitHubMvpView {
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.forksRepoGitHubPresenterFactory().forksRepoPresenter(
-            requireArguments().getString(KEY_FORKS_REPO)!!
-        )
+        App.instance.initForkRepositorySubcomponent()
+        App.instance.forkRepositorySubcomponent?.forksRepoGitHubPresenterFactory()
+            ?.forksRepoPresenter(requireArguments().getString(KEY_FORKS_REPO)!!)!!
     }
 
     private val adapter by lazy {

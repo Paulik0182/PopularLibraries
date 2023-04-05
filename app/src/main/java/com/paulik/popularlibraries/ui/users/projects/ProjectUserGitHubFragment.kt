@@ -1,5 +1,6 @@
 package com.paulik.popularlibraries.ui.users.projects
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -9,7 +10,6 @@ import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.databinding.FragmentDetailsUserGitHubBinding
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
-import com.paulik.popularlibraries.ui.users.UserRootActivity
 import com.paulik.popularlibraries.ui.users.adapter.ProjectAdapter
 import moxy.ktx.moxyPresenter
 
@@ -20,10 +20,9 @@ class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 ), ProjectGitHubMvpView {
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.projectUserGitHubPresenterFactory()
-            .projectsUserGitHubPresenterFactory(
-                requireArguments().getString(KEY_USER)!!
-            )
+        App.instance.initProjectRepositorySubcomponent()
+        App.instance.projectRepositorySubcomponent?.projectUserGitHubPresenterFactory()
+            ?.projectsUserPresenter(requireArguments().getString(KEY_USER)!!)!!
     }
 
     private val adapter by lazy {
@@ -43,6 +42,17 @@ class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
         binding.recyclerView.adapter = adapter
     }
 
+    interface Controller {
+        fun showForksRepo(forksUrl: String?)
+    }
+
+    private fun getController(): Controller = activity as Controller
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        getController()
+    }
+
     companion object {
 
         @JvmStatic
@@ -58,7 +68,7 @@ class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
     }
 
     override fun showForksRepo(forksUrl: String?) {
-        (requireActivity() as UserRootActivity).showForksRepo(forksUrl)
+        getController().showForksRepo(forksUrl)
     }
 
     override fun showProgressBar() {

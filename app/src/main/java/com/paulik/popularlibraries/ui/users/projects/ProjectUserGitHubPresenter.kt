@@ -3,6 +3,7 @@ package com.paulik.popularlibraries.ui.users.projects
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
+import com.paulik.popularlibraries.di.scope.containers.ProjectScopeContainer
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.repo.ProjectGitHubRepo
 import dagger.assisted.Assisted
@@ -15,6 +16,7 @@ import moxy.MvpPresenter
 class ProjectsUserGitHubPresenter @AssistedInject constructor(
     private val router: Router,
     private val projectGitHubRepo: ProjectGitHubRepo,
+    private val projectScopeContainer: ProjectScopeContainer,
     @Assisted private val reposUrl: String
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
@@ -51,9 +53,14 @@ class ProjectsUserGitHubPresenter @AssistedInject constructor(
         router.exit()
         return true
     }
+
+    override fun onDestroy() {
+        projectScopeContainer.destroyProjectRepositorySubcomponent()
+        super.onDestroy()
+    }
 }
 
 @AssistedFactory
 interface ProjectsUserGitHubPresenterFactory {
-    fun projectsUserGitHubPresenterFactory(reposUrl: String): ProjectsUserGitHubPresenter
+    fun projectsUserPresenter(reposUrl: String): ProjectsUserGitHubPresenter
 }

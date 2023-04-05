@@ -17,7 +17,8 @@ import javax.inject.Inject
 
 class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubMvpView,
     ProjectGitHubMvpView,
-    UsersGitHubMvpFragment.Controller {
+    UsersGitHubMvpFragment.Controller,
+    ProjectUserGitHubFragment.Controller {
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -63,7 +64,6 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
             .replace(
                 R.id.container, ProjectUserGitHubFragment.newInstance(reposUrl)
             )
-//            .addToBackStack(null)
             .commit()
     }
 
@@ -73,7 +73,6 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
             .replace(
                 R.id.container, ForksRepoGitHubFragment.newInstance(forksUrl)
             )
-//            .addToBackStack(null)
             .commit()
     }
 

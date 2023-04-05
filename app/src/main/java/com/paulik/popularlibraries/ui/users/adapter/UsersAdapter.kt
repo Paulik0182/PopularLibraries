@@ -10,7 +10,6 @@ import com.paulik.popularlibraries.databinding.ItemUsersBinding
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.root.image.ImageLoader
 
-
 class UsersAdapter(
     private val itemClickListener: (UsersGitHubEntity) -> Unit,
     private val imageLoader: ImageLoader<ImageView>

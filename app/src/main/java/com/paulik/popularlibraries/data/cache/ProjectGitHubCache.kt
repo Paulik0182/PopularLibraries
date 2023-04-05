@@ -3,8 +3,9 @@ package com.paulik.popularlibraries.data.cache
 import com.paulik.popularlibraries.data.room.RoomDb
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import io.reactivex.rxjava3.core.Single
+import javax.inject.Inject
 
-class ProjectGitHubCache(
+class ProjectGitHubCache @Inject constructor(
     private val db: RoomDb
 ) {
 

@@ -28,7 +28,8 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
     }
 
     private val presenter by moxyPresenter {
-        App.instance.appComponent.usersGitHubPresenter()
+        App.instance.initUsersRepositorySubcomponent()
+        App.instance.usersRepositorySubcomponent?.usersGitHubPresenter()!!
     }
 
     private val adapter by lazy {
@@ -68,7 +69,6 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
         // submitList - отправляет список элементов
         adapter.submitList(users)
 //        adapter.submitList(adapter.currentList + users) // вариант
-
     }
 
     interface Controller {
@@ -93,7 +93,6 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 
     override fun showReposUrl(reposUrl: String) {
         getController().showReposUrl(reposUrl)
-//        (requireActivity() as UserRootActivity).showReposUrl(reposUrl)
     }
 
     override fun showProgressBar() {

@@ -30,7 +30,6 @@ class NetworkModule {
         return UsedConst.httpsConst.GIT_CONST
     }
 
-    // обращение к API github через пакет OkHttp (с помощью этой библиотеки делаются запросы и получаем ответы)
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
         .connectTimeout(UsedConst.settingTimeConst.ITEM_OUT_CONST, TimeUnit.SECONDS)
         .build()
@@ -53,8 +52,8 @@ class NetworkModule {
     ): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)
         .client(okHttpClient) // увеличение времени по таймауту
-        .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // возможность оборачивать объекты в RxJava, например в single.
-        .addConverterFactory(GsonConverterFactory.create(gson)) // это приобразователь объектов из одного типа в другой тип (здесь старонняя библиотека)
+        .addCallAdapterFactory(RxJava3CallAdapterFactory.create()) // обернули объект в RxJava, например в single.
+        .addConverterFactory(GsonConverterFactory.create(gson)) // приобразователь объектов в другой тип (старонняя библиотека)
         .build()
 
     @Singleton

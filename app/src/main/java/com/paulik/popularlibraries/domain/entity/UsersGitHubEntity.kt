@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-@Entity(tableName = "users") // это название таблицы
+@Entity(tableName = "users")
 data class UsersGitHubEntity(
 
     @Expose
