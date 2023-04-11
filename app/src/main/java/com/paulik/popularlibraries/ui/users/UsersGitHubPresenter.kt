@@ -3,6 +3,7 @@ package com.paulik.popularlibraries.ui.users
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
+import com.paulik.popularlibraries.AppScreens
 import com.paulik.popularlibraries.di.scope.containers.UsersScopeContainer
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.repo.UsersGitHubRepo
@@ -14,7 +15,8 @@ import javax.inject.Inject
 class UsersGitHubPresenter @Inject constructor(
     private val router: Router,
     private val usersUsersGitHubRepo: UsersGitHubRepo,
-    private val usersScopeContainer: UsersScopeContainer
+    private val usersScopeContainer: UsersScopeContainer,
+    private val appScreens: AppScreens
 ) : MvpPresenter<UsersGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
@@ -43,7 +45,7 @@ class UsersGitHubPresenter @Inject constructor(
     }
 
     fun onUserClicked(usersGitHubEntity: UsersGitHubEntity) {
-        viewState.showReposUrl(usersGitHubEntity.reposUrl)
+        router.replaceScreen(appScreens.projectsUerGitHubScreen(usersGitHubEntity.reposUrl))
     }
 
     fun backPressed(): Boolean {

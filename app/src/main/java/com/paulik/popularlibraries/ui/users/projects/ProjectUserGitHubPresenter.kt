@@ -3,6 +3,7 @@ package com.paulik.popularlibraries.ui.users.projects
 import android.annotation.SuppressLint
 import android.util.Log
 import com.github.terrakok.cicerone.Router
+import com.paulik.popularlibraries.AppScreens
 import com.paulik.popularlibraries.di.scope.containers.ProjectScopeContainer
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.repo.ProjectGitHubRepo
@@ -17,6 +18,7 @@ class ProjectsUserGitHubPresenter @AssistedInject constructor(
     private val router: Router,
     private val projectGitHubRepo: ProjectGitHubRepo,
     private val projectScopeContainer: ProjectScopeContainer,
+    private val appScreens: AppScreens,
     @Assisted private val reposUrl: String
 ) : MvpPresenter<ProjectGitHubMvpView>() {
 
@@ -46,7 +48,7 @@ class ProjectsUserGitHubPresenter @AssistedInject constructor(
     }
 
     fun onProjectClicked(projectGitHubEntity: ProjectGitHubEntity) {
-        viewState.showForksRepo(projectGitHubEntity.forksUrl)
+        router.replaceScreen(appScreens.forksGitHubScreen(projectGitHubEntity.forksUrl))
     }
 
     fun backPressed(): Boolean {

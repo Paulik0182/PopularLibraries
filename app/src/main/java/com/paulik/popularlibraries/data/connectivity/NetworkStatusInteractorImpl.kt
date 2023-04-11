@@ -15,7 +15,6 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
  */
 class NetworkStatusInteractorImpl(
     context: Context
-//    contextProvider: IContextProvider = ContextProvider
 ) : NetworkStatusInteractor {
 
     // Служба через которую получаем статус сети

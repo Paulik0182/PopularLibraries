@@ -8,8 +8,6 @@ interface ProjectGitHubMvpView : MvpView {
 
     fun updateProjectList(project: List<ProjectGitHubEntity?>)
 
-    fun showForksRepo(forksUrl: String?)
-
     fun showProgressBar()
 
     fun hideProgressBar()

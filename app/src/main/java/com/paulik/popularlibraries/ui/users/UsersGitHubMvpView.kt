@@ -9,8 +9,6 @@ interface UsersGitHubMvpView : MvpView {
 
     fun updateUsersList(users: List<UsersGitHubEntity>)
 
-    fun showReposUrl(reposUrl: String)
-
     fun showProgressBar()
 
     fun hideProgressBar()
