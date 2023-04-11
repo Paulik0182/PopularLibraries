@@ -1,7 +1,6 @@
 package com.paulik.popularlibraries.ui.users
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -71,17 +70,6 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
 //        adapter.submitList(adapter.currentList + users) // вариант
     }
 
-    interface Controller {
-        fun showReposUrl(reposUrl: String)
-    }
-
-    private fun getController(): Controller = activity as Controller
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        getController()
-    }
-
     companion object {
         @JvmStatic
         fun newInstance() =
@@ -89,10 +77,6 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
                 arguments = Bundle().apply {
                 }
             }
-    }
-
-    override fun showReposUrl(reposUrl: String) {
-        getController().showReposUrl(reposUrl)
     }
 
     override fun showProgressBar() {

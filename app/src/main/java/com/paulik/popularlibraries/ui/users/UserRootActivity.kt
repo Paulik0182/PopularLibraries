@@ -8,17 +8,13 @@ import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
-import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
 import com.paulik.popularlibraries.ui.users.projects.ProjectGitHubMvpView
-import com.paulik.popularlibraries.ui.users.projects.ProjectUserGitHubFragment
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubMvpView,
-    ProjectGitHubMvpView,
-    UsersGitHubMvpFragment.Controller,
-    ProjectUserGitHubFragment.Controller {
+    ProjectGitHubMvpView {
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -56,24 +52,6 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
             }
         }
         presenter.backPressed()
-    }
-
-    override fun showReposUrl(reposUrl: String) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(
-                R.id.container, ProjectUserGitHubFragment.newInstance(reposUrl)
-            )
-            .commit()
-    }
-
-    override fun showForksRepo(forksUrl: String?) {
-        supportFragmentManager
-            .beginTransaction()
-            .replace(
-                R.id.container, ForksRepoGitHubFragment.newInstance(forksUrl)
-            )
-            .commit()
     }
 
     override fun updateUsersList(users: List<UsersGitHubEntity>) {

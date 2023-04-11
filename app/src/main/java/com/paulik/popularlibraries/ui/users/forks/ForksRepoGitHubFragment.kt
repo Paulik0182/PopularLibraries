@@ -10,13 +10,14 @@ import com.paulik.popularlibraries.databinding.FragmentForksRepoGitHubBinding
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.ForksRepoAdapter
+import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import moxy.ktx.moxyPresenter
 
 private const val KEY_FORKS_REPO = "KEY_FORKS_REPO"
 
 class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBinding>(
     FragmentForksRepoGitHubBinding::inflate
-), ForksRepoGitHubMvpView {
+), ForksRepoGitHubMvpView, BackButtonListener {
 
     private val presenter by moxyPresenter {
         App.instance.initForkRepositorySubcomponent()
@@ -55,10 +56,6 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
         adapter.submitList(forks)
     }
 
-    override fun showFork(fork: String?) {
-        // TODO("Not yet implemented")
-    }
-
     override fun showProgressBar() {
         binding.progressBar.isVisible = true
         binding.recyclerView.isVisible = false
@@ -67,5 +64,10 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
     override fun hideProgressBar() {
         binding.progressBar.isVisible = false
         binding.recyclerView.isVisible = true
+    }
+
+    override fun backPressed(): Boolean {
+        presenter.backPressed()
+        return true
     }
 }

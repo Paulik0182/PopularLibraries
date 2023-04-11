@@ -9,8 +9,6 @@ interface ForksRepoGitHubMvpView : MvpView {
 
     fun updateForksList(forks: List<ForksRepoGitHubEntity?>)
 
-    fun showFork(fork: String?)
-
     fun showProgressBar()
 
     fun hideProgressBar()

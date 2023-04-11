@@ -4,7 +4,6 @@ import android.content.Context
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.paulik.popularlibraries.UsedConst
 import com.paulik.popularlibraries.data.GitHubApi
 import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
@@ -20,6 +19,8 @@ import javax.inject.Named
 import javax.inject.Singleton
 
 private const val BASE_URL = "BASE_URL"
+private const val GIT_CONST = "https://api.github.com/"
+private const val ITEM_OUT_CONST = 15L
 
 @Module
 class NetworkModule {
@@ -27,11 +28,11 @@ class NetworkModule {
     @Provides
     @Named(BASE_URL)
     fun baseUrl(): String {
-        return UsedConst.httpsConst.GIT_CONST
+        return GIT_CONST
     }
 
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
-        .connectTimeout(UsedConst.settingTimeConst.ITEM_OUT_CONST, TimeUnit.SECONDS)
+        .connectTimeout(ITEM_OUT_CONST, TimeUnit.SECONDS)
         .build()
 
     // для работы с пришедшими данными

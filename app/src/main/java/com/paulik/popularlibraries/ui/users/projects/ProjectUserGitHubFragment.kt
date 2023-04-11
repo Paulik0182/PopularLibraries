@@ -1,6 +1,5 @@
 package com.paulik.popularlibraries.ui.users.projects
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -11,13 +10,14 @@ import com.paulik.popularlibraries.databinding.FragmentDetailsUserGitHubBinding
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.adapter.ProjectAdapter
+import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import moxy.ktx.moxyPresenter
 
 private const val KEY_USER = "KEY_USER"
 
 class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubBinding>(
     FragmentDetailsUserGitHubBinding::inflate
-), ProjectGitHubMvpView {
+), ProjectGitHubMvpView, BackButtonListener {
 
     private val presenter by moxyPresenter {
         App.instance.initProjectRepositorySubcomponent()
@@ -42,17 +42,6 @@ class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
         binding.recyclerView.adapter = adapter
     }
 
-    interface Controller {
-        fun showForksRepo(forksUrl: String?)
-    }
-
-    private fun getController(): Controller = activity as Controller
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        getController()
-    }
-
     companion object {
 
         @JvmStatic
@@ -67,10 +56,6 @@ class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
         adapter.submitList(project)
     }
 
-    override fun showForksRepo(forksUrl: String?) {
-        getController().showForksRepo(forksUrl)
-    }
-
     override fun showProgressBar() {
         binding.progressBar.isVisible = true
         binding.recyclerView.isVisible = false
@@ -79,5 +64,10 @@ class ProjectUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
     override fun hideProgressBar() {
         binding.progressBar.isVisible = false
         binding.recyclerView.isVisible = true
+    }
+
+    override fun backPressed(): Boolean {
+        presenter.backPressed()
+        return true
     }
 }
