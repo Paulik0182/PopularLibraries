@@ -5,20 +5,20 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.R
-import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
-import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
-import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
+import com.paulik.popularlibraries.ui.users.projects.ProjectGitHubMvpView
+import com.paulik.popularlibraries.ui.users.projects.ProjectUserGitHubFragment
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGitHubMvpView,
     ProjectGitHubMvpView,
-    UsersGitHubMvpFragment.Controller {
+    UsersGitHubMvpFragment.Controller,
+    ProjectUserGitHubFragment.Controller {
 
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
@@ -62,19 +62,17 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
         supportFragmentManager
             .beginTransaction()
             .replace(
-                R.id.container, DetailsUserGitHubFragment.newInstance(reposUrl)
+                R.id.container, ProjectUserGitHubFragment.newInstance(reposUrl)
             )
-//            .addToBackStack(null)
             .commit()
     }
 
-    override fun showForksRepo(forksUrl: String) {
+    override fun showForksRepo(forksUrl: String?) {
         supportFragmentManager
             .beginTransaction()
             .replace(
                 R.id.container, ForksRepoGitHubFragment.newInstance(forksUrl)
             )
-//            .addToBackStack(null)
             .commit()
     }
 
@@ -82,7 +80,7 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
         // TODO("Not yet implemented")
     }
 
-    override fun updateProjectList(project: List<ProjectGitHubEntity>) {
+    override fun updateProjectList(project: List<ProjectGitHubEntity?>) {
         // TODO("Not yet implemented")
     }
 

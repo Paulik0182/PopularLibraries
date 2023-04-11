@@ -1,7 +1,6 @@
 package com.paulik.popularlibraries.ui.counter
 
 import com.paulik.popularlibraries.data.counter.CounterModelRepoImpl
-import com.paulik.popularlibraries.domain.CounterMvpView
 import moxy.MvpPresenter
 
 /**
