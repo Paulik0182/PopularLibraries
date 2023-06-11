@@ -16,5 +16,8 @@ interface ForksRepoGitHubMvpView : MvpView {
     fun showProgressBar()
 
     @AddToEndSingle
+    fun showError(message: String)
+
+    @AddToEndSingle
     fun hideProgressBar()
 }

@@ -1,18 +1,15 @@
 package com.paulik.popularlibraries.ui.users
 
 import android.annotation.SuppressLint
-import android.util.Log
-import com.github.terrakok.cicerone.Router
-import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
+import com.paulik.popularlibraries.domain.repo.GitHubRepo
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.MvpPresenter
 
 class UsersGitHubPresenter(
-    private val router: Router,
-    private val usersGitHubRepoImpl: GitHubRepoImpl
+    private val usersGitHubRepo: GitHubRepo
 ) : MvpPresenter<UsersGitHubMvpView>() {
 
     override fun onFirstViewAttach() {
@@ -22,22 +19,26 @@ class UsersGitHubPresenter(
     }
 
     @SuppressLint("CheckResult")
-    private fun loadData() {
-        usersGitHubRepoImpl.getUsers()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { viewState.showProgressBar() }
-            .subscribe({ users: List<UsersGitHubEntity> ->
-                viewState.updateUsersList(users)
-                viewState.hideProgressBar()
-            }, {
-                Log.e(
-                    "Retrofit. UsersGitHubPresenter",
-                    "Ошибка при получении списка пользователей",
-                    it
-                )
-                viewState.showProgressBar()
-            })
+    fun loadData() {
+        val userSingle = usersGitHubRepo.getUsers()
+        if (userSingle != null) {
+            userSingle.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe {
+                    viewState.showProgressBar()
+                }
+                .subscribe({ users: List<UsersGitHubEntity> ->
+                    viewState.updateUsersList(users)
+                    viewState.hideProgressBar()
+                }, {
+                    viewState.showErrorMessage(it.message ?: "Неизвестная ошибка")
+                    viewState.showProgressBar()
+                })
+        } else {
+            viewState.showErrorMessage("Ошибка получения данных от сервера")
+            viewState.hideProgressBar()
+        }
+
     }
 
     fun onUserClicked(usersGitHubEntity: UsersGitHubEntity) {
@@ -45,7 +46,6 @@ class UsersGitHubPresenter(
     }
 
     fun backPressed(): Boolean {
-        router.exit()
         return true
     }
 }

@@ -2,6 +2,7 @@ package com.paulik.popularlibraries.ui.users.forks
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +26,6 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
 
     private val presenter by moxyPresenter {
         ForksRepoGitHubPresenter(
-            App.instance.router,
             GitHubRepoImpl(app.gitHubApi, RoomDb.instanceRoom, app.networkStatusInteractor),
             requireArguments().getString(KEY_FORKS_REPO)!!
         )
@@ -69,6 +69,10 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
     override fun showProgressBar() {
         binding.progressBar.isVisible = true
         binding.recyclerView.isVisible = false
+    }
+
+    override fun showError(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun hideProgressBar() {

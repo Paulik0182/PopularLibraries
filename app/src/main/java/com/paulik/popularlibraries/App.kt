@@ -42,13 +42,6 @@ class App : Application() {
     val gitHubApi: GitHubApi =
         retrofit.create(GitHubApi::class.java) //создаем gitHubApi. Автоматически обратится к интерфейсу
 
-    // Вариант создания GitHubApi
-//    val retrofitService by lazy {
-//        retrofit
-//            .create<GitHubApi>()
-//    }
-
-
     // Создаем Instance Cicerone
     private val cicerone: Cicerone<Router> by lazy { Cicerone.create() }
 

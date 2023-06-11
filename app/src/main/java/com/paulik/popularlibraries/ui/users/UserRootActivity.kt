@@ -1,5 +1,6 @@
 package com.paulik.popularlibraries.ui.users
 
+import android.widget.Toast
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.paulik.popularlibraries.App
 import com.paulik.popularlibraries.R
@@ -10,7 +11,6 @@ import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.ui.users.base.BackButtonListener
 import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubFragment
 import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubFragment
-//import com.paulik.popularlibraries.ui.users.details.DetailsUserRootPresenter
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
@@ -81,5 +81,9 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
 
     override fun hideProgressBar() {
         // TODO("Not yet implemented")
+    }
+
+    override fun showErrorMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

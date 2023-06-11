@@ -17,4 +17,7 @@ interface UsersGitHubMvpView : MvpView {
 
     @AddToEndSingle
     fun hideProgressBar()
+
+    @AddToEndSingle
+    fun showErrorMessage(message: String)
 }
