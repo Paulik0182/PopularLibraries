@@ -21,7 +21,6 @@ class UserRootActivity : MvpAppCompatActivity(R.layout.activity_users), UsersGit
     private val navigator = AppNavigator(this, R.id.container)
 
     private val presenter by moxyPresenter { UsersRootPresenter(App.instance.router) }
-//    private val presenterDetails by moxyPresenter { DetailsUserRootPresenter(App.instance.router) }
 
     override fun onResumeFragments() {
         super.onResumeFragments()

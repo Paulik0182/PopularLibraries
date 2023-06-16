@@ -20,25 +20,19 @@ class UsersGitHubPresenter(
 
     @SuppressLint("CheckResult")
     fun loadData() {
-        val userSingle = usersGitHubRepo.getUsers()
-        if (userSingle != null) {
-            userSingle.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-                    viewState.showProgressBar()
-                }
-                .subscribe({ users: List<UsersGitHubEntity> ->
-                    viewState.updateUsersList(users)
-                    viewState.hideProgressBar()
-                }, {
-                    viewState.showErrorMessage(it.message ?: "Неизвестная ошибка")
-                    viewState.showProgressBar()
-                })
-        } else {
-            viewState.showErrorMessage("Ошибка получения данных от сервера")
-            viewState.hideProgressBar()
-        }
-
+        usersGitHubRepo.getUsers()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                viewState.showProgressBar()
+            }
+            .subscribe({ users: List<UsersGitHubEntity> ->
+                viewState.updateUsersList(users)
+                viewState.hideProgressBar()
+            }, { throwable ->
+                viewState.showErrorMessage(throwable.message ?: "Неизвестная ошибка")
+                viewState.hideProgressBar()
+            })
     }
 
     fun onUserClicked(usersGitHubEntity: UsersGitHubEntity) {

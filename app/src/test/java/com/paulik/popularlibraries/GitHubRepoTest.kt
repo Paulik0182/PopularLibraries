@@ -9,13 +9,14 @@ import com.paulik.popularlibraries.domain.repo.GitHubRepo
 import io.reactivex.rxjava3.core.Single
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mock
+import org.junit.runner.RunWith
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnit
+import org.mockito.junit.MockitoJUnitRunner
 
+@RunWith(MockitoJUnitRunner::class)
 class GitHubRepoTest {
 
-    @Mock
     private lateinit var repository: GitHubRepo
 
     @Before

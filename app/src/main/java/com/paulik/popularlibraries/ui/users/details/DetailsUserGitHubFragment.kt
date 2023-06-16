@@ -14,7 +14,6 @@ import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 import com.paulik.popularlibraries.ui.users.UserRootActivity
 import com.paulik.popularlibraries.ui.users.adapter.ProjectAdapter
-import moxy.ktx.moxyPresenter
 
 private const val KEY_USER = "KEY_USER"
 
@@ -24,17 +23,7 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
 
     private val app: App get() = requireActivity().applicationContext as App
 
-    private val presenter by moxyPresenter {
-        DetailsUserGitHubPresenter(
-            App.instance.router,
-            GitHubRepoImpl(
-                gitHubApi = app.gitHubApi,
-                db = RoomDb.instanceRoom,
-                app.networkStatusInteractor
-            ),
-            requireArguments().getString(KEY_USER)!! // todo чтото не так
-        )
-    }
+    private lateinit var presenter: DetailsUserGitHubPresenter
 
     private val adapter by lazy {
         ProjectAdapter(
@@ -45,6 +34,20 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        presenter = DetailsUserGitHubPresenter(
+            gitHubRepo = GitHubRepoImpl(
+                gitHubApi = app.gitHubApi,
+                db = RoomDb.instanceRoom,
+                app.networkStatusInteractor
+            ),
+            reposUrl = requireArguments().getString(KEY_USER)!!,
+            context = requireContext(),
+            lifecycleOwner = viewLifecycleOwner
+        )
+
+
+        presenter.onAttach()
+        presenter.attachView(this)
         initView()
     }
 
@@ -79,5 +82,10 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
     override fun hideProgressBar() {
         binding.progressBar.isVisible = false
         binding.recyclerView.isVisible = true
+    }
+
+    override fun onDestroyView() {
+        presenter.onDetach()
+        super.onDestroyView()
     }
 }

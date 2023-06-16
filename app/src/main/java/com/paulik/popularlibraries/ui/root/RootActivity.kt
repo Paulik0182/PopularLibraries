@@ -22,7 +22,7 @@ class RootActivity : MvpAppCompatActivity(),
     AboutAppFragment.Controller {
 
     private var _binding: ActivityRootBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private val startingFragment: StartingFragment by lazy { StartingFragment() }
     private val settingsFragment: SettingsFragment by lazy { SettingsFragment() }
@@ -41,15 +41,17 @@ class RootActivity : MvpAppCompatActivity(),
         }
     }
 
-    private fun onBottomNaviBar() {
+    fun onBottomNaviBar() {
         binding.bottomNavBar.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.starting_item -> {
                     navigateTo(startingFragment)
                 }
+
                 R.id.settings_item -> {
                     navigateTo(settingsFragment)
                 }
+
                 else -> throw IllegalStateException("Такого фрагмента нет")
             }
             return@setOnItemSelectedListener true
@@ -84,7 +86,7 @@ class RootActivity : MvpAppCompatActivity(),
             .commit()
     }
 
-    private fun onAboutApp() {
+    fun onAboutApp() {
         navigateWithBackStack(AboutAppFragment.newInstance())
         binding.bottomNavBar.visibility = View.GONE
     }

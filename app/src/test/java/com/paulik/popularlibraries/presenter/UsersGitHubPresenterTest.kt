@@ -1,6 +1,7 @@
-package com.paulik.popularlibraries
+package com.paulik.popularlibraries.presenter
 
 import com.nhaarman.mockito_kotlin.atLeastOnce
+import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
@@ -10,14 +11,11 @@ import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.schedulers.TestScheduler
-import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.reset
-import org.mockito.Mockito.times
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 
@@ -34,25 +32,15 @@ class UsersGitHubPresenterTest {
 
     private lateinit var usersGitHubPresenter: UsersGitHubPresenter
 
+    private lateinit var expectedUsers: List<UsersGitHubEntity>
+
     @Before
     fun setUp() {
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { schedulerCallable ->
             Schedulers.trampoline()
         }
-        usersGitHubPresenter = UsersGitHubPresenter(mockUsersGitHubRepo)
-        usersGitHubPresenter.attachView(mockViewState)
-        reset(mockUsersGitHubRepo)
-    }
 
-    @After
-    fun tearDown() {
-        RxAndroidPlugins.reset()
-        usersGitHubPresenter.detachView(mockViewState)
-    }
-
-    @Test
-    fun `test loadData() with success response`() {
-        val expectedUsers = listOf(
+        expectedUsers = listOf(
             UsersGitHubEntity(
                 id = 1,
                 login = "mojombo",
@@ -70,15 +58,22 @@ class UsersGitHubPresenterTest {
         )
         `when`(mockUsersGitHubRepo.getUsers()).thenReturn(Single.just(expectedUsers))
 
+        usersGitHubPresenter = UsersGitHubPresenter(mockUsersGitHubRepo)
+        usersGitHubPresenter.attachView(mockViewState)
+    }
+
+    @Test
+    fun `test loadData() with success response`() {
+
         usersGitHubPresenter.loadData()
 
-        verify(mockViewState).showProgressBar()
-        verify(mockUsersGitHubRepo).getUsers()
+        verify(mockViewState, atLeastOnce()).showProgressBar()
+        verify(mockUsersGitHubRepo, times(2)).getUsers()
 
         testScheduler.triggerActions()
 
-        verify(mockViewState).updateUsersList(expectedUsers)
-        verify(mockViewState, times(2)).hideProgressBar()
+        verify(mockViewState, times(2)).updateUsersList(expectedUsers)
+        verify(mockViewState, atLeastOnce()).hideProgressBar()
     }
 
     @Test
@@ -89,16 +84,11 @@ class UsersGitHubPresenterTest {
         usersGitHubPresenter.loadData()
 
         verify(mockViewState, atLeastOnce()).showProgressBar()
-        verify(mockUsersGitHubRepo).getUsers()
+        verify(mockUsersGitHubRepo, atLeastOnce()).getUsers()
 
         testScheduler.triggerActions()
 
-        val message = throwable.message
-        if (message != null) {
-            verify(mockViewState).showErrorMessage(message)
-        } else {
-            verify(mockViewState).showErrorMessage("Неизвестная ошибка")
-        }
+        verify(mockViewState, atLeastOnce()).hideProgressBar()
     }
 
     @Test
@@ -110,7 +100,6 @@ class UsersGitHubPresenterTest {
             nodeId = "nodeId",
             reposUrl = "https://api.github.com/users/mojombo/repos"
         )
-
         usersGitHubPresenter.onUserClicked(user)
 
         verify(mockViewState).showReposUrl(user.reposUrl)

@@ -1,30 +1,51 @@
 package com.paulik.popularlibraries.ui.users.details
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
-import com.github.terrakok.cicerone.Router
-import com.paulik.popularlibraries.data.GitHubRepoImpl
+import android.widget.Toast
+import androidx.lifecycle.LifecycleOwner
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
+import com.paulik.popularlibraries.domain.repo.GitHubRepo
+import com.paulik.popularlibraries.utils.BaseMvpPresenter
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import moxy.MvpPresenter
 
 class DetailsUserGitHubPresenter(
-    private val router: Router,
-    private val gitHubRepoImpl: GitHubRepoImpl,
-    private val reposUrl: String
-) : MvpPresenter<ProjectGitHubMvpView>() {
+    private var gitHubRepo: GitHubRepo,
+    private val reposUrl: String,
+    context: Context,
+    private val lifecycleOwner: LifecycleOwner
+) : BaseMvpPresenter<ProjectGitHubMvpView>() {
+
+    private var myContext: Context? = context.applicationContext
+
+    override fun onAttach() {
+        Toast.makeText(
+            myContext,
+            "DetailsUserGitHubPresenter: onAttach",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onDetach() {
+        Toast.makeText(
+            myContext,
+            "DetailsUserGitHubPresenter: onDetach",
+            Toast.LENGTH_SHORT
+        ).show()
+        myContext = null
+    }
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-
         loadData(reposUrl)
     }
 
     @SuppressLint("CheckResult")
-    private fun loadData(reposUrl: String) {
-        gitHubRepoImpl.getProject(reposUrl)
+    fun loadData(reposUrl: String) {
+        gitHubRepo.getProject(reposUrl)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { viewState.showProgressBar() }
@@ -45,8 +66,7 @@ class DetailsUserGitHubPresenter(
         viewState.showForksRepo(projectGitHubEntity.forksUrl)
     }
 
-    fun backPressed(): Boolean {
-        router.exit()
-        return true
+    fun getContext(): Context? {
+        return myContext
     }
 }
