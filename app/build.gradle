@@ -84,6 +84,10 @@ dependencies {
     testImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     testImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
 
+    // Espresso
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
     // images
     // picasso
     implementation 'com.squareup.picasso:picasso:2.8'
