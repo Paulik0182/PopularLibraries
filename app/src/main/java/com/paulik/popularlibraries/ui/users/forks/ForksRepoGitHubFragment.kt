@@ -26,8 +26,13 @@ class ForksRepoGitHubFragment : ViewBindingFragment<FragmentForksRepoGitHubBindi
 
     private val presenter by moxyPresenter {
         ForksRepoGitHubPresenter(
-            GitHubRepoImpl(app.gitHubApi, RoomDb.instanceRoom, app.networkStatusInteractor),
-            requireArguments().getString(KEY_FORKS_REPO)!!
+            gitHubRepo = GitHubRepoImpl(
+                app.gitHubApi,
+                RoomDb.instanceRoom,
+                app.networkStatusInteractor
+            ),
+            forksUrl = requireArguments().getString(KEY_FORKS_REPO)!!,
+            context = requireContext()
         )
     }
 

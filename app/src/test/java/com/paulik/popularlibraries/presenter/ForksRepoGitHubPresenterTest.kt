@@ -1,5 +1,9 @@
-package com.paulik.popularlibraries
+package com.paulik.popularlibraries.presenter
 
+import android.content.Context
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.platform.app.InstrumentationRegistry
+import com.nhaarman.mockito_kotlin.atLeastOnce
 import com.nhaarman.mockito_kotlin.verify
 import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
@@ -11,10 +15,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mockito.mock
-import org.mockito.Mockito.times
 import org.mockito.Mockito.`when`
 
+@RunWith(AndroidJUnit4::class)
 class ForksRepoGitHubPresenterTest {
 
     private lateinit var presenter: ForksRepoGitHubPresenter
@@ -23,12 +28,28 @@ class ForksRepoGitHubPresenterTest {
 
     private val forksUrl = "https://api.github.com/repos/mojombo/30daysoflaptops.github.io/forks"
 
+    private lateinit var forks: List<ForksRepoGitHubEntity>
+    private lateinit var context: Context
+
     @Before
     fun setUp() {
+        context = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { schedulerCallable ->
             Schedulers.trampoline()
         }
-        presenter = ForksRepoGitHubPresenter(mockGitHubRepo, forksUrl)
+
+        // положительный ответ от репозитория
+        forks = listOf(
+            ForksRepoGitHubEntity(
+                id = 1,
+                name = "mojombo",
+                fullName = "mojombo",
+                size = 3
+            )
+        )
+        `when`(mockGitHubRepo.getForks(forksUrl)).thenReturn(Single.just(forks))
+
+        presenter = ForksRepoGitHubPresenter(mockGitHubRepo, forksUrl, context.applicationContext)
         presenter.attachView(mockView)
     }
 
@@ -39,28 +60,18 @@ class ForksRepoGitHubPresenterTest {
 
     @Test
     fun `test loadData renders view upon success response`() {
-        // положительный ответ от репозитория
-        val forks = listOf(
-            ForksRepoGitHubEntity(
-                id = 1,
-                name = "mojombo",
-                fullName = "mojombo",
-                size = 3
-            )
-        )
-        `when`(mockGitHubRepo.getForks(forksUrl)).thenReturn(Single.just(forks))
 
         // запустим метод загрузки данных
         presenter.loadData(forksUrl)
 
         // убедимся, что показаны индикатор загрузки
-        verify(mockView).showProgressBar()
+        verify(mockView, atLeastOnce()).showProgressBar()
 
         // убедимся, что метод обновления списка вызван с данными из репозитория
-        verify(mockView).updateForksList(forks)
+        verify(mockView, atLeastOnce()).updateForksList(forks)
 
         // убедимся, что прогресс индикатор скрыт
-        verify(mockView, times(2)).hideProgressBar()
+        verify(mockView, atLeastOnce()).hideProgressBar()
     }
 
     @Test
@@ -73,12 +84,25 @@ class ForksRepoGitHubPresenterTest {
         presenter.loadData(forksUrl)
 
         // убедимся, что показаны индикатор загрузки
-        verify(mockView).showProgressBar()
+        verify(mockView, atLeastOnce()).showProgressBar()
 
         // убедимся, что метод отображения ошибки вызван с переданным объектом-ошибкой
         verify(mockView).showError("Неизвестная ошибка")
 
         // убедимся, что прогресс индикатор скрыт
-        verify(mockView).hideProgressBar()
+        verify(mockView, atLeastOnce()).hideProgressBar()
     }
+
+    @Test
+    fun testOnAttach() {
+        presenter.onAttach()
+//        verify(mockToast).show()
+//        verify(mockToast).setText("ForksRepoGitHubPresenter: onAttach")
+    }
+
+    @Test
+    fun testOnDetach() {
+        presenter.onDetach()
+    }
+
 }

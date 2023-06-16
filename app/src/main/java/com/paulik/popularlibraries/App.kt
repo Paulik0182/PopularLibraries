@@ -12,6 +12,7 @@ import com.paulik.popularlibraries.data.GitHubApi
 import com.paulik.popularlibraries.data.connectivity.NetworkStatusInteractorImpl
 import com.paulik.popularlibraries.domain.interactor.NetworkStatusInteractor
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,6 +22,9 @@ class App : Application() {
 
     // обращение к API github через пакет OkHttp (с помощью этой библиотеки делаются запросы и получаем ответы)
     private val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        })
         .connectTimeout(UsedConst.settingTimeConst.ITEM_OUT_CONST, TimeUnit.SECONDS)
         .build()
 
