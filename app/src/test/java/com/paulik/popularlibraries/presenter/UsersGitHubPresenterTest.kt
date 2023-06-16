@@ -11,7 +11,6 @@ import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.schedulers.TestScheduler
-import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -63,11 +62,6 @@ class UsersGitHubPresenterTest {
         usersGitHubPresenter.attachView(mockViewState)
     }
 
-    @After
-    fun tearDown() {
-        usersGitHubPresenter.detachView(mockViewState)
-    }
-
     @Test
     fun `test loadData() with success response`() {
 
@@ -106,7 +100,6 @@ class UsersGitHubPresenterTest {
             nodeId = "nodeId",
             reposUrl = "https://api.github.com/users/mojombo/repos"
         )
-
         usersGitHubPresenter.onUserClicked(user)
 
         verify(mockViewState).showReposUrl(user.reposUrl)

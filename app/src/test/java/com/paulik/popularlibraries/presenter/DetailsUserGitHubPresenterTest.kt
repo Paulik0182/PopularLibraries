@@ -14,7 +14,6 @@ import com.paulik.popularlibraries.ui.users.details.DetailsUserGitHubPresenter
 import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import org.junit.After
 import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
@@ -68,11 +67,6 @@ class DetailsUserGitHubPresenterTest {
         presenter.attachView(mockView)
 
         mockToast = mock(Toast::class.java)
-    }
-
-    @After
-    fun tearDown() {
-        presenter.detachView(mockView)
     }
 
     @Test

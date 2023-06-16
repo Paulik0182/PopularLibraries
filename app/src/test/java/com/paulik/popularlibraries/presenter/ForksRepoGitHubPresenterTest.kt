@@ -12,7 +12,6 @@ import com.paulik.popularlibraries.ui.users.forks.ForksRepoGitHubPresenter
 import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -53,11 +52,6 @@ class ForksRepoGitHubPresenterTest {
         presenter.attachView(mockView)
     }
 
-    @After
-    fun tearDown() {
-        presenter.detachView(mockView)
-    }
-
     @Test
     fun `test loadData renders view upon success response`() {
 
@@ -96,13 +90,10 @@ class ForksRepoGitHubPresenterTest {
     @Test
     fun testOnAttach() {
         presenter.onAttach()
-//        verify(mockToast).show()
-//        verify(mockToast).setText("ForksRepoGitHubPresenter: onAttach")
     }
 
     @Test
     fun testOnDetach() {
         presenter.onDetach()
     }
-
 }
