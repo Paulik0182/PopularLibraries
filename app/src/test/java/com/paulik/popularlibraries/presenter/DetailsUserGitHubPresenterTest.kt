@@ -6,7 +6,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.nhaarman.mockito_kotlin.atLeastOnce
 import com.nhaarman.mockito_kotlin.verify
-import com.paulik.popularlibraries.TestLifecycleOwner
 import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
@@ -32,7 +31,6 @@ class DetailsUserGitHubPresenterTest {
 
     private lateinit var project: List<ProjectGitHubEntity>
     private lateinit var context: Context
-    private val lifecycleOwner = TestLifecycleOwner()
 
     private lateinit var mockToast: Toast
 
@@ -62,7 +60,6 @@ class DetailsUserGitHubPresenterTest {
             gitHubRepo = mockGitHubRepo,
             reposUrl = projectUrl,
             context = context.applicationContext,
-            lifecycleOwner = lifecycleOwner
         )
         presenter.attachView(mockView)
 

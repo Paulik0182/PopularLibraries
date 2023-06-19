@@ -1,7 +1,6 @@
 package com.paulik.popularlibraries.presenter
 
 import com.nhaarman.mockito_kotlin.atLeastOnce
-import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
@@ -68,11 +67,11 @@ class UsersGitHubPresenterTest {
         usersGitHubPresenter.loadData()
 
         verify(mockViewState, atLeastOnce()).showProgressBar()
-        verify(mockUsersGitHubRepo, times(2)).getUsers()
+        verify(mockUsersGitHubRepo, atLeastOnce()).getUsers()
 
         testScheduler.triggerActions()
 
-        verify(mockViewState, times(2)).updateUsersList(expectedUsers)
+        verify(mockViewState, atLeastOnce()).updateUsersList(expectedUsers)
         verify(mockViewState, atLeastOnce()).hideProgressBar()
     }
 

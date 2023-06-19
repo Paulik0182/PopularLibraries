@@ -84,15 +84,7 @@ class SettingsFragmentEspressoTest {
         onView(withId(R.id.about_app_button)).perform(click())
 
         onView(withId(R.id.about_app_text_view))
-            .check(
-                matches(
-                    ViewMatchers.withText(
-                        "О Приложении\n\nПриложение является результатом выполнения " +
-                                "практических заданий по освоению разработки Android приложений." +
-                                "\nКурс - Популярные библиотеки: RxJava 2, Dagger 2, Moxy (февраль 2023 года)"
-                    )
-                )
-            )
+            .check(matches(ViewMatchers.withText(R.string.about_app_text)))
     }
 
     @After

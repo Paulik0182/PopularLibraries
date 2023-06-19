@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LifecycleOwner
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
 import com.paulik.popularlibraries.domain.repo.GitHubRepo
@@ -16,7 +15,6 @@ class DetailsUserGitHubPresenter(
     private var gitHubRepo: GitHubRepo,
     private val reposUrl: String,
     context: Context,
-    private val lifecycleOwner: LifecycleOwner
 ) : BaseMvpPresenter<ProjectGitHubMvpView>() {
 
     private var myContext: Context? = context.applicationContext

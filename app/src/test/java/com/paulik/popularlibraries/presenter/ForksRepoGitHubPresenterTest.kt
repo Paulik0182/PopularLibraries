@@ -22,8 +22,8 @@ import org.mockito.Mockito.`when`
 class ForksRepoGitHubPresenterTest {
 
     private lateinit var presenter: ForksRepoGitHubPresenter
-    private val mockView: ForksRepoGitHubMvpView = mock(ForksRepoGitHubMvpView::class.java)
-    private val mockGitHubRepo: GitHubRepoImpl = mock(GitHubRepoImpl::class.java)
+    private var view = mock(ForksRepoGitHubMvpView::class.java)
+    private val mockGitHubRepo = mock(GitHubRepoImpl::class.java)
 
     private val forksUrl = "https://api.github.com/repos/mojombo/30daysoflaptops.github.io/forks"
 
@@ -49,7 +49,7 @@ class ForksRepoGitHubPresenterTest {
         `when`(mockGitHubRepo.getForks(forksUrl)).thenReturn(Single.just(forks))
 
         presenter = ForksRepoGitHubPresenter(mockGitHubRepo, forksUrl, context.applicationContext)
-        presenter.attachView(mockView)
+        presenter.attachView(view)
     }
 
     @Test
@@ -59,13 +59,13 @@ class ForksRepoGitHubPresenterTest {
         presenter.loadData(forksUrl)
 
         // убедимся, что показаны индикатор загрузки
-        verify(mockView, atLeastOnce()).showProgressBar()
+        verify(view, atLeastOnce()).showProgressBar()
 
         // убедимся, что метод обновления списка вызван с данными из репозитория
-        verify(mockView, atLeastOnce()).updateForksList(forks)
+        verify(view, atLeastOnce()).updateForksList(forks)
 
         // убедимся, что прогресс индикатор скрыт
-        verify(mockView, atLeastOnce()).hideProgressBar()
+        verify(view, atLeastOnce()).hideProgressBar()
     }
 
     @Test
@@ -78,13 +78,13 @@ class ForksRepoGitHubPresenterTest {
         presenter.loadData(forksUrl)
 
         // убедимся, что показаны индикатор загрузки
-        verify(mockView, atLeastOnce()).showProgressBar()
+        verify(view, atLeastOnce()).showProgressBar()
 
         // убедимся, что метод отображения ошибки вызван с переданным объектом-ошибкой
-        verify(mockView).showError("Неизвестная ошибка")
+        verify(view).showError("Неизвестная ошибка")
 
         // убедимся, что прогресс индикатор скрыт
-        verify(mockView, atLeastOnce()).hideProgressBar()
+        verify(view, atLeastOnce()).hideProgressBar()
     }
 
     @Test
