@@ -10,4 +10,6 @@ interface GitHubRepo {
     fun getUsers(): Single<List<UsersGitHubEntity>>
     fun getProject(reposUrl: String): Single<List<ProjectGitHubEntity>>
     fun getForks(forksUrl: String): Single<List<ForksRepoGitHubEntity>>
+
+    fun searchUsers(query: String): Single<List<UsersGitHubEntity>>
 }

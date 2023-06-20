@@ -13,6 +13,9 @@
     <string name="personalization_app">Персонализация</string>
     <string name="cod_version">Код версии:</string>
     <string name="version">Версия:</string>
+    <string name="about_app_text">О Приложении\n\nПриложение является результатом выполнения
+        практических заданий по освоению разработки Android приложений.\nКурс - Популярные
+        библиотеки: RxJava 2, Dagger 2, Moxy (февраль 2023 года)</string>
 
     <!--Кнопки -->
     <string name="counter_mvp">Cчетчик на MVP</string>
@@ -26,7 +29,10 @@
     <string name="counter_one">Счетчик 1</string>
     <string name="counter_two">Счетчик 2</string>
     <string name="counter_three">Счетчик 3</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Для экрана  -->
+    <string name="search">Поиск</string>
+    <string name="results">Number</string>
+
 
 </resources>

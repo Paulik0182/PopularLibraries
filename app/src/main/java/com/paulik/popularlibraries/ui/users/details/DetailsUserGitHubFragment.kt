@@ -42,7 +42,6 @@ class DetailsUserGitHubFragment : ViewBindingFragment<FragmentDetailsUserGitHubB
             ),
             reposUrl = requireArguments().getString(KEY_USER)!!,
             context = requireContext(),
-            lifecycleOwner = viewLifecycleOwner
         )
 
 

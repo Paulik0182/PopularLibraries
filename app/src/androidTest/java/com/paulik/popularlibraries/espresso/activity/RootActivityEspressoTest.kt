@@ -1,4 +1,4 @@
-package com.paulik.popularlibraries.activity
+package com.paulik.popularlibraries.espresso.activity
 
 import androidx.lifecycle.Lifecycle
 import androidx.test.core.app.ActivityScenario

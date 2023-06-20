@@ -5,6 +5,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.paulik.popularlibraries.BuildConfig
+import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.databinding.FragmentAboutAppBinding
 import com.paulik.popularlibraries.ui.root.ViewBindingFragment
 
@@ -22,10 +23,7 @@ class AboutAppFragment : ViewBindingFragment<FragmentAboutAppBinding>(
     private fun informationApp() {
         binding.codVersionTextView.text = "Код версии: " + BuildConfig.VERSION_CODE
         binding.versionTextView.text = "Версия: " + BuildConfig.VERSION_NAME
-        binding.aboutAppTextView.text =
-            "О Приложении\n\nПриложение является результатом выполнения " +
-                    "практических заданий по освоению разработки Android приложений." +
-                    "\nКурс - Популярные библиотеки: RxJava 2, Dagger 2, Moxy (февраль 2023 года)"
+        binding.aboutAppTextView.text = getText(R.string.about_app_text)
     }
 
     interface Controller {

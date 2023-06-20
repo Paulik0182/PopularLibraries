@@ -4,11 +4,16 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.paulik.popularlibraries.App
+import com.paulik.popularlibraries.R
 import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.data.room.RoomDb
 import com.paulik.popularlibraries.databinding.FragmentUsersGitHubBinding
@@ -37,7 +42,7 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
                 networkStatusInteractor = networkStatusInteractor,
                 gitHubApi = app.gitHubApi,
                 db = RoomDb.instanceRoom
-            ),
+            )
         )
     }
 
@@ -48,12 +53,35 @@ class UsersGitHubMvpFragment : ViewBindingFragment<FragmentUsersGitHubBinding>(
         )
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initView()
 
         networkStatus()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu, menu)
+
+        val searchItem: MenuItem? = menu.findItem(R.id.action_search)
+        val searchView: SearchView = searchItem?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                presenter.onQueryTextSubmit(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?) = true
+        })
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     @SuppressLint("CheckResult")

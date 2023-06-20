@@ -19,8 +19,13 @@ class UsersGitHubPresenter(
     }
 
     @SuppressLint("CheckResult")
-    fun loadData() {
-        usersGitHubRepo.getUsers()
+    fun loadData(query: String? = null) {
+        val observableData = if (query == null) {
+            usersGitHubRepo.getUsers()
+        } else {
+            usersGitHubRepo.searchUsers(query)
+        }
+        observableData
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
@@ -41,5 +46,9 @@ class UsersGitHubPresenter(
 
     fun backPressed(): Boolean {
         return true
+    }
+
+    fun onQueryTextSubmit(query: String?) {
+        loadData(query)
     }
 }
