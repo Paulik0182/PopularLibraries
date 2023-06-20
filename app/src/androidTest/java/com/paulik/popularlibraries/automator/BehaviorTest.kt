@@ -87,7 +87,7 @@ class BehaviorTest {
 
     //Убеждаемся, что поиск работает как ожидается
     @Test
-    fun test_SearchIsPositive() {
+    fun testEspresso_SearchIsPositive() {
         onView(withId(R.id.action_search)).perform(ViewActions.click())
 
         onView(isAssignableFrom(AutoCompleteTextView::class.java))
@@ -102,5 +102,20 @@ class BehaviorTest {
 
         Thread.sleep(3_000) // ожидание в течение 3 секунд
         onView(withId(R.id.recycler_view)).check(RecyclerViewItemCountAssertion(2))
+    }
+
+    @Test
+    fun testAutomator_SearchIsPositive() {
+        val autoCompleteTextView = uiDevice.findObject(By.res(packageName, "action_search"))
+        autoCompleteTextView.click()
+
+        val inputField = uiDevice.findObject(By.clazz("android.widget.EditText"))
+        inputField.text = "mojombo"
+
+        uiDevice.pressEnter()
+
+        uiDevice.wait(Until.hasObject(By.res(packageName, "recycler_view")), TIMEOUT)
+        val recyclerView = uiDevice.findObject(By.res(packageName, "recycler_view"))
+        assertThat(recyclerView.childCount, `is`(2))
     }
 }
