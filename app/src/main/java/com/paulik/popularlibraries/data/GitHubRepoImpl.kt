@@ -62,6 +62,12 @@ class GitHubRepoImpl(
         return gitHubApi.getForks(forksUrl)
     }
 
+    override fun searchUsers(query: String): Single<List<UsersGitHubEntity>> {
+        return gitHubApi.searchUsers(query).map {
+            it.items
+        }
+    }
+
     fun interval(): @NonNull Observable<Long> {
         return Observable.interval(1, TimeUnit.SECONDS)
     }
