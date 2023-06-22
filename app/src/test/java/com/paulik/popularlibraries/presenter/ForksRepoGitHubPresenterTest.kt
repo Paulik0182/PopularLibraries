@@ -5,6 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.nhaarman.mockito_kotlin.atLeastOnce
 import com.nhaarman.mockito_kotlin.verify
+import com.paulik.popularlibraries.MOJOMBO_FORKS_API_URL
 import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.domain.ForksRepoGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ForksRepoGitHubEntity
@@ -25,8 +26,6 @@ class ForksRepoGitHubPresenterTest {
     private var view = mock(ForksRepoGitHubMvpView::class.java)
     private val mockGitHubRepo = mock(GitHubRepoImpl::class.java)
 
-    private val forksUrl = "https://api.github.com/repos/mojombo/30daysoflaptops.github.io/forks"
-
     private lateinit var forks: List<ForksRepoGitHubEntity>
     private lateinit var context: Context
 
@@ -46,9 +45,13 @@ class ForksRepoGitHubPresenterTest {
                 size = 3
             )
         )
-        `when`(mockGitHubRepo.getForks(forksUrl)).thenReturn(Single.just(forks))
+        `when`(mockGitHubRepo.getForks(MOJOMBO_FORKS_API_URL)).thenReturn(Single.just(forks))
 
-        presenter = ForksRepoGitHubPresenter(mockGitHubRepo, forksUrl, context.applicationContext)
+        presenter = ForksRepoGitHubPresenter(
+            mockGitHubRepo,
+            MOJOMBO_FORKS_API_URL,
+            context.applicationContext
+        )
         presenter.attachView(view)
     }
 
@@ -56,7 +59,7 @@ class ForksRepoGitHubPresenterTest {
     fun `test loadData renders view upon success response`() {
 
         // запустим метод загрузки данных
-        presenter.loadData(forksUrl)
+        presenter.loadData(MOJOMBO_FORKS_API_URL)
 
         // убедимся, что показаны индикатор загрузки
         verify(view, atLeastOnce()).showProgressBar()
@@ -72,10 +75,10 @@ class ForksRepoGitHubPresenterTest {
     fun `test loadData renders view upon failure response`() {
         // отрицательный ответ от репозитория
         val error = Exception()
-        `when`(mockGitHubRepo.getForks(forksUrl)).thenReturn(Single.error(error))
+        `when`(mockGitHubRepo.getForks(MOJOMBO_FORKS_API_URL)).thenReturn(Single.error(error))
 
         // запустим метод загрузки данных
-        presenter.loadData(forksUrl)
+        presenter.loadData(MOJOMBO_FORKS_API_URL)
 
         // убедимся, что показаны индикатор загрузки
         verify(view, atLeastOnce()).showProgressBar()

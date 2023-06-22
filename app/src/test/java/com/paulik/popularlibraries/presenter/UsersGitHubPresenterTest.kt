@@ -2,6 +2,7 @@ package com.paulik.popularlibraries.presenter
 
 import com.nhaarman.mockito_kotlin.atLeastOnce
 import com.nhaarman.mockito_kotlin.verify
+import com.paulik.popularlibraries.MOJOMBO_REPOS_API_URL
 import com.paulik.popularlibraries.domain.UsersGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.UsersGitHubEntity
 import com.paulik.popularlibraries.domain.repo.GitHubRepo
@@ -97,7 +98,7 @@ class UsersGitHubPresenterTest {
             login = "mojombo",
             avatarUrl = "avatarUrl",
             nodeId = "nodeId",
-            reposUrl = "https://api.github.com/users/mojombo/repos"
+            reposUrl = MOJOMBO_REPOS_API_URL
         )
         usersGitHubPresenter.onUserClicked(user)
 
