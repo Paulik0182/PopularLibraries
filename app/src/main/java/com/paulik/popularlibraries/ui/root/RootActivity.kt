@@ -39,6 +39,8 @@ class RootActivity : MvpAppCompatActivity(),
         } else {
             // todo другое
         }
+
+//        throw RuntimeException("Test Crash") // Force a crash
     }
 
     fun onBottomNaviBar() {
