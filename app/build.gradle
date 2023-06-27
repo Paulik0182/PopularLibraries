@@ -119,11 +119,11 @@ dependencies {
     testImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha01'
     testImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
     // Espresso
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'androidx.test:rules:1.6.0-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
-    debugImplementation 'androidx.fragment:fragment-testing:1.6.0'
+    androidTestImplementation 'androidx.fragment:fragment-testing:1.6.0'
     //UI Automator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.3.0-alpha03'
     androidTestImplementation 'androidx.test:rules:1.6.0-alpha01'
