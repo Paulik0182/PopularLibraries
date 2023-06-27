@@ -56,7 +56,6 @@ class GitHubRepoTest {
 
     @Test
     fun getProject_Test() {
-        val reposUrl = "https://api.github.com/users/mojombo/repos"
         val expectedForks = listOf(
             ProjectGitHubEntity(
                 id = 1,
@@ -77,11 +76,15 @@ class GitHubRepoTest {
                 private = true
             )
         )
-        `when`(repository.getProject(reposUrl)).thenReturn(Single.just(expectedForks))
+        `when`(repository.getProject(MOJOMBO_REPOS_API_URL)).thenReturn(Single.just(expectedForks))
 
-        val result = repository.getProject(reposUrl).test()
+        val result =
+            repository
+                .getProject(
+                    MOJOMBO_REPOS_API_URL
+                ).test()
 
-        verify(repository).getProject(reposUrl)
+        verify(repository).getProject(MOJOMBO_REPOS_API_URL)
         result.assertValueCount(1)
         result.assertValue(expectedForks)
         result.assertComplete()
@@ -90,7 +93,6 @@ class GitHubRepoTest {
 
     @Test
     fun getForks_Test() {
-        val forksUrl = "https://api.github.com/repos/mojombo/30daysoflaptops.github.io/forks"
         val expectedForks = listOf(
             ForksRepoGitHubEntity(
                 id = 1,
@@ -105,11 +107,15 @@ class GitHubRepoTest {
                 4
             )
         )
-        `when`(repository.getForks(forksUrl)).thenReturn(Single.just(expectedForks))
+        `when`(repository.getForks(MOJOMBO_FORKS_API_URL)).thenReturn(Single.just(expectedForks))
 
-        val result = repository.getForks(forksUrl).test()
+        val result =
+            repository
+                .getForks(
+                    MOJOMBO_FORKS_API_URL
+                ).test()
 
-        verify(repository).getForks(forksUrl)
+        verify(repository).getForks(MOJOMBO_FORKS_API_URL)
         result.assertValueCount(1)
         result.assertValue(expectedForks)
         result.assertComplete()

@@ -6,6 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.nhaarman.mockito_kotlin.atLeastOnce
 import com.nhaarman.mockito_kotlin.verify
+import com.paulik.popularlibraries.MOJOMBO_REPOS_API_URL
 import com.paulik.popularlibraries.data.GitHubRepoImpl
 import com.paulik.popularlibraries.domain.ProjectGitHubMvpView
 import com.paulik.popularlibraries.domain.entity.ProjectGitHubEntity
@@ -26,8 +27,6 @@ class DetailsUserGitHubPresenterTest {
     private lateinit var presenter: DetailsUserGitHubPresenter
     private val mockView: ProjectGitHubMvpView = mock(ProjectGitHubMvpView::class.java)
     private val mockGitHubRepo: GitHubRepoImpl = mock(GitHubRepoImpl::class.java)
-
-    private val projectUrl = "https://api.github.com/users/mojombo/repos"
 
     private lateinit var project: List<ProjectGitHubEntity>
     private lateinit var context: Context
@@ -54,11 +53,11 @@ class DetailsUserGitHubPresenterTest {
             )
         )
 
-        `when`(mockGitHubRepo.getProject(projectUrl)).thenReturn(Single.just(project))
+        `when`(mockGitHubRepo.getProject(MOJOMBO_REPOS_API_URL)).thenReturn(Single.just(project))
 
         presenter = DetailsUserGitHubPresenter(
             gitHubRepo = mockGitHubRepo,
-            reposUrl = projectUrl,
+            reposUrl = MOJOMBO_REPOS_API_URL,
             context = context.applicationContext,
         )
         presenter.attachView(mockView)
@@ -70,7 +69,7 @@ class DetailsUserGitHubPresenterTest {
     fun `test loadData renders view upon success response`() {
 
         // запустим метод загрузки данных
-        presenter.loadData(projectUrl)
+        presenter.loadData(MOJOMBO_REPOS_API_URL)
 
         // убедимся, что показаны индикатор загрузки
         verify(mockView, atLeastOnce()).showProgressBar()
@@ -86,10 +85,10 @@ class DetailsUserGitHubPresenterTest {
     fun `test loadData renders view upon failure response`() {
         // отрицательный ответ от репозитория
         val error = Exception()
-        `when`(mockGitHubRepo.getProject(projectUrl)).thenReturn(Single.error(error))
+        `when`(mockGitHubRepo.getProject(MOJOMBO_REPOS_API_URL)).thenReturn(Single.error(error))
 
         // запустим метод загрузки данных
-        presenter.loadData(projectUrl)
+        presenter.loadData(MOJOMBO_REPOS_API_URL)
 
         // убедимся, что показаны индикатор загрузки
         verify(mockView, atLeastOnce()).showProgressBar()

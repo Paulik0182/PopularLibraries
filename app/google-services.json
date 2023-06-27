@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "2113665801",
+    "project_id": "testpopularlibraris",
+    "storage_bucket": "testpopularlibraris.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2113665801:android:a187ea489831c464b5b1d8",
+        "android_client_info": {
+          "package_name": "com.paulik.popularlibraries"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2113665801-p4e9749uok5l0t9jjv4cg4sp16jp197t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAk31Q18FX3QlErW9gDKvnkDcgzN7K_v7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2113665801-p4e9749uok5l0t9jjv4cg4sp16jp197t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

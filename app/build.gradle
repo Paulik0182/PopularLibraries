@@ -4,6 +4,8 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -63,6 +65,16 @@ android {
 
         }
     }
+    sourceSets {
+        androidTest {
+            java.srcDirs += "src/androidTest/java"
+            java.srcDirs += "src/sharedTestData/java"
+        }
+        test {
+            java.srcDirs += "src/test/java"
+            java.srcDirs += "src/sharedTestData/java"
+        }
+    }
 }
 
 dependencies {
@@ -87,8 +99,9 @@ dependencies {
 
     // Test
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.0-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha01'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.6.0-alpha01'
     // Mockito
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.5.2'
     testImplementation "org.mockito:mockito-core:3.10.0"
@@ -101,18 +114,19 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:4.10.3'
     testImplementation 'androidx.test:core:1.5.0'
     testImplementation 'androidx.test:runner:1.5.2'
-    testImplementation 'androidx.test.ext:junit:1.1.5'
+    testImplementation 'androidx.test.ext:junit:1.2.0-alpha01'
     testImplementation 'androidx.test.ext:truth:1.5.0'
-    testImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha01'
     testImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
     // Espresso
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.0-alpha01'
     androidTestImplementation 'androidx.test:runner:1.5.2'
-    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test:rules:1.6.0-alpha01'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
     debugImplementation 'androidx.fragment:fragment-testing:1.6.0'
     //UI Automator
     androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.3.0-alpha03'
+    androidTestImplementation 'androidx.test:rules:1.6.0-alpha01'
 
     // images
     // picasso
@@ -162,4 +176,15 @@ dependencies {
     // snappyDB
     implementation 'com.snappydb:snappydb-lib:0.5.2'
     implementation 'com.esotericsoftware.kryo:kryo:2.24.0'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:32.1.1')
+    // Test Firebase
+    androidTestImplementation 'com.google.firebase:testlab-instr-lib:0.2'
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'    // Test Firebase
+    androidTestImplementation 'com.google.firebase:testlab-instr-lib:0.2'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
