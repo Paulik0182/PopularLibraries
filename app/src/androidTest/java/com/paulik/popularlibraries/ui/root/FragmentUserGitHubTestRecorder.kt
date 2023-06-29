@@ -1,11 +1,12 @@
 package com.paulik.popularlibraries.ui.root
 
-
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.*
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -15,80 +16,58 @@ import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.TypeSafeMatcher
+import org.hamcrest.core.IsInstanceOf
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class RootActivityTest1 {
+class FragmentUserGitHubTestRecorder {
 
     @Rule
     @JvmField
     var mActivityScenarioRule = ActivityScenarioRule(RootActivity::class.java)
 
     @Test
-    fun rootActivityTest1() {
-        val button = onView(
-            allOf(
-                withId(R.id.counter_mvp_button), withText("C������ �� MVP"),
-                withParent(withParent(withId(R.id.fragment_starting))),
-                isDisplayed()
-            )
-        )
-        button.check(matches(isDisplayed()))
-
-        val button2 = onView(
-            allOf(
-                withId(R.id.counter_mvp_button), withText("C������ �� MVP"),
-                withParent(withParent(withId(R.id.fragment_starting))),
-                isDisplayed()
-            )
-        )
-        button2.check(matches(isDisplayed()))
-
+    fun rootActivityTestRecorder() {
         val materialButton = onView(
             allOf(
-                withId(R.id.counter_mvp_button), withText("C������ �� MVP"),
+                withId(R.id.users_git_hub_button),
+                withText("Users GitHub"),
                 childAtPosition(
-                    childAtPosition(
-                        withId(R.id.fragment_starting),
-                        0
-                    ),
-                    0
+                    childAtPosition(withId(R.id.fragment_starting), 0),
+                    1
                 ),
                 isDisplayed()
             )
         )
         materialButton.perform(click())
 
-        val textView = onView(
+        val recyclerView = onView(
             allOf(
-                withId(R.id.one_counter_text_view), withText("������� 1"),
-                withParent(
-                    allOf(
-                        withId(R.id.fragment_counter),
-                        withParent(withId(R.id.fragment_container_frame_layout))
-                    )
-                ),
-                isDisplayed()
+                withId(R.id.recycler_view),
+                childAtPosition(withId(R.id.content_layout), 0)
             )
         )
-        textView.check(matches(withText("������� 1")))
 
-        val button3 = onView(
+        Thread.sleep(3_000) // ожидание в течение 3 секунд
+        recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
+
+        val titleTextView = onView(
             allOf(
-                withId(R.id.one_counter_button), withText("0"),
+                withId(R.id.title_text_view),
+                withText("30daysoflaptops.github.io"),
                 withParent(
-                    allOf(
-                        withId(R.id.fragment_counter),
-                        withParent(withId(R.id.fragment_container_frame_layout))
-                    )
+                    withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))
                 ),
                 isDisplayed()
             )
         )
-        button3.check(matches(isDisplayed()))
+
+        Thread.sleep(3_000) // ожидание в течение 3 секунд
+        titleTextView.check(matches(withText("30daysoflaptops.github.io")))
+        titleTextView.check(matches(isDisplayed()))
     }
 
     private fun childAtPosition(
