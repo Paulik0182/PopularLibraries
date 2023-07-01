@@ -23,7 +23,7 @@ import org.junit.runner.RunWith
 
 @LargeTest
 @RunWith(AndroidJUnit4::class)
-class RootActivityTestRecorder {
+class FragmentUserGitHubTestRecorder {
 
     @Rule
     @JvmField
@@ -50,6 +50,8 @@ class RootActivityTestRecorder {
                 childAtPosition(withId(R.id.content_layout), 0)
             )
         )
+
+        Thread.sleep(3_000) // ожидание в течение 3 секунд
         recyclerView.perform(actionOnItemAtPosition<ViewHolder>(0, click()))
 
         val titleTextView = onView(
@@ -62,6 +64,8 @@ class RootActivityTestRecorder {
                 isDisplayed()
             )
         )
+
+        Thread.sleep(3_000) // ожидание в течение 3 секунд
         titleTextView.check(matches(withText("30daysoflaptops.github.io")))
         titleTextView.check(matches(isDisplayed()))
     }
